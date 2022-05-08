@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Reddit',
       theme: ThemeData(
-        primarySwatch: Colors.orange[900],
+        primarySwatch: Colors.deepOrange,
       ),
       home: const HomePage(title: 'Home Page'),
     );
@@ -28,6 +28,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Reddit'),
+      ),
+    );
   }
 }
