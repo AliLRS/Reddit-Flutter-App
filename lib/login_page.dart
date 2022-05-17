@@ -61,15 +61,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
               obscureText: !_passwordVisibility,
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 15),
-              child: OutlinedButton(
-                child: const Text('Forgot password'),
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/home');
-                },
-              ),
-            )
           ],
         ),
       ),
