@@ -15,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Log In'),
+        title: Text('Log in'),
         actions: [
           TextButton(
             child: Text('Sign Up'),
@@ -48,13 +48,16 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       labelText: 'Password',
                     ),
-                    obscureText: true,
+                    obscureText: !_passwordVisibility,
                   ),
                 ),
                 IconButton(
-                  icon: (_passwordVisibility
-                      ? Icon(Icons.visibility)
-                      : Icon(Icons.visibility_off)),
+                  icon: Icon(
+                    Icons.remove_red_eye,
+                    color: (_passwordVisibility
+                        ? Colors.deepOrange
+                        : Colors.black),
+                  ),
                   onPressed: () {
                     setState(() {
                       _passwordVisibility = !_passwordVisibility;
