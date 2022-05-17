@@ -16,10 +16,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Log in'),
+        title: const Text('Log in'),
         actions: [
           TextButton(
-            child: Text('Sign Up'),
+            child: const Text('Sign Up'),
             style: TextButton.styleFrom(
               primary: Colors.white,
             ),
@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             TextField(
               controller: _usernameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Username',
               ),
               keyboardType: TextInputType.emailAddress,
@@ -64,13 +64,20 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               margin: const EdgeInsets.only(top: 15),
               child: OutlinedButton(
-                child: Text('Log in'),
+                child: const Text('Forgot password'),
                 onPressed: () {
                   Navigator.pushReplacementNamed(context, '/home');
                 },
               ),
             )
           ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: SizedBox(
+          height: 50,
+          child:
+              ElevatedButton(child: const Text('Continue'), onPressed: () {}),
         ),
       ),
     );
