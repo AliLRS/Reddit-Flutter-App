@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -40,18 +41,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                    ),
-                    obscureText: !_passwordVisibility,
-                  ),
-                ),
-                IconButton(
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                suffixIcon: IconButton(
                   icon: Icon(
                     Icons.remove_red_eye,
                     color: (_passwordVisibility
@@ -64,14 +58,18 @@ class _LoginPageState extends State<LoginPage> {
                     });
                   },
                 ),
-              ],
+              ),
+              obscureText: !_passwordVisibility,
             ),
-            OutlinedButton(
-              child: Text('Log In'),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/home');
-              },
-            ),
+            Container(
+              margin: const EdgeInsets.only(top: 15),
+              child: OutlinedButton(
+                child: Text('Log in'),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/home');
+                },
+              ),
+            )
           ],
         ),
       ),
