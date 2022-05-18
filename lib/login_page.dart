@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
+import 'package:reddit/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -24,7 +24,8 @@ class _LoginPageState extends State<LoginPage> {
               primary: Colors.white,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, '/signup');
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => SignupPage()));
             },
           ),
         ],
