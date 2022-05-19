@@ -9,9 +9,9 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  TextEditingController _emailController;
-  TextEditingController _usernameController;
-  TextEditingController _passwordController;
+  TextEditingController _emailController,
+      _usernameController,
+      _passwordController;
   bool _passwordVisibility = false;
   @override
   Widget build(BuildContext context) {
@@ -38,14 +38,17 @@ class _SignupPageState extends State<SignupPage> {
           children: [
             TextField(
               controller: _emailController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Email',
+                errorText: _emailController == null
+                    ? null
+                    : validateEmail(_emailController.text),
               ),
               keyboardType: TextInputType.emailAddress,
             ),
             TextField(
               controller: _usernameController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Username',
               ),
               keyboardType: TextInputType.emailAddress,
@@ -54,6 +57,9 @@ class _SignupPageState extends State<SignupPage> {
               controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'Password',
+                errorText: _passwordController == null
+                    ? null
+                    : validatePassword(_passwordController.text),
                 suffixIcon: IconButton(
                   icon: Icon(
                     Icons.remove_red_eye,
@@ -81,5 +87,32 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     );
+  }
+
+  String validatePassword(String value) {
+    RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+    if (value.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Enter valid password';
+      } else {
+        return null;
+      }
+    }
+  }
+
+  String validateEmail(String value) {
+    RegExp regex = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    if (value.isEmpty) {
+      return 'Please enter email';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Enter valid email';
+      } else {
+        return null;
+      }
+    }
   }
 }
