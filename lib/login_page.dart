@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/signup_page.dart';
+import 'package:reddit/feed_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -84,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (validateUsername(_usernameController.text) == null &&
                       validatePassword(_passwordController.text) == null) {
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => SignupPage()));
+                        MaterialPageRoute(builder: (context) => FeedPage()));
                   }
                 });
               }),
