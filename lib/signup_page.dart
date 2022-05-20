@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/login_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key key}) : super(key: key);
@@ -12,7 +13,15 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController _emailController,
       _usernameController,
       _passwordController;
-  bool _passwordVisibility = false;
+  bool _passwordVisibility = false, firstEntry = true;
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _usernameController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +49,7 @@ class _SignupPageState extends State<SignupPage> {
               controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
-                errorText: _emailController == null
-                    ? null
-                    : validateEmail(_emailController.text),
+                errorText: validateEmail(_emailController.text),
               ),
               keyboardType: TextInputType.emailAddress,
             ),
@@ -50,6 +57,7 @@ class _SignupPageState extends State<SignupPage> {
               controller: _usernameController,
               decoration: InputDecoration(
                 labelText: 'Username',
+                errorText: validateUsername(_usernameController.text),
               ),
               keyboardType: TextInputType.emailAddress,
             ),
@@ -57,9 +65,8 @@ class _SignupPageState extends State<SignupPage> {
               controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'Password',
-                errorText: _passwordController == null
-                    ? null
-                    : validatePassword(_passwordController.text),
+                errorText: validatePassword(_passwordController.text),
+                errorMaxLines: 3,
                 suffixIcon: IconButton(
                   icon: Icon(
                     Icons.remove_red_eye,
@@ -82,34 +89,61 @@ class _SignupPageState extends State<SignupPage> {
       bottomNavigationBar: BottomAppBar(
         child: SizedBox(
           height: 50,
-          child:
-              ElevatedButton(child: const Text('Continue'), onPressed: () {}),
+          child: ElevatedButton(
+              child: const Text('Continue'),
+              onPressed: () {
+                setState(() {
+                  firstEntry = false;
+                  if (validateEmail(_emailController.text) == null &&
+                      validateUsername(_usernameController.text) == null &&
+                      validatePassword(_passwordController.text) == null) {
+                    Fluttertoast.showToast(
+                        msg: 'Sign up was successful',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.TOP,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.white,
+                        textColor: Colors.deepOrange,
+                        fontSize: 16.0);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => LoginPage()));
+                  }
+                });
+              }),
         ),
       ),
     );
   }
 
-  String validatePassword(String value) {
-    RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
-    if (value.isEmpty) {
-      return 'Please enter password';
+  String validateEmail(String value) {
+    RegExp regex = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    if (value.isEmpty && !firstEntry) {
+      return 'Email is required';
     } else {
-      if (!regex.hasMatch(value)) {
-        return 'Enter valid password';
+      if (!regex.hasMatch(value) && !firstEntry) {
+        return 'Please enter a valid email';
       } else {
         return null;
       }
     }
   }
 
-  String validateEmail(String value) {
-    RegExp regex = RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    if (value.isEmpty) {
-      return 'Please enter email';
+  String validateUsername(String value) {
+    if (value.isEmpty && !firstEntry) {
+      return 'Username is required';
     } else {
-      if (!regex.hasMatch(value)) {
-        return 'Enter valid email';
+      return null;
+    }
+  }
+
+  String validatePassword(String value) {
+    RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+    if (value.isEmpty && !firstEntry) {
+      return 'Password is required';
+    } else {
+      if (!regex.hasMatch(value) && !firstEntry) {
+        return 'Password must have contain at least one uppercase, one lowercase, one number and at least 8 characters';
       } else {
         return null;
       }

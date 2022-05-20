@@ -9,9 +9,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _usernameController;
-  TextEditingController _passwordController;
-  bool _passwordVisibility = false;
+  TextEditingController _usernameController, _passwordController;
+  bool _passwordVisibility = false, firstEntry = true;
+  @override
+  void initState() {
+    super.initState();
+    _usernameController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +43,9 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             TextField(
               controller: _usernameController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Username',
+                errorText: validateUsername(_usernameController.text),
               ),
               keyboardType: TextInputType.emailAddress,
             ),
@@ -46,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
               controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'Password',
+                errorText: validatePassword(_passwordController.text),
                 suffixIcon: IconButton(
                   icon: Icon(
                     Icons.remove_red_eye,
@@ -68,10 +76,34 @@ class _LoginPageState extends State<LoginPage> {
       bottomNavigationBar: BottomAppBar(
         child: SizedBox(
           height: 50,
-          child:
-              ElevatedButton(child: const Text('Continue'), onPressed: () {}),
+          child: ElevatedButton(
+              child: const Text('Continue'),
+              onPressed: () {
+                setState(() {
+                  firstEntry = false;
+                  if (validateUsername(_usernameController.text) == null &&
+                      validatePassword(_passwordController.text) == null) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => SignupPage()));
+                  }
+                });
+              }),
         ),
       ),
     );
+  }
+
+  String validateUsername(String value) {
+    if (value.isEmpty && !firstEntry) {
+      return 'Username is required';
+    }
+    return null;
+  }
+
+  String validatePassword(String value) {
+    if (value.isEmpty && !firstEntry) {
+      return 'Password is required';
+    }
+    return null;
   }
 }
