@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   fluttertoast: ^8.0.7
+  convex_bottom_bar: ^3.0.0
   flutter:
     sdk: flutter
 
