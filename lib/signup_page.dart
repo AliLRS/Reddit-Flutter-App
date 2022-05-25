@@ -35,7 +35,7 @@ class _SignupPageState extends State<SignupPage> {
             ),
             onPressed: () {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
+                  MaterialPageRoute(builder: (context) => const LoginPage()));
             },
           ),
         ],
@@ -106,7 +106,7 @@ class _SignupPageState extends State<SignupPage> {
                         textColor: Colors.deepOrange,
                         fontSize: 16.0);
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
+                        MaterialPageRoute(builder: (context) => const LoginPage()));
                   }
                 });
               }),

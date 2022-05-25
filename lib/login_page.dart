@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             onPressed: () {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => SignupPage()));
+                  MaterialPageRoute(builder: (context) => const SignupPage()));
             },
           ),
         ],
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (validateUsername(_usernameController.text) == null &&
                       validatePassword(_passwordController.text) == null) {
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => FeedPage()));
+                        MaterialPageRoute(builder: (context) => const FeedPage()));
                   }
                 });
               }),
