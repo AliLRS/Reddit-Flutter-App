@@ -3,6 +3,10 @@ import 'feed_page.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'add_post_page.dart';
 import 'communities_page.dart';
+import 'Setting/profile_page.dart';
+import 'Setting/create_community_page.dart';
+import 'Setting/about_us_page.dart';
+import 'Setting/saved_posts_page.dart';
 
 class PageDrawer extends StatefulWidget {
   const PageDrawer({Key key}) : super(key: key);
@@ -11,7 +15,6 @@ class PageDrawer extends StatefulWidget {
 }
 
 class _PageDrawerState extends State<PageDrawer> {
-  int _drawerSelectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -20,7 +23,6 @@ class _PageDrawerState extends State<PageDrawer> {
           const DrawerHeader(
             decoration: BoxDecoration(color: Colors.deepOrange),
             child: UserAccountsDrawerHeader(
-              //onDetailsPressed: ,
               accountName: Text('User'),
               accountEmail: Text('User@email.com'),
               currentAccountPicture: CircleAvatar(
@@ -32,37 +34,29 @@ class _PageDrawerState extends State<PageDrawer> {
           ListTile(
             title: const Text('Profile'),
             onTap: () {
-              Navigator.pop(context);
-              setState(() {
-                _drawerSelectedIndex = 0;
-              });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ProfilePage()));
             },
           ),
           ListTile(
             title: const Text('Create a community'),
             onTap: () {
-              Navigator.pop(context);
-              setState(() {
-                _drawerSelectedIndex = 1;
-              });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const CreateCommunity()));
             },
           ),
           ListTile(
             title: const Text('Saved posts'),
             onTap: () {
-              Navigator.pop(context);
-              setState(() {
-                _drawerSelectedIndex = 2;
-              });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const SavedPosts()));
             },
           ),
           ListTile(
             title: const Text('About us'),
             onTap: () {
-              Navigator.pop(context);
-              setState(() {
-                _drawerSelectedIndex = 3;
-              });
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const AboutUs()));
             },
           ),
           Container(
