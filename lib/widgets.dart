@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'feed_page.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'add_post_page.dart';
+import 'communities_page.dart';
 
 class PageDrawer extends StatefulWidget {
   const PageDrawer({Key key}) : super(key: key);
@@ -86,8 +88,6 @@ class _PageDrawerState extends State<PageDrawer> {
   }
 }
 
-
-
 class PageAppBar extends StatefulWidget {
   const PageAppBar({Key key}) : super(key: key);
 
@@ -111,6 +111,37 @@ class _PageAppBarState extends State<PageAppBar> {
       onTap: (int index) {
         setState(() {
           FeedPage.selectedIndex = index;
+          switch (index) {
+            case 0:
+              Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => const AddPage(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero),
+              );
+              break;
+            case 1:
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) => const FeedPage(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero),
+              );
+              break;
+            case 2:
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) => const CommunitiesPage(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero),
+              );
+              break;
+            default:
+              break;
+          }
         });
       },
     );

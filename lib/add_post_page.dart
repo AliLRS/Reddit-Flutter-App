@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'widgets.dart';
 
-class FeedPage extends StatefulWidget {
-  const FeedPage({Key key}) : super(key: key);
-  static bool darkMode = false;
-  static int selectedIndex = 1;
+class AddPage extends StatefulWidget {
+  const AddPage({Key key}) : super(key: key);
 
   @override
-  State<FeedPage> createState() => _FeedPageState();
+  State<AddPage> createState() => _AddPageState();
 }
 
-class _FeedPageState extends State<FeedPage> {
+class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +16,7 @@ class _FeedPageState extends State<FeedPage> {
         title: const Text('Reddit'),
       ),
       body: const ListTile(
-        title: Text('Feed'),
+        title: Text('Add post'),
       ),
       drawer: const PageDrawer(),
       bottomNavigationBar: const PageAppBar(),
