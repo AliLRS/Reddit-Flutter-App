@@ -11,6 +11,7 @@ class FeedPage extends StatefulWidget {
 class _FeedPageState extends State<FeedPage> {
   int _selectedIndex = 1;
   int _drawerSelectedIndex = 0;
+  bool _darkMode = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +25,9 @@ class _FeedPageState extends State<FeedPage> {
         child: ListView(
           children: <Widget>[
             const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.deepOrange
-              ),
+              decoration: BoxDecoration(color: Colors.deepOrange),
               child: UserAccountsDrawerHeader(
-
+                //onDetailsPressed: ,
                 accountName: Text('User'),
                 accountEmail: Text('User@email.com'),
                 currentAccountPicture: CircleAvatar(
@@ -38,7 +37,7 @@ class _FeedPageState extends State<FeedPage> {
               ),
             ),
             ListTile(
-              title: Text('Home'),
+              title: const Text('Profile'),
               onTap: () {
                 Navigator.pop(context);
                 setState(() {
@@ -47,7 +46,7 @@ class _FeedPageState extends State<FeedPage> {
               },
             ),
             ListTile(
-              title: Text('Profile'),
+              title: const Text('Create a community'),
               onTap: () {
                 Navigator.pop(context);
                 setState(() {
@@ -56,13 +55,39 @@ class _FeedPageState extends State<FeedPage> {
               },
             ),
             ListTile(
-              title: Text('Settings'),
+              title: const Text('Saved posts'),
               onTap: () {
                 Navigator.pop(context);
                 setState(() {
                   _drawerSelectedIndex = 2;
                 });
               },
+            ),
+            ListTile(
+              title: const Text('About us'),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() {
+                  _drawerSelectedIndex = 3;
+                });
+              },
+            ),
+            Container(
+              decoration: const BoxDecoration(color: Colors.black38),
+              child: Row(
+                children: [
+                  const Text('     Dark mode',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Switch(
+                    onChanged: (bool value) {
+                      setState(() {
+                        _darkMode = value;
+                      });
+                    },
+                    value: _darkMode,
+                  )
+                ],
+              ),
             ),
           ],
         ),
