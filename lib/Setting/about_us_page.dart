@@ -15,7 +15,7 @@ class _AboutUsState extends State<AboutUs> {
         title: const Text('Reddit'),
       ),
       body: const ListTile(
-        title: Text('About us'),
+        title: Text('About Us'),
       ),
     );
   }
