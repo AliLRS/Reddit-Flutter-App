@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
@@ -15,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
       ),
-      home: const HomePage(title: 'Home Page'),
+      home: const HomePage(title: 'Home'),
     );
   }
 }
@@ -29,6 +27,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return loginPage();
+    return const LoginPage();
   }
 }
