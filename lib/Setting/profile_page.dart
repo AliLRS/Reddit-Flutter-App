@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key key}) : super(key: key);
@@ -17,13 +18,10 @@ class _ProfilePageState extends State<ProfilePage> {
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             height: 140,
             child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.blueAccent,
-              ),
               alignment: const Alignment(0.0, 0.0),
               child: const CircleAvatar(
                 backgroundColor: Colors.deepOrange,
@@ -34,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           const SizedBox(
-            height: 60,
+            height: 30,
           ),
           Column(
             children: const [
@@ -130,7 +128,8 @@ class _ProfilePageState extends State<ProfilePage> {
             onPressed: () {
               setState(
                 () {
-
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const EditProfile()));
                 },
               );
             },
