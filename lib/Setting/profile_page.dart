@@ -22,17 +22,25 @@ class _ProfilePageState extends State<ProfilePage> {
             width: double.infinity,
             height: 140,
             child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.blueAccent,
+              ),
               alignment: const Alignment(0.0, 0.0),
-              child: const CircleAvatar(
-                backgroundColor: Colors.deepOrange,
-                child: Text('U',
-                    style: TextStyle(fontSize: 35, )),
-                radius: 50.0,
+              child: Row(
+                children: const [
+                  CircleAvatar(
+                    backgroundColor: Colors.deepOrange,
+                    child: Text('U',
+                        style: TextStyle(fontSize: 35, )),
+                    radius: 50.0,
+                  ),
+                  Text("12434")
+                ],
               ),
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 60,
           ),
           Column(
             children: const [
