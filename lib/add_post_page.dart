@@ -33,7 +33,7 @@ class _AddPageState extends State<AddPage> {
               style: const TextStyle(fontSize: 22),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 hintText: 'Add a title',
               ),
@@ -45,34 +45,30 @@ class _AddPageState extends State<AddPage> {
               child: TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     hintText: 'Add Body text'),
                 controller: _bodyController,
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.multiline,
                 maxLines: 10,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              height: 50,
+              width: 150,
+              child: ElevatedButton(
+                onPressed: () {
+
+                },
+                child: const Text('Add Post'),
               ),
             ),
           ],
         ),
       ),
       drawer: const PageDrawer(),
-      bottomNavigationBar: BottomAppBar(
-        child: SizedBox(
-          height: 50,
-          child: ElevatedButton(
-              child: const Text('Continue'),
-              onPressed: () {
-                setState(() {
-                  FeedPage.selectedIndex = 1;
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const FeedPage()));
-                });
-              }),
-        ),
-      ),
+      bottomNavigationBar: const PageAppBar()
     );
   }
 }
