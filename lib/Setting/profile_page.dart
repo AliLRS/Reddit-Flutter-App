@@ -23,56 +23,70 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 140,
             child: Container(
               decoration: const BoxDecoration(
-                color: Colors.blueAccent,
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Colors.blue,
+                    Colors.red,
+                  ],
+                ),
               ),
               alignment: const Alignment(0.0, 0.0),
               child: Row(
-                children: const [
-                  CircleAvatar(
-                    backgroundColor: Colors.deepOrange,
-                    child: Text('U',
-                        style: TextStyle(fontSize: 35, )),
-                    radius: 50.0,
+                children: [
+                  const Expanded(
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: Text('U',
+                          style: TextStyle(
+                            fontSize: 35,
+                          )),
+                      radius: 50.0,
+                    ),
                   ),
-                  Text("12434")
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Username",
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.white,
+                              letterSpacing: 2.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(
+                          "Username@email.com",
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.white,
+                              letterSpacing: 2.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
           const SizedBox(
-            height: 60,
-          ),
-          Column(
-            children: const [
-              Center(
-                child: Text(
-                  "Username",
-                  style: TextStyle(
-                      fontSize: 25.0,
-                      color: Colors.blueGrey,
-                      letterSpacing: 2.0,
-                      fontWeight: FontWeight.w400),
-                ),
-              ),
-              Center(
-                child: Text(
-                  "Username@email.com",
-                  style: TextStyle(
-                      fontSize: 25.0,
-                      color: Colors.blueGrey,
-                      letterSpacing: 2.0,
-                      fontWeight: FontWeight.w400),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
             height: 30,
           ),
           Card(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            ),
             margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -94,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 22.0,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w500),
                         )
                       ],
                     ),
@@ -117,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 22.0,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w500),
                         )
                       ],
                     ),
@@ -136,8 +150,10 @@ class _ProfilePageState extends State<ProfilePage> {
             onPressed: () {
               setState(
                 () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const EditProfile()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const EditProfile()));
                 },
               );
             },
