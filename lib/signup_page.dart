@@ -71,8 +71,8 @@ class _SignupPageState extends State<SignupPage> {
                   icon: Icon(
                     Icons.remove_red_eye,
                     color: (_passwordVisibility
-                        ? Colors.deepOrange
-                        : Colors.black),
+                        ? Colors.orange
+                        : Colors.black54),
                   ),
                   onPressed: () {
                     setState(() {

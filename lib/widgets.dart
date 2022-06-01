@@ -21,7 +21,7 @@ class _PageDrawerState extends State<PageDrawer> {
       child: ListView(
         children: <Widget>[
           const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.deepOrange),
+            decoration: BoxDecoration(color: Colors.indigo),
             child: UserAccountsDrawerHeader(
               accountName: Text('User'),
               accountEmail: Text('User@email.com'),
@@ -95,7 +95,7 @@ class _PageAppBarState extends State<PageAppBar> {
     return ConvexAppBar(
       color: Colors.white,
       style: TabStyle.reactCircle,
-      backgroundColor: Colors.deepOrange,
+      backgroundColor: Colors.indigo,
       items: const [
         TabItem(icon: Icons.add, title: "Add"),
         TabItem(icon: Icons.home_filled, title: "Home"),

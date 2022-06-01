@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/signup_page.dart';
 import 'package:reddit/feed_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -59,8 +60,8 @@ class _LoginPageState extends State<LoginPage> {
                   icon: Icon(
                     Icons.remove_red_eye,
                     color: (_passwordVisibility
-                        ? Colors.deepOrange
-                        : Colors.black),
+                        ? Colors.orange
+                        : Colors.black54),
                   ),
                   onPressed: () {
                     setState(() {
@@ -84,6 +85,14 @@ class _LoginPageState extends State<LoginPage> {
                   firstEntry = false;
                   if (validateUsername(_usernameController.text) == null &&
                       validatePassword(_passwordController.text) == null) {
+                    Fluttertoast.showToast(
+                        msg: 'Log in was successful',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.TOP,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.white,
+                        textColor: Colors.deepOrange,
+                        fontSize: 16.0);
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => const FeedPage()));
                   }
