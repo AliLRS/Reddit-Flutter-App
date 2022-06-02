@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'community_search_page.dart';
 import 'feed_page.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'add_post_page.dart';
@@ -8,6 +9,7 @@ import 'Setting/profile_page.dart';
 import 'Setting/create_community_page.dart';
 import 'Setting/about_us_page.dart';
 import 'Setting/saved_posts_page.dart';
+import 'post_search_page.dart';
 
 class PageDrawer extends StatefulWidget {
   const PageDrawer({Key key}) : super(key: key);
@@ -167,9 +169,84 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return CupertinoSearchTextField(
-        controller: _textController,
-        onSubmitted: (String value) {
-          Navigator.of(context).pushNamed('/search', arguments: value);
-        });
+      controller: _textController,
+      onSubmitted: (String value) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => PostSearchPage(
+              search: value,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ReplacedPostSearchBar extends StatefulWidget {
+  ReplacedPostSearchBar(this.search, {Key key}) : super(key: key);
+  String search;
+  @override
+  State<ReplacedPostSearchBar> createState() => _ReplacedPostSearchBarState();
+}
+
+class _ReplacedPostSearchBarState extends State<ReplacedPostSearchBar> {
+  TextEditingController _textController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoSearchTextField(
+      controller: _textController,
+      onSubmitted: (String value) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => PostSearchPage(
+              search: value,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ReplacedCommunitySearchBar extends StatefulWidget {
+  ReplacedCommunitySearchBar(this.search, {Key key}) : super(key: key);
+  String search;
+  @override
+  State<ReplacedCommunitySearchBar> createState() =>
+      _ReplacedCommunitySearchBarState();
+}
+
+class _ReplacedCommunitySearchBarState
+    extends State<ReplacedCommunitySearchBar> {
+  TextEditingController _textController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoSearchTextField(
+      controller: _textController,
+      onSubmitted: (String value) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => CommunitySearchPage(
+              search: value,
+            ),
+          ),
+        );
+      },
+    );
   }
 }
