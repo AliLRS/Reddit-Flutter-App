@@ -8,12 +8,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Reddit',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
-      home: const HomePage(title: 'Home'),
+      home: HomePage(title: 'Home'),
     );
   }
 }

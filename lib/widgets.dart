@@ -10,6 +10,7 @@ import 'Setting/create_community_page.dart';
 import 'Setting/about_us_page.dart';
 import 'Setting/saved_posts_page.dart';
 import 'Search/post_search_page.dart';
+import 'globals.dart';
 
 class PageDrawer extends StatefulWidget {
   const PageDrawer({Key key}) : super(key: key);
@@ -21,11 +22,13 @@ class _PageDrawerState extends State<PageDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: backgroundColor,
       child: ListView(
         children: <Widget>[
           const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.indigo),
+            decoration: BoxDecoration(color: Colors.deepPurple),
             child: UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Colors.deepPurple),
               accountName: Text('User'),
               accountEmail: Text('User@email.com'),
               currentAccountPicture: CircleAvatar(
@@ -73,10 +76,11 @@ class _PageDrawerState extends State<PageDrawer> {
                 Switch(
                   onChanged: (bool value) {
                     setState(() {
-                      FeedPage.darkMode = value;
+                      darkMode = value;
+                      changeColor(darkMode);
                     });
                   },
-                  value: FeedPage.darkMode,
+                  value: darkMode,
                 )
               ],
             ),
@@ -84,6 +88,17 @@ class _PageDrawerState extends State<PageDrawer> {
         ],
       ),
     );
+  }
+  void changeColor(bool isDark) {
+    if (isDark) {
+      mainColor = Colors.indigo;
+      backgroundColor = Colors.grey;
+      textColor = Colors.white;
+    } else {
+      mainColor = Colors.orange;
+      backgroundColor = Colors.white;
+      textColor = Colors.black;
+    }
   }
 }
 
@@ -100,7 +115,7 @@ class _PageAppBarState extends State<PageAppBar> {
     return ConvexAppBar(
       color: Colors.white,
       style: TabStyle.reactCircle,
-      backgroundColor: Colors.indigo,
+      backgroundColor: mainColor,
       items: const [
         TabItem(icon: Icons.add, title: "Add"),
         TabItem(icon: Icons.home_filled, title: "Home"),

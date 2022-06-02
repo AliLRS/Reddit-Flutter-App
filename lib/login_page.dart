@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reddit/signup_page.dart';
 import 'package:reddit/feed_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'globals.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -23,7 +24,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
+        backgroundColor: mainColor,
         title: const Text('Log in'),
         actions: [
           TextButton(
@@ -79,6 +82,9 @@ class _LoginPageState extends State<LoginPage> {
         child: SizedBox(
           height: 50,
           child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: mainColor,
+            ),
               child: const Text('Continue'),
               onPressed: () {
                 setState(() {

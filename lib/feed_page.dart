@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/globals.dart';
 import 'widgets.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({Key key}) : super(key: key);
-  static bool darkMode = false;
   static int selectedIndex = 1;
 
   @override
@@ -14,10 +14,12 @@ class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
+        backgroundColor: mainColor,
         title: Container(
           color: Colors.white,
-          child: SearchBar(),
+          child: const SearchBar(),
         ),
       ),
       body: const ListTile(
