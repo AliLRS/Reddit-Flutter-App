@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/Community_search_result_page.dart';
+import 'package:reddit/Search/post_search_result_page.dart';
 import 'package:reddit/widgets.dart';
-import 'post_search_result_page.dart';
+import 'Community_search_result_page.dart';
 
 final GlobalKey<NavigatorState> _navKey = GlobalKey<NavigatorState>();
 
-class PostSearchPage extends StatefulWidget {
-  PostSearchPage({Key key, String search}) : super(key: key) {}
+class CommunitySearchPage extends StatefulWidget {
+  CommunitySearchPage({Key key, String search}) : super(key: key);
   String search;
   @override
-  State<PostSearchPage> createState() => _PostSearchPageState();
+  State<CommunitySearchPage> createState() => _CommunitySearchPageState();
 }
 
-class _PostSearchPageState extends State<PostSearchPage>
+class _CommunitySearchPageState extends State<CommunitySearchPage>
     with TickerProviderStateMixin {
   TabController _tabController;
   @override
@@ -29,7 +29,7 @@ class _PostSearchPageState extends State<PostSearchPage>
         appBar: AppBar(
           title: Container(
             color: Colors.white,
-            child: ReplacedPostSearchBar(widget.search),
+            child: ReplacedCommunitySearchBar(widget.search),
           ),
           bottom: TabBar(
             controller: _tabController,

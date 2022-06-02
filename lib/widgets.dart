@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'community_search_page.dart';
+import 'Search/community_search_page.dart';
 import 'feed_page.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'add_post_page.dart';
@@ -9,7 +9,7 @@ import 'Setting/profile_page.dart';
 import 'Setting/create_community_page.dart';
 import 'Setting/about_us_page.dart';
 import 'Setting/saved_posts_page.dart';
-import 'post_search_page.dart';
+import 'Search/post_search_page.dart';
 
 class PageDrawer extends StatefulWidget {
   const PageDrawer({Key key}) : super(key: key);
