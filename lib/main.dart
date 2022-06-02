@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'splash_screen.dart';
 import 'login_page.dart';
 
 void main() => runApp(const MyApp());
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Reddit',
-      home: HomePage(title: 'Home'),
+      home: SplashScreen(),
     );
   }
 }
