@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/searchbar_page.dart';
 import 'widgets.dart';
 
 class CommunitiesPage extends StatefulWidget {
@@ -13,7 +14,10 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reddit'),
+        title: Container(
+          color: Colors.white,
+          child: SearchBarPage(),
+        ),
       ),
       body: const ListTile(
         title: Text('Communities page'),

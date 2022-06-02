@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/searchbar_page.dart';
 import 'widgets.dart';
 
 class FeedPage extends StatefulWidget {
@@ -15,7 +16,10 @@ class _FeedPageState extends State<FeedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reddit'),
+        title: Container(
+          color: Colors.white,
+          child: SearchBarPage(),
+        ),
       ),
       body: const ListTile(
         title: Text('Feed'),
