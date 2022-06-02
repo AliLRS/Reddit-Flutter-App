@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'feed_page.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -41,8 +42,10 @@ class _PageDrawerState extends State<PageDrawer> {
           ListTile(
             title: const Text('Create a community'),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const CreateCommunity()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const CreateCommunity()));
             },
           ),
           ListTile(
@@ -108,18 +111,20 @@ class _PageAppBarState extends State<PageAppBar> {
           switch (index) {
             case 0:
               Navigator.pushReplacement(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => const AddPage(),
-                  transitionDuration: Duration.zero,
-                  reverseTransitionDuration: Duration.zero),
+                context,
+                PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const AddPage(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero),
               );
               break;
             case 1:
               Navigator.pushReplacement(
                 context,
                 PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => const FeedPage(),
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const FeedPage(),
                     transitionDuration: Duration.zero,
                     reverseTransitionDuration: Duration.zero),
               );
@@ -128,7 +133,8 @@ class _PageAppBarState extends State<PageAppBar> {
               Navigator.pushReplacement(
                 context,
                 PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => const CommunitiesPage(),
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const CommunitiesPage(),
                     transitionDuration: Duration.zero,
                     reverseTransitionDuration: Duration.zero),
               );
@@ -139,5 +145,31 @@ class _PageAppBarState extends State<PageAppBar> {
         });
       },
     );
+  }
+}
+
+class SearchBar extends StatefulWidget {
+  const SearchBar({Key key}) : super(key: key);
+
+  @override
+  State<SearchBar> createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  TextEditingController _textController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoSearchTextField(
+        controller: _textController,
+        onSubmitted: (String value) {
+          Navigator.of(context).pushNamed('/search', arguments: value);
+        });
   }
 }
