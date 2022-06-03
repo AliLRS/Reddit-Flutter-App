@@ -11,6 +11,7 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   TextEditingController _titleController, _bodyController;
+  bool _isButtonActive = false;
   List<String> _communities;
   String _communitySelected;
   @override
@@ -18,6 +19,18 @@ class _AddPageState extends State<AddPage> {
     super.initState();
     _titleController = TextEditingController();
     _bodyController = TextEditingController();
+    _titleController.addListener(() {
+      final _isButtonActive = _titleController.text.isNotEmpty &&
+          _bodyController.text.isNotEmpty &&
+          _communitySelected != null;
+      setState(() => this._isButtonActive = _isButtonActive);
+    });
+    _bodyController.addListener(() {
+      _isButtonActive = _titleController.text.isNotEmpty &&
+          _bodyController.text.isNotEmpty &&
+          _communitySelected != null;
+      setState(() => this._isButtonActive = _isButtonActive);
+    });
     _communities = [
       'Dart',
       'Flutter',
@@ -29,6 +42,13 @@ class _AddPageState extends State<AddPage> {
       'Meteor'
     ];
     _communitySelected = _communities[0];
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _bodyController.dispose();
+    super.dispose();
   }
 
   @override
@@ -89,7 +109,15 @@ class _AddPageState extends State<AddPage> {
                 height: 50,
                 width: 150,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _isButtonActive
+                      ? () {
+                          FeedPage.selectedIndex = 1;
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FeedPage()));
+                        }
+                      : null,
                   child: const Text('Add Post'),
                 ),
               ),
