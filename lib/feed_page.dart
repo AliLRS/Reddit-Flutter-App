@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/post_item.dart';
 import 'widgets.dart';
 
 class FeedPage extends StatefulWidget {
@@ -9,6 +10,14 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
+  List<PostItem> posts = [
+    PostItem(),
+    PostItem(),
+    PostItem(),
+    PostItem(),
+    PostItem(),
+    PostItem(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,30 +27,11 @@ class _FeedPageState extends State<FeedPage> {
           child: const SearchBar(),
         ),
       ),
-      body: Column(
-        children: [
-          ListTile(
-            leading: const CircleAvatar(
-              radius: 30,
-              child: Icon(Icons.ac_unit),
-            ),
-            title: Text('r/user'),
-            subtitle: Text('u/community'),
-          ),
-          ListTile(
-            title: Text('title'),
-            subtitle: Text('description\n...\n...\n...'),
-          ),
-          Row(
-            children: [
-              Expanded(child: IconButton(onPressed: () {}, icon: const Icon(Icons.thumb_up))),
-              Expanded(child: IconButton(onPressed: () {}, icon: const Icon(Icons.thumb_down))),
-              Expanded(child: IconButton(onPressed: () {}, icon: const Icon(Icons.comment))),
-              Expanded(child: IconButton(onPressed: () {}, icon: const Icon(Icons.share)))
-            ],
-          ),
-        ],
-      ),
+      body: ListView.builder(
+          itemCount: posts.length,
+          itemBuilder: (context, index) {
+            return PostItem();
+          }),
       drawer: const PageDrawer(),
       bottomNavigationBar: const PageAppBar(),
     );
