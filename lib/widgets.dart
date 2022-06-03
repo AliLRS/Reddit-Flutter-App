@@ -10,6 +10,7 @@ import 'Setting/about_us_page.dart';
 import 'Setting/saved_posts_page.dart';
 import 'Search/search_page.dart';
 import 'Setting/setting_page.dart';
+import 'app_theme.dart';
 
 class PageDrawer extends StatefulWidget {
   const PageDrawer({Key key}) : super(key: key);
@@ -23,10 +24,10 @@ class _PageDrawerState extends State<PageDrawer> {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
+          DrawerHeader(
+            decoration: BoxDecoration(color: AppTheme.mainColor),
             child: UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
+              decoration: BoxDecoration(color: AppTheme.mainColor),
               accountName: Text('User'),
               accountEmail: Text('User@email.com'),
               currentAccountPicture: CircleAvatar(
@@ -66,7 +67,7 @@ class _PageDrawerState extends State<PageDrawer> {
             },
           ),
           ListTile(
-            title: const Text('Setting'),
+            title: const Text('Settings'),
             onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const Setting()));
@@ -89,6 +90,7 @@ class _PageAppBarState extends State<PageAppBar> {
   @override
   Widget build(BuildContext context) {
     return ConvexAppBar(
+      backgroundColor: AppTheme.mainColor,
       color: Colors.white,
       style: TabStyle.reactCircle,
       items: const [

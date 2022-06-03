@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/feed_page.dart';
 import 'package:reddit/login_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import 'app_theme.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key key}) : super(key: key);
@@ -53,35 +56,45 @@ class _SignupPageState extends State<SignupPage> {
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                labelText: 'Username',
-                errorText: validateUsername(_usernameController.text),
-              ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                errorText: validatePassword(_passwordController.text),
-                errorMaxLines: 3,
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    Icons.remove_red_eye,
-                    color: (_passwordVisibility
-                        ? Colors.orange
-                        : Colors.black54),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _passwordVisibility = !_passwordVisibility;
-                    });
-                  },
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                  errorText: validateUsername(_usernameController.text),
                 ),
+                keyboardType: TextInputType.emailAddress,
               ),
-              obscureText: !_passwordVisibility,
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  errorText: validatePassword(_passwordController.text),
+                  errorMaxLines: 3,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      Icons.remove_red_eye,
+                      color: (ThemeMode.system == ThemeMode.dark
+                          ? (_passwordVisibility
+                              ? Colors.blueGrey
+                              : Colors.white)
+                          : (_passwordVisibility
+                              ? Colors.orange
+                              : Colors.black)),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _passwordVisibility = !_passwordVisibility;
+                      });
+                    },
+                  ),
+                ),
+                obscureText: !_passwordVisibility,
+              ),
             ),
           ],
         ),
@@ -90,8 +103,6 @@ class _SignupPageState extends State<SignupPage> {
         child: SizedBox(
           height: 50,
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-            ),
               child: const Text('Continue'),
               onPressed: () {
                 setState(() {
@@ -104,11 +115,13 @@ class _SignupPageState extends State<SignupPage> {
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.TOP,
                         timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.white,
-                        textColor: Colors.deepOrange,
+                        backgroundColor: AppTheme.mainColor,
+                        textColor: Colors.white,
                         fontSize: 16.0);
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => const LoginPage()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const FeedPage()));
                   }
                 });
               }),

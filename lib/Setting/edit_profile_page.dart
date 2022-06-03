@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../app_theme.dart';
 import 'profile_page.dart';
 
 class EditProfile extends StatefulWidget {
@@ -41,37 +42,47 @@ class _EditProfileState extends State<EditProfile> {
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                labelText: 'Username',
-                errorText: validateUsername(_usernameController.text),
-              ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                errorText: validatePassword(_passwordController.text),
-                errorMaxLines: 3,
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    Icons.remove_red_eye,
-                    color: (_passwordVisibility
-                        ? Colors.deepOrange
-                        : Colors.black),
-                  ),
-                  onPressed: () {
-                    setState(
-                      () {
-                        _passwordVisibility = !_passwordVisibility;
-                      },
-                    );
-                  },
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                  errorText: validateUsername(_usernameController.text),
                 ),
+                keyboardType: TextInputType.emailAddress,
               ),
-              obscureText: !_passwordVisibility,
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  errorText: validatePassword(_passwordController.text),
+                  errorMaxLines: 3,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      Icons.remove_red_eye,
+                      color: (ThemeMode.system == ThemeMode.dark
+                          ? (_passwordVisibility
+                              ? Colors.blueGrey
+                              : Colors.white)
+                          : (_passwordVisibility
+                              ? Colors.orange
+                              : Colors.black)),
+                    ),
+                    onPressed: () {
+                      setState(
+                        () {
+                          _passwordVisibility = !_passwordVisibility;
+                        },
+                      );
+                    },
+                  ),
+                ),
+                obscureText: !_passwordVisibility,
+              ),
             ),
           ],
         ),
@@ -93,10 +104,10 @@ class _EditProfileState extends State<EditProfile> {
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.TOP,
                         timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.white,
-                        textColor: Colors.deepOrange,
+                        backgroundColor: AppTheme.mainColor,
+                        textColor: Colors.white,
                         fontSize: 16.0);
-                    Navigator.push(
+                    Navigator.pop(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const ProfilePage()));

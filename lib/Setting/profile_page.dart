@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/app_theme.dart';
 import 'edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -92,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   Expanded(
                     child: Column(
-                      children: const [
+                      children: [
                         Text(
                           "Posts",
                           style: TextStyle(
@@ -106,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Text(
                           "15",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: AppTheme.mainColor,
                               fontSize: 22.0,
                               fontWeight: FontWeight.w500),
                         )
@@ -115,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Expanded(
                     child: Column(
-                      children: const [
+                      children: [
                         Text(
                           "Followers",
                           style: TextStyle(
@@ -129,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Text(
                           "200",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: AppTheme.mainColor,
                               fontSize: 22.0,
                               fontWeight: FontWeight.w500),
                         )
@@ -146,6 +147,9 @@ class _ProfilePageState extends State<ProfilePage> {
         child: SizedBox(
           height: 50,
           child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: AppTheme.mainColor,
+            ),
             child: const Text('Edit Profile'),
             onPressed: () {
               setState(

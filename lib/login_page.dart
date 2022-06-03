@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reddit/signup_page.dart';
 import 'package:reddit/feed_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'app_theme.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -51,26 +52,33 @@ class _LoginPageState extends State<LoginPage> {
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                errorText: validatePassword(_passwordController.text),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    Icons.remove_red_eye,
-                    color: (_passwordVisibility
-                        ? Colors.orange
-                        : Colors.black54),
+            Container(
+              margin: const EdgeInsets.only(top: 20),
+              child: TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  errorText: validatePassword(_passwordController.text),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      Icons.remove_red_eye,
+                      color: (ThemeMode.system == ThemeMode.dark
+                          ? (_passwordVisibility
+                              ? Colors.blueGrey
+                              : Colors.white)
+                          : (_passwordVisibility
+                              ? Colors.orange
+                              : Colors.black)),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _passwordVisibility = !_passwordVisibility;
+                      });
+                    },
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _passwordVisibility = !_passwordVisibility;
-                    });
-                  },
                 ),
+                obscureText: !_passwordVisibility,
               ),
-              obscureText: !_passwordVisibility,
             ),
           ],
         ),
@@ -79,8 +87,6 @@ class _LoginPageState extends State<LoginPage> {
         child: SizedBox(
           height: 50,
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-            ),
               child: const Text('Continue'),
               onPressed: () {
                 setState(() {
@@ -92,11 +98,13 @@ class _LoginPageState extends State<LoginPage> {
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.TOP,
                         timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.white,
-                        textColor: Colors.deepOrange,
+                        backgroundColor: AppTheme.mainColor,
+                        textColor: Colors.white,
                         fontSize: 16.0);
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => const FeedPage()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const FeedPage()));
                   }
                 });
               }),

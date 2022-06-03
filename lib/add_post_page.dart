@@ -1,3 +1,4 @@
+import 'app_theme.dart';
 import 'widgets.dart';
 import 'feed_page.dart';
 import 'package:flutter/material.dart';

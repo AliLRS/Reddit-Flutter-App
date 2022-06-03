@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'app_theme.dart';
 import 'globals.dart';
 import 'dart:async';
 import 'main.dart';
@@ -68,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
     double _h = MediaQuery.of(context).size.height;
     double _w = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: mainColor,
+      backgroundColor: AppTheme.mainColor,
       body: Center(
         child: Column(
           children: [
@@ -104,8 +105,9 @@ class _SplashScreenState extends State<SplashScreen> {
               decoration: BoxDecoration(
                   color: _b ? Colors.white : Colors.transparent,
                   // shape: _c? BoxShape.rectangle : BoxShape.circle,
-                  borderRadius:
-                      _d ? const BorderRadius.only() : BorderRadius.circular(30)),
+                  borderRadius: _d
+                      ? const BorderRadius.only()
+                      : BorderRadius.circular(30)),
               child: Center(
                 child: _e
                     ? AnimatedTextKit(
@@ -115,10 +117,9 @@ class _SplashScreenState extends State<SplashScreen> {
                             'Reddit',
                             duration: const Duration(milliseconds: 1700),
                             textStyle: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700,
-                              color: mainColor,
-                            ),
+                                fontSize: 30,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.mainColor),
                           ),
                         ],
                       )

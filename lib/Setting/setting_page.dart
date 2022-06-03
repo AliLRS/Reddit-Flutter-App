@@ -32,10 +32,11 @@ class _SettingState extends State<Setting> {
                     Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                    const Setting(),
-                    transitionDuration: Duration.zero,
-                    reverseTransitionDuration: Duration.zero));
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    const Setting(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero));
                   });
                 },
                 initialValue: isSwitched,
