@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const FeedPage()));
+                            builder: (context) => FeedPage()));
                   }
                 });
               }),

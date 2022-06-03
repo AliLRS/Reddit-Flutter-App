@@ -121,7 +121,7 @@ class _SignupPageState extends State<SignupPage> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const FeedPage()));
+                            builder: (context) => FeedPage()));
                   }
                 });
               }),
