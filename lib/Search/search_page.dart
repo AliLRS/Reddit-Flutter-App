@@ -5,15 +5,14 @@ import 'post_search_result_page.dart';
 
 final GlobalKey<NavigatorState> _navKey = GlobalKey<NavigatorState>();
 
-class PostSearchPage extends StatefulWidget {
-  PostSearchPage({Key key, String search}) : super(key: key) {}
+class SearchPage extends StatefulWidget {
+  SearchPage(this.search, {Key key}) : super(key: key);
   String search;
   @override
-  State<PostSearchPage> createState() => _PostSearchPageState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _PostSearchPageState extends State<PostSearchPage>
-    with TickerProviderStateMixin {
+class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   TabController _tabController;
   @override
   void initState() {
@@ -27,10 +26,7 @@ class _PostSearchPageState extends State<PostSearchPage>
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Container(
-            color: Colors.white,
-            child: ReplacedPostSearchBar(widget.search),
-          ),
+          title: Text(widget.search),
           bottom: TabBar(
             controller: _tabController,
             tabs: [
