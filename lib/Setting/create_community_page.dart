@@ -12,7 +12,7 @@ class CreateCommunity extends StatefulWidget {
 
 class _CreateCommunityState extends State<CreateCommunity> {
   TextEditingController _nameController;
-  String _type = 'Public';
+  String _type = 'public';
   bool _isButtonActive = false;
   @override
   void initState() {

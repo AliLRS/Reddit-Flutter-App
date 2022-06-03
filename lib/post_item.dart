@@ -16,9 +16,10 @@ class PostItem extends StatelessWidget {
           subtitle: Text('u/user'),
         ),
         const ListTile(
-
           title: Text('title'),
-          subtitle: Text('description\n...\n...\n...',),
+          subtitle: Text(
+            'description\n...\n...\n...',
+          ),
         ),
         Container(
           decoration: const BoxDecoration(
@@ -32,17 +33,36 @@ class PostItem extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                  child: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.thumb_up))),
+                flex: 3,
+                child: Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.thumb_up)),
+                    const Text('16'),
+                    IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.thumb_down)),
+                  ],
+                ),
+              ),
               Expanded(
-                  child: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.thumb_down))),
+                flex: 2,
+                child: Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.comment)),
+                    const Text('2'),
+                  ],
+                ),
+              ),
               Expanded(
-                  child: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.comment))),
-              Expanded(
-                  child: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.share)))
+                flex: 2,
+                child: Row(
+                  children: [
+                    IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
+                    const Text('Share'),
+                  ],
+                ),
+              )
             ],
           ),
         ),

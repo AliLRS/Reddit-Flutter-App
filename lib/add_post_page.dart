@@ -1,4 +1,3 @@
-import 'app_theme.dart';
 import 'widgets.dart';
 import 'feed_page.dart';
 import 'package:flutter/material.dart';
@@ -33,14 +32,14 @@ class _AddPageState extends State<AddPage> {
       setState(() => this._isButtonActive = _isButtonActive);
     });
     _communities = [
-      'Dart',
-      'Flutter',
-      'React',
-      'Vue',
-      'Angular',
-      'Backbone',
-      'Ember',
-      'Meteor'
+      'r/Dart',
+      'r/Flutter',
+      'r/React',
+      'r/Vue',
+      'r/Angular',
+      'r/Backbone',
+      'r/Ember',
+      'r/Meteor'
     ];
     _communitySelected = _communities[0];
   }
