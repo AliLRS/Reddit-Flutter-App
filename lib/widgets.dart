@@ -118,7 +118,7 @@ class _PageAppBarState extends State<PageAppBar> {
                 context,
                 PageRouteBuilder(
                     pageBuilder: (context, animation, secondaryAnimation) =>
-                        const FeedPage(),
+                        FeedPage(),
                     transitionDuration: Duration.zero,
                     reverseTransitionDuration: Duration.zero),
               );
