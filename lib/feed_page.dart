@@ -3,7 +3,7 @@ import 'package:reddit/post_item.dart';
 import 'widgets.dart';
 
 class FeedPage extends StatefulWidget {
-  FeedPage({Key key}) : super(key: key);
+  const FeedPage({Key key}) : super(key: key);
   static int selectedIndex = 1;
   @override
   State<FeedPage> createState() => _FeedPageState();
@@ -36,11 +36,4 @@ class _FeedPageState extends State<FeedPage> {
       bottomNavigationBar: const PageAppBar(),
     );
   }
-}
-
-class Post {
-  String title;
-  String discribe;
-  String User;
-  String Community;
 }
