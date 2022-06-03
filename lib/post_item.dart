@@ -7,33 +7,44 @@ class PostItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ListTile(
-          leading: const CircleAvatar(
+        const ListTile(
+          leading: CircleAvatar(
             radius: 30,
             child: Icon(Icons.ac_unit),
           ),
           title: Text('r/community'),
           subtitle: Text('u/user'),
         ),
-        ListTile(
+        const ListTile(
+
           title: Text('title'),
-          subtitle: Text('description\n...\n...\n...'),
+          subtitle: Text('description\n...\n...\n...',),
         ),
-        Row(
-          children: [
-            Expanded(
-                child: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.thumb_up))),
-            Expanded(
-                child: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.thumb_down))),
-            Expanded(
-                child: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.comment))),
-            Expanded(
-                child:
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.share)))
-          ],
+        Container(
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.grey,
+                width: 1,
+              ),
+            ),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                  child: IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.thumb_up))),
+              Expanded(
+                  child: IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.thumb_down))),
+              Expanded(
+                  child: IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.comment))),
+              Expanded(
+                  child: IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.share)))
+            ],
+          ),
         ),
       ],
     );

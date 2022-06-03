@@ -28,8 +28,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
-                    Colors.blue,
-                    Colors.red,
+                    Colors.blueGrey,
+                    Colors.orange,
                   ],
                 ),
               ),
@@ -56,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           "Username",
                           style: TextStyle(
                               fontSize: 20.0,
-                              color: Colors.white,
+                              color: Colors.black,
                               letterSpacing: 2.0,
                               fontWeight: FontWeight.w400),
                         ),
@@ -67,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           "Username@email.com",
                           style: TextStyle(
                               fontSize: 15.0,
-                              color: Colors.white,
+                              color: Colors.black,
                               letterSpacing: 2.0,
                               fontWeight: FontWeight.w400),
                         ),
