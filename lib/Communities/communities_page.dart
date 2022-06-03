@@ -30,7 +30,11 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
       body: ListView.builder(
         itemCount: communityList.length,
         itemBuilder: (context, index) {
-          return CommunityItem();
+          return communityList[index].isEmpty
+              ? const SizedBox(height: 0)
+              : CommunityItem(
+                  communityList[index],
+                );
         },
       ),
       drawer: const PageDrawer(),
