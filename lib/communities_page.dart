@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'community_item.dart';
 import 'widgets.dart';
 
 class CommunitiesPage extends StatefulWidget {
@@ -9,8 +10,16 @@ class CommunitiesPage extends StatefulWidget {
 }
 
 class _CommunitiesPageState extends State<CommunitiesPage> {
+  List<String> communityList = [
+    'r/Community 1',
+    'r/Community 2',
+    'r/Community 3'
+  ];
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      //communityList.sort((a, b) => a.expireDate.compareTo(b.expireDate));
+    });
     return Scaffold(
       appBar: AppBar(
         title: Container(
@@ -18,8 +27,11 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
           child: SearchBar(),
         ),
       ),
-      body: const ListTile(
-        title: Text('Communities page'),
+      body: ListView.builder(
+        itemCount: communityList.length,
+        itemBuilder: (context, index) {
+          return CommunityItem();
+        },
       ),
       drawer: const PageDrawer(),
       bottomNavigationBar: const PageAppBar(),
