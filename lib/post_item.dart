@@ -12,8 +12,8 @@ class PostItem extends StatelessWidget {
             radius: 30,
             child: Icon(Icons.ac_unit),
           ),
-          title: Text('r/user'),
-          subtitle: Text('u/community'),
+          title: Text('r/community'),
+          subtitle: Text('u/user'),
         ),
         ListTile(
           title: Text('title'),
