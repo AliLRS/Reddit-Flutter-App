@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/communities_page.dart';
+import 'package:reddit/Communities/communities_page.dart';
 
 import '../feed_page.dart';
 

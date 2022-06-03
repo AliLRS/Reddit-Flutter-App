@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'feed_page.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'add_post_page.dart';
-import 'communities_page.dart';
+import 'Communities/communities_page.dart';
 import 'Setting/profile_page.dart';
 import 'Setting/create_community_page.dart';
 import 'Setting/about_us_page.dart';
@@ -28,9 +28,9 @@ class _PageDrawerState extends State<PageDrawer> {
             decoration: BoxDecoration(color: AppTheme.mainColor),
             child: UserAccountsDrawerHeader(
               decoration: BoxDecoration(color: AppTheme.mainColor),
-              accountName: Text('User'),
-              accountEmail: Text('User@email.com'),
-              currentAccountPicture: CircleAvatar(
+              accountName: const Text('User'),
+              accountEmail: const Text('User@email.com'),
+              currentAccountPicture: const CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text('U'),
               ),

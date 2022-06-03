@@ -7,18 +7,18 @@ class AppTheme {
 
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    appBarTheme: AppBarTheme(color: Colors.orange),
+    appBarTheme: const AppBarTheme(color: Colors.orange),
     bottomAppBarColor: Colors.orange,
     bottomNavigationBarTheme:
-        BottomNavigationBarThemeData(backgroundColor: Colors.orange),
-    buttonTheme: ButtonThemeData(
+        const BottomNavigationBarThemeData(backgroundColor: Colors.orange),
+    buttonTheme: const ButtonThemeData(
       buttonColor: Colors.orange,
       textTheme: ButtonTextTheme.primary,
     ),
-    cupertinoOverrideTheme: CupertinoThemeData(
+    cupertinoOverrideTheme: const CupertinoThemeData(
       primaryColor: Colors.orange,
     ),
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: const TabBarTheme(
       labelColor: Colors.orange,
       unselectedLabelColor: Colors.white,
     ),
@@ -33,11 +33,11 @@ class AppTheme {
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      labelStyle: TextStyle(color: Colors.orange),
-      errorStyle: TextStyle(color: Colors.orange),
+      labelStyle: const TextStyle(color: Colors.orange),
+      errorStyle: const TextStyle(color: Colors.orange),
       errorMaxLines: 3,
       border: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.orange),
+        borderSide: const BorderSide(color: Colors.orange),
         borderRadius: BorderRadius.circular(10),
       ),
     ),
@@ -47,18 +47,18 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    appBarTheme: AppBarTheme(color: Colors.blueGrey),
+    appBarTheme: const AppBarTheme(color: Colors.blueGrey),
     bottomAppBarColor: Colors.blueGrey,
     bottomNavigationBarTheme:
-        BottomNavigationBarThemeData(backgroundColor: Colors.blueGrey),
-    buttonTheme: ButtonThemeData(
+        const BottomNavigationBarThemeData(backgroundColor: Colors.blueGrey),
+    buttonTheme: const ButtonThemeData(
       buttonColor: Colors.blueGrey,
       textTheme: ButtonTextTheme.primary,
     ),
-    cupertinoOverrideTheme: CupertinoThemeData(
+    cupertinoOverrideTheme: const CupertinoThemeData(
       primaryColor: Colors.blueGrey,
     ),
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: const TabBarTheme(
       labelColor: Colors.blueGrey,
       unselectedLabelColor: Colors.white,
     ),
@@ -73,11 +73,11 @@ class AppTheme {
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      labelStyle: TextStyle(color: Colors.blueGrey),
-      errorStyle: TextStyle(color: Colors.blueGrey),
+      labelStyle: const TextStyle(color: Colors.blueGrey),
+      errorStyle: const TextStyle(color: Colors.blueGrey),
       errorMaxLines: 3,
       border: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.blueGrey),
+        borderSide: const BorderSide(color: Colors.blueGrey),
         borderRadius: BorderRadius.circular(10),
       ),
     ),

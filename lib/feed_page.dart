@@ -11,12 +11,12 @@ class FeedPage extends StatefulWidget {
 
 class _FeedPageState extends State<FeedPage> {
   List<PostItem> posts = [
-    PostItem(),
-    PostItem(),
-    PostItem(),
-    PostItem(),
-    PostItem(),
-    PostItem(),
+    const PostItem(),
+    const PostItem(),
+    const PostItem(),
+    const PostItem(),
+    const PostItem(),
+    const PostItem(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class _FeedPageState extends State<FeedPage> {
       body: ListView.builder(
           itemCount: posts.length,
           itemBuilder: (context, index) {
-            return PostItem();
+            return const PostItem();
           }),
       drawer: const PageDrawer(),
       bottomNavigationBar: const PageAppBar(),
