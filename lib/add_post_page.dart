@@ -67,7 +67,7 @@ class _AddPageState extends State<AddPage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10, right: 10, left: 10),
                 child: DropdownButton<String>(
                   value: _communitySelected,
                   items: _communities.map((String value) {
