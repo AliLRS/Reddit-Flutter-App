@@ -9,7 +9,7 @@ import 'Setting/create_community_page.dart';
 import 'Setting/about_us_page.dart';
 import 'Setting/saved_posts_page.dart';
 import 'Search/search_page.dart';
-import 'globals.dart';
+import 'Setting/setting_page.dart';
 
 class PageDrawer extends StatefulWidget {
   const PageDrawer({Key key}) : super(key: key);
@@ -21,13 +21,12 @@ class _PageDrawerState extends State<PageDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: backgroundColor,
       child: ListView(
         children: <Widget>[
           const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.deepPurple),
+            decoration: BoxDecoration(color: Colors.blue),
             child: UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.deepPurple),
+              decoration: BoxDecoration(color: Colors.blue),
               accountName: Text('User'),
               accountEmail: Text('User@email.com'),
               currentAccountPicture: CircleAvatar(
@@ -66,39 +65,16 @@ class _PageDrawerState extends State<PageDrawer> {
                   MaterialPageRoute(builder: (context) => const AboutUs()));
             },
           ),
-          Container(
-            decoration: const BoxDecoration(color: Colors.black38),
-            child: Row(
-              children: [
-                const Text('     Dark mode',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                Switch(
-                  onChanged: (bool value) {
-                    setState(() {
-                      darkMode = value;
-                      changeColor(darkMode);
-                    });
-                  },
-                  value: darkMode,
-                )
-              ],
-            ),
+          ListTile(
+            title: const Text('Setting'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Setting()));
+            },
           ),
         ],
       ),
     );
-  }
-
-  void changeColor(bool isDark) {
-    if (isDark) {
-      mainColor = Colors.indigo;
-      backgroundColor = Colors.grey;
-      textColor = Colors.white;
-    } else {
-      mainColor = Colors.orange;
-      backgroundColor = Colors.white;
-      textColor = Colors.black;
-    }
   }
 }
 
@@ -115,7 +91,6 @@ class _PageAppBarState extends State<PageAppBar> {
     return ConvexAppBar(
       color: Colors.white,
       style: TabStyle.reactCircle,
-      backgroundColor: mainColor,
       items: const [
         TabItem(icon: Icons.add, title: "Add"),
         TabItem(icon: Icons.home_filled, title: "Home"),

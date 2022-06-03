@@ -16,36 +16,36 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Timer(Duration(milliseconds: 400), () {
+    Timer(const Duration(milliseconds: 400), () {
       setState(() {
         _a = true;
       });
     });
-    Timer(Duration(milliseconds: 400), () {
+    Timer(const Duration(milliseconds: 400), () {
       setState(() {
         _b = true;
       });
     });
-    Timer(Duration(milliseconds: 1300), () {
+    Timer(const Duration(milliseconds: 1300), () {
       setState(() {
         _c = true;
       });
     });
-    Timer(Duration(milliseconds: 1700), () {
+    Timer(const Duration(milliseconds: 1700), () {
       setState(() {
         _e = true;
       });
     });
-    Timer(Duration(milliseconds: 3400), () {
+    Timer(const Duration(milliseconds: 3400), () {
       setState(() {
         _d = true;
       });
     });
-    Timer(Duration(milliseconds: 3850), () {
+    Timer(const Duration(milliseconds: 3850), () {
       setState(() {
         Navigator.of(context).pushReplacement(
           ThisIsFadeRoute(
-            route: HomePage(title: 'Home'),
+            route: const HomePage(title: 'Home'),
           ),
         );
       });
@@ -105,7 +105,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   color: _b ? Colors.white : Colors.transparent,
                   // shape: _c? BoxShape.rectangle : BoxShape.circle,
                   borderRadius:
-                      _d ? BorderRadius.only() : BorderRadius.circular(30)),
+                      _d ? const BorderRadius.only() : BorderRadius.circular(30)),
               child: Center(
                 child: _e
                     ? AnimatedTextKit(
@@ -113,7 +113,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         animatedTexts: [
                           FadeAnimatedText(
                             'Reddit',
-                            duration: Duration(milliseconds: 1700),
+                            duration: const Duration(milliseconds: 1700),
                             textStyle: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w700,
@@ -122,7 +122,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           ),
                         ],
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
             ),
           ],

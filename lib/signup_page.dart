@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/login_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'globals.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key key}) : super(key: key);
@@ -26,9 +25,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: mainColor,
         title: const Text('Sign up'),
         actions: [
           TextButton(
@@ -94,7 +91,6 @@ class _SignupPageState extends State<SignupPage> {
           height: 50,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: mainColor,
             ),
               child: const Text('Continue'),
               onPressed: () {

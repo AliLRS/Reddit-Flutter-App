@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/globals.dart';
 import 'widgets.dart';
 
 class FeedPage extends StatefulWidget {
@@ -14,9 +13,7 @@ class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: mainColor,
         title: Container(
           color: Colors.white,
           child: const SearchBar(),
