@@ -94,14 +94,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   Expanded(
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           "Posts",
                           style: TextStyle(
                               color: Colors.blueAccent,
                               fontSize: 22.0,
                               fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 7,
                         ),
                         Text(
@@ -117,14 +117,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   Expanded(
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           "Followers",
                           style: TextStyle(
                               color: Colors.blueAccent,
                               fontSize: 22.0,
                               fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 7,
                         ),
                         Text(
