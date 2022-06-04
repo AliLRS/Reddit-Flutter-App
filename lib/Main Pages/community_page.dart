@@ -34,7 +34,7 @@ class _CommunityPageState extends State<CommunityPage> {
               Container(
                 margin: const EdgeInsets.all(10),
                 alignment: Alignment.centerLeft,
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   radius: 30,
                   child: Text(
                     'C',
@@ -47,18 +47,18 @@ class _CommunityPageState extends State<CommunityPage> {
                 margin: const EdgeInsets.only(left: 10, bottom: 5),
                 child: Text(widget.community,
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                        const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               ),
               Container(
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(left: 10, bottom: 5),
-                child: Text('125,154 members',
+                child: const Text('125,154 members',
                     style: TextStyle(color: Colors.grey)),
               ),
               Container(
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(left: 10, bottom: 5),
-                child: Text('Description\n...\n...',
+                child: const Text('Description\n...\n...',
                     style: TextStyle(fontSize: 17)),
               ),
             ],
