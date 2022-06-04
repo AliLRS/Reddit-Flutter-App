@@ -10,12 +10,12 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   List<CommentItem> comments = [
-    CommentItem(),
-    CommentItem(),
-    CommentItem(),
-    CommentItem(),
-    CommentItem(),
-    CommentItem(),
+    const CommentItem(),
+    const CommentItem(),
+    const CommentItem(),
+    const CommentItem(),
+    const CommentItem(),
+    const CommentItem(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -24,14 +24,14 @@ class _PostPageState extends State<PostPage> {
       body: Column(
         children: [
           ListTile(
-            leading: CircleAvatar(
+            leading: const CircleAvatar(
               radius: 30,
               child: Icon(Icons.ac_unit),
             ),
             title: Text(widget.post),
-            subtitle: Text('u/user'),
+            subtitle: const Text('u/user'),
           ),
-          ListTile(
+          const ListTile(
             title: Text('title'),
             subtitle: Text('description\n...\n...\n...'),
           ),
@@ -70,15 +70,15 @@ class _PostPageState extends State<PostPage> {
               ),
             ],
           ),
-          Divider(
+          const Divider(
             color: Colors.grey,
             thickness: 2,
           ),
           Container(
-            height: MediaQuery.of(context).size.height - 315,
+            height: MediaQuery.of(context).size.height - 320,
             child: ListView.builder(
               shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemCount: comments.length,
               itemBuilder: (context, index) {
