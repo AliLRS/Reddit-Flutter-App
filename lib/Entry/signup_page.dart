@@ -1,4 +1,4 @@
-import 'package:reddit/Main%20Pages/feed_page.dart';
+import 'package:reddit/MainPages/feed_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:reddit/Entry/login_page.dart';
 import 'package:flutter/material.dart';
