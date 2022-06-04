@@ -74,10 +74,6 @@ class _PostPageState extends State<PostPage> {
             color: Colors.grey,
             thickness: 2,
           ),
-          ListView.builder(itemBuilder: (context, index) 
-
-            return comments[index];
-          }),
         ],
       ),
     );
