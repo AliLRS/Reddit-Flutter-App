@@ -24,7 +24,7 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
       appBar: AppBar(
         title: Container(
           color: Colors.white,
-          child: SearchBar(),
+          child: const SearchBar(),
         ),
       ),
       body: ListView.builder(

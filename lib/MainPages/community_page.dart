@@ -23,9 +23,7 @@ class _CommunityPageState extends State<CommunityPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Container(
-          child: Text(widget.community),
-        ),
+        title: Text(widget.community),
       ),
       body: Stack(
         children: <Widget>[
