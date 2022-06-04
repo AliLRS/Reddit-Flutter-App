@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../Items/post_item.dart';
 import '../app_theme.dart';
-import '../post_item.dart';
 import '../widgets.dart';
 
 class CommunityPage extends StatefulWidget {

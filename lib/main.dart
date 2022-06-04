@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'splash_screen.dart';
-import 'login_page.dart';
+import 'Entry/splash_screen.dart';
+import 'Entry/login_page.dart';
 import 'app_theme.dart';
 
 void main() => runApp(const MyApp());
@@ -10,9 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       title: 'Reddit',
-      themeMode:ThemeMode.system,
+      themeMode: ThemeMode.system,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       home: const SplashScreen(),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'community_item.dart';
+import '../Items/community_item.dart';
 import '../widgets.dart';
 
 class CommunitiesPage extends StatefulWidget {

@@ -1,15 +1,15 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'feed_page.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'add_post_page.dart';
-import 'Communities/communities_page.dart';
-import 'Setting/profile_page.dart';
-import 'Setting/create_community_page.dart';
-import 'Setting/about_us_page.dart';
-import 'Setting/saved_posts_page.dart';
+import 'Settings/create_community_page.dart';
+import 'Main Pages/communities_page.dart';
+import 'Settings/saved_posts_page.dart';
+import 'package:flutter/cupertino.dart';
+import 'Main Pages/add_post_page.dart';
+import 'package:flutter/material.dart';
+import 'Settings/settings_page.dart';
+import 'Settings/about_us_page.dart';
+import 'Settings/profile_page.dart';
+import 'Main Pages/feed_page.dart';
 import 'Search/search_page.dart';
-import 'Setting/setting_page.dart';
 import 'app_theme.dart';
 
 class PageDrawer extends StatefulWidget {

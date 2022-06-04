@@ -1,14 +1,15 @@
+import 'package:reddit/Items/post_item.dart';
 import 'package:flutter/material.dart';
-import 'package:reddit/post_item.dart';
+import '../widgets.dart';
 
-class SavedPosts extends StatefulWidget {
-  const SavedPosts({Key key}) : super(key: key);
+class FeedPage extends StatefulWidget {
+  const FeedPage({Key key}) : super(key: key);
   static int selectedIndex = 1;
   @override
-  State<SavedPosts> createState() => _SavedPostsState();
+  State<FeedPage> createState() => _FeedPageState();
 }
 
-class _SavedPostsState extends State<SavedPosts> {
+class _FeedPageState extends State<FeedPage> {
   List<PostItem> posts = [
     const PostItem(),
     const PostItem(),
@@ -21,13 +22,18 @@ class _SavedPostsState extends State<SavedPosts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Saved Posts'),
+        title: Container(
+          color: Colors.white,
+          child: const SearchBar(),
+        ),
       ),
       body: ListView.builder(
           itemCount: posts.length,
           itemBuilder: (context, index) {
             return const PostItem();
           }),
+      drawer: const PageDrawer(),
+      bottomNavigationBar: const PageAppBar(),
     );
   }
 }

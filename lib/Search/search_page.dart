@@ -1,6 +1,5 @@
+import 'community_search_result_page.dart';
 import 'package:flutter/material.dart';
-import 'package:reddit/Search/Community_search_result_page.dart';
-import 'package:reddit/widgets.dart';
 import 'post_search_result_page.dart';
 
 final GlobalKey<NavigatorState> _navKey = GlobalKey<NavigatorState>();

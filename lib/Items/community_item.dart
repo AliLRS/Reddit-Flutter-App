@@ -1,7 +1,5 @@
+import '../Main Pages/community_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
-import 'community_page.dart';
 
 class CommunityItem extends StatelessWidget {
   CommunityItem(this.community, {Key key}) : super(key: key);

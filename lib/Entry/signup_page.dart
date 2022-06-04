@@ -1,22 +1,25 @@
-import 'package:flutter/material.dart';
-import 'package:reddit/signup_page.dart';
-import 'package:reddit/feed_page.dart';
+import 'package:reddit/Main%20Pages/feed_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'app_theme.dart';
+import 'package:reddit/Entry/login_page.dart';
+import 'package:flutter/material.dart';
+import '../app_theme.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key key}) : super(key: key);
+class SignupPage extends StatefulWidget {
+  const SignupPage({Key key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  TextEditingController _usernameController, _passwordController;
+class _SignupPageState extends State<SignupPage> {
+  TextEditingController _emailController,
+      _usernameController,
+      _passwordController;
   bool _passwordVisibility = false, firstEntry = true;
   @override
   void initState() {
     super.initState();
+    _emailController = TextEditingController();
     _usernameController = TextEditingController();
     _passwordController = TextEditingController();
   }
@@ -25,16 +28,16 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Log in'),
+        title: const Text('Sign up'),
         actions: [
           TextButton(
-            child: const Text('Sign Up'),
+            child: const Text('Log in'),
             style: TextButton.styleFrom(
               primary: Colors.white,
             ),
             onPressed: () {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const SignupPage()));
+                  MaterialPageRoute(builder: (context) => const LoginPage()));
             },
           ),
         ],
@@ -45,20 +48,32 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextField(
-              controller: _usernameController,
+              controller: _emailController,
               decoration: InputDecoration(
-                labelText: 'Username',
-                errorText: validateUsername(_usernameController.text),
+                labelText: 'Email',
+                errorText: validateEmail(_emailController.text),
               ),
               keyboardType: TextInputType.emailAddress,
             ),
             Container(
-              margin: const EdgeInsets.only(top: 20),
+              margin: const EdgeInsets.only(top: 10),
+              child: TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                  errorText: validateUsername(_usernameController.text),
+                ),
+                keyboardType: TextInputType.emailAddress,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
               child: TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
                   errorText: validatePassword(_passwordController.text),
+                  errorMaxLines: 3,
                   suffixIcon: IconButton(
                     icon: Icon(
                       Icons.remove_red_eye,
@@ -91,20 +106,19 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () {
                 setState(() {
                   firstEntry = false;
-                  if (validateUsername(_usernameController.text) == null &&
+                  if (validateEmail(_emailController.text) == null &&
+                      validateUsername(_usernameController.text) == null &&
                       validatePassword(_passwordController.text) == null) {
                     Fluttertoast.showToast(
-                        msg: 'Log in was successful',
+                        msg: 'Sign up was successful',
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.TOP,
                         timeInSecForIosWeb: 1,
                         backgroundColor: AppTheme.mainColor,
                         textColor: Colors.white,
                         fontSize: 16.0);
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FeedPage()));
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => FeedPage()));
                   }
                 });
               }),
@@ -113,17 +127,38 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  String validateEmail(String value) {
+    RegExp regex = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    if (value.isEmpty && !firstEntry) {
+      return 'Email is required';
+    } else {
+      if (!regex.hasMatch(value) && !firstEntry) {
+        return 'Please enter a valid email';
+      } else {
+        return null;
+      }
+    }
+  }
+
   String validateUsername(String value) {
     if (value.isEmpty && !firstEntry) {
       return 'Username is required';
+    } else {
+      return null;
     }
-    return null;
   }
 
   String validatePassword(String value) {
+    RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
     if (value.isEmpty && !firstEntry) {
       return 'Password is required';
+    } else {
+      if (!regex.hasMatch(value) && !firstEntry) {
+        return 'Password must have contain at least one uppercase, one lowercase, one number and at least 8 characters';
+      } else {
+        return null;
+      }
     }
-    return null;
   }
 }

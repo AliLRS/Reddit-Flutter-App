@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:reddit/app_theme.dart';
+import 'package:flutter/material.dart';
 import 'edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
