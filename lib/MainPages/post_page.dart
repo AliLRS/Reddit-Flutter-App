@@ -74,6 +74,18 @@ class _PostPageState extends State<PostPage> {
             color: Colors.grey,
             thickness: 2,
           ),
+          Container(
+            height: MediaQuery.of(context).size.height - 315,
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              itemCount: comments.length,
+              itemBuilder: (context, index) {
+                return comments[index];
+              },
+            ),
+          ),
         ],
       ),
     );

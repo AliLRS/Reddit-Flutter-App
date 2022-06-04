@@ -7,22 +7,15 @@ class CommentItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            CircleAvatar(
-              radius: 30,
-              child: Icon(Icons.ac_unit),
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('u/user'),
-                  Text('comment'),
-                ],
-              ),
-            ),
-          ],
+        ListTile(
+          leading: CircleAvatar(
+            radius: 20,
+            child: Icon(Icons.ac_unit),
+          ),
+          title: Text('u/user'),
+        ),
+        ListTile(
+          title: Text('Line1\nLine2\nLine3'),
         ),
         Container(
           decoration: const BoxDecoration(
