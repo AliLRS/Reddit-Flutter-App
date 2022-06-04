@@ -7,7 +7,7 @@ class CommunityItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleAvatar(
+      leading: const CircleAvatar(
         child: Text('C'),
       ),
       title: GestureDetector(
@@ -19,7 +19,7 @@ class CommunityItem extends StatelessWidget {
                   builder: (context) => CommunityPage(community)));
         },
       ),
-      trailing: Icon(Icons.star_outline_rounded),
+      trailing: const Icon(Icons.star_outline_rounded),
     );
   }
 }
