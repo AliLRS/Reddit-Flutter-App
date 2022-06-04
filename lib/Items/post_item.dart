@@ -1,25 +1,38 @@
 import 'package:flutter/material.dart';
 
-class PostItem extends StatelessWidget {
-  const PostItem({Key key}) : super(key: key);
+import '../MainPages/post_page.dart';
 
+class PostItem extends StatelessWidget {
+  PostItem(this.post, {Key key}) : super(key: key);
+  String post;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ListTile(
-          leading: CircleAvatar(
-            radius: 30,
-            child: Icon(Icons.ac_unit),
+        GestureDetector(
+          child: Column(
+            children: const [
+              ListTile(
+                leading: CircleAvatar(
+                  radius: 30,
+                  child: Icon(Icons.ac_unit),
+                ),
+                title: Text('r/community'),
+                subtitle: Text('u/user'),
+              ),
+              ListTile(
+                title: Text('title'),
+                subtitle: Text(
+                  'description\n...\n...\n...',
+                ),
+              ),
+            ],
           ),
-          title: Text('r/community'),
-          subtitle: Text('u/user'),
-        ),
-        const ListTile(
-          title: Text('title'),
-          subtitle: Text(
-            'description\n...\n...\n...',
-          ),
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return PostPage(post);
+            }));
+          },
         ),
         Container(
           decoration: const BoxDecoration(

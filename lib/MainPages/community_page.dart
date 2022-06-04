@@ -12,12 +12,12 @@ class CommunityPage extends StatefulWidget {
 
 class _CommunityPageState extends State<CommunityPage> {
   List<PostItem> posts = [
-    const PostItem(),
-    const PostItem(),
-    const PostItem(),
-    const PostItem(),
-    const PostItem(),
-    const PostItem(),
+    PostItem('r/community1'),
+    PostItem('r/community2'),
+    PostItem('r/community3'),
+    PostItem('r/community4'),
+    PostItem('r/community5'),
+    PostItem('r/community6'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -44,8 +44,8 @@ class _CommunityPageState extends State<CommunityPage> {
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(left: 10, bottom: 5),
                 child: Text(widget.community,
-                    style:
-                        const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold)),
               ),
               Container(
                 alignment: Alignment.centerLeft,
