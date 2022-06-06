@@ -1,3 +1,5 @@
+import 'package:reddit/app_theme.dart';
+
 import 'community_search_result_page.dart';
 import 'package:flutter/material.dart';
 import 'post_search_result_page.dart';
@@ -36,6 +38,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                 text: 'Communities',
               ),
             ],
+            labelColor: Colors.lightBlue,
           ),
         ),
         body: Navigator(

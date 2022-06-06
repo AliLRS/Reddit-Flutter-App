@@ -5,6 +5,9 @@ class AppTheme {
   static final Color mainColor =
       ThemeMode.system == ThemeMode.dark ? Colors.blueGrey : Colors.orange;
 
+  static final Color opositeMainColor =
+      ThemeMode.system == ThemeMode.dark ? Colors.orange : Colors.blueGrey;
+
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     appBarTheme: const AppBarTheme(color: Colors.orange),
