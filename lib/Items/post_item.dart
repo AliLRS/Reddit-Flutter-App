@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../MainPages/add_comment_page.dart';
 import '../MainPages/post_page.dart';
 
 class PostItem extends StatelessWidget {
@@ -62,7 +63,13 @@ class PostItem extends StatelessWidget {
                 child: Row(
                   children: [
                     IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.comment)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddCommentPage(post)));
+                        },
+                        icon: const Icon(Icons.comment)),
                     const Text('2'),
                   ],
                 ),

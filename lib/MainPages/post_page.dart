@@ -1,5 +1,6 @@
 import 'package:reddit/Items/comment_item.dart';
 import 'package:flutter/material.dart';
+import 'package:reddit/MainPages/add_comment_page.dart';
 
 class PostPage extends StatefulWidget {
   PostPage(this.post, {Key key}) : super(key: key);
@@ -9,6 +10,8 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
+  TextEditingController _commentController;
+  bool _isButtonActive = false;
   List<CommentItem> comments = [
     const CommentItem(),
     const CommentItem(),
@@ -17,6 +20,7 @@ class _PostPageState extends State<PostPage> {
     const CommentItem(),
     const CommentItem(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +58,14 @@ class _PostPageState extends State<PostPage> {
                 child: Row(
                   children: [
                     IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.comment)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      AddCommentPage(widget.post)));
+                        },
+                        icon: const Icon(Icons.comment)),
                     const Text('2'),
                   ],
                 ),
