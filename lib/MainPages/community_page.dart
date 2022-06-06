@@ -77,7 +77,7 @@ class _CommunityPageState extends State<CommunityPage> {
       builder: (BuildContext context, ScrollController scrollController) {
         return Container(
           decoration: BoxDecoration(
-            color: AppTheme.mainColor,
+            color: Colors.blueGrey,
           ),
           child: Scrollbar(
             child: ListView.builder(

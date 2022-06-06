@@ -18,7 +18,7 @@ class PostItem extends StatelessWidget {
                   child: Icon(Icons.ac_unit),
                 ),
                 title: Text('r/community'),
-                subtitle: Text('u/user'),
+                subtitle: const Text('u/user' ' - ' '6/6/2022'),
               ),
               ListTile(
                 title: Text('title'),

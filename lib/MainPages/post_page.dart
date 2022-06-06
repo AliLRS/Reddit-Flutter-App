@@ -29,7 +29,7 @@ class _PostPageState extends State<PostPage> {
               child: Icon(Icons.ac_unit),
             ),
             title: Text(widget.post),
-            subtitle: const Text('u/user'),
+            subtitle: const Text('u/user' ' - ' '6/6/2022'),
           ),
           const ListTile(
             title: Text('title'),
