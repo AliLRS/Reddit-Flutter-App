@@ -24,32 +24,36 @@ class _SettingState extends State<Setting> {
             title: const Text('Common'),
             tiles: <SettingsTile>[
               SettingsTile.navigation(
-                leading: const Icon(Icons.person),
-                title: const Text('Profile'),
-                value: const Text('Profile page'),
-                onPressed: (context) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const ProfilePage()));
-                }
-              ),
+                  leading: const Icon(Icons.person),
+                  title: const Text('Profile'),
+                  value: const Text('Profile page'),
+                  onPressed: (context) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfilePage()));
+                  }),
               SettingsTile.navigation(
                   leading: const Icon(Icons.account_box_outlined),
                   title: const Text('About'),
                   value: const Text('About us page'),
                   onPressed: (context) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const AboutUs()));
-                  }
-              ),
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AboutUs()));
+                  }),
               SettingsTile.navigation(
                   leading: const Icon(Icons.exit_to_app),
                   title: const Text('Logout'),
                   value: const Text('Logout'),
                   onPressed: (context) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const LoginPage()));
-                  }
-              ),
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
+                        (Route<dynamic> route) => false);
+                  }),
               SettingsTile.switchTile(
                 onToggle: (value) {
                   setState(() {
