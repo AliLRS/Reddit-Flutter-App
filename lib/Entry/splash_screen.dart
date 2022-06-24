@@ -102,7 +102,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       ? 200
                       : 20,
               decoration: BoxDecoration(
-                  color: _b ? Colors.white : Colors.transparent,
+                  color: _b ? Color(0xff192028) : Colors.transparent,
                   // shape: _c? BoxShape.rectangle : BoxShape.circle,
                   borderRadius: _d
                       ? const BorderRadius.only()
