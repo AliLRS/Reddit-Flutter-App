@@ -63,7 +63,7 @@ class _AddPageState extends State<AddPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextField(
-                style: const TextStyle(fontSize: 22),
+                //style: const TextStyle(fontSize: 18),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -83,7 +83,7 @@ class _AddPageState extends State<AddPage> {
                       hintText: 'Add Body text'),
                   controller: _bodyController,
                   keyboardType: TextInputType.multiline,
-                  maxLines: 10,
+                  maxLines: 7,
                 ),
               ),
               Container(
