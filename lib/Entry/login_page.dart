@@ -199,13 +199,17 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               component2(
-                                'Sign up',
+                                'Log in',
                                 2.58,
                                 () {
                                   HapticFeedback.lightImpact();
                                   firstEntry = false;
-                                  if (validateUsername(_usernameController.text) == null &&
-                                      validatePassword(_passwordController.text) == null) {
+                                  if (validateUsername(
+                                              _usernameController.text) ==
+                                          null &&
+                                      validatePassword(
+                                              _passwordController.text) ==
+                                          null) {
                                     Fluttertoast.showToast(
                                         msg: 'Log in was successful',
                                         toastLength: Toast.LENGTH_SHORT,
@@ -214,8 +218,11 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                         backgroundColor: AppTheme.mainColor,
                                         textColor: Colors.white,
                                         fontSize: 16.0);
-                                    Navigator.pushReplacement(context,
-                                        MaterialPageRoute(builder: (context) => const FeedPage()));
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const FeedPage()));
                                   }
                                 },
                               ),
@@ -279,9 +286,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
             borderRadius: BorderRadius.circular(15),
           ),
           child: TextField(
-            controller: isPassword
-                    ? _passwordController
-                    : _usernameController,
+            controller: isPassword ? _passwordController : _usernameController,
             style: TextStyle(color: Colors.white.withOpacity(.8)),
             cursorColor: Colors.white,
             obscureText: isPassword ? !_passwordVisibility : false,
@@ -289,8 +294,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 isEmail ? TextInputType.emailAddress : TextInputType.text,
             decoration: InputDecoration(
               errorText: isPassword
-                      ? validatePassword(_passwordController.text)
-                      : validateUsername(_usernameController.text),
+                  ? validatePassword(_passwordController.text)
+                  : validateUsername(_usernameController.text),
               prefixIcon: Icon(
                 icon,
                 color: Colors.white.withOpacity(.7),
@@ -367,7 +372,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     }
     return null;
   }
-
 }
 
 class MyPainter extends CustomPainter {
