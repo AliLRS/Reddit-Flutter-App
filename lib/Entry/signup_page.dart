@@ -228,7 +228,44 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => const FeedPage()));
+                                            builder: (context) =>
+                                                const FeedPage()));
+                                  } else if (validateUsername(
+                                          _usernameController.text) !=
+                                      null) {
+                                    Fluttertoast.showToast(
+                                        msg: validateUsername(
+                                            _usernameController.text),
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.TOP,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: AppTheme.mainColor,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                  } else if (validateEmail(
+                                          _emailController.text) !=
+                                      null) {
+                                    Fluttertoast.showToast(
+                                        msg: validateEmail(
+                                            _emailController.text),
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.TOP,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: AppTheme.mainColor,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                  } else if (validatePassword(
+                                          _passwordController.text) !=
+                                      null) {
+                                    Fluttertoast.showToast(
+                                        msg: validatePassword(
+                                            _passwordController.text),
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.TOP,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: AppTheme.mainColor,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
                                   }
                                 },
                               ),
@@ -250,8 +287,9 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                               Navigator.pushReplacement(
                                 context,
                                 PageRouteBuilder(
-                                    pageBuilder: (context, animation, secondaryAnimation) =>
-                                    const LoginPage(),
+                                    pageBuilder: (context, animation,
+                                            secondaryAnimation) =>
+                                        const LoginPage(),
                                     transitionDuration: Duration.zero,
                                     reverseTransitionDuration: Duration.zero),
                               );
@@ -302,11 +340,6 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
             keyboardType:
                 isEmail ? TextInputType.emailAddress : TextInputType.text,
             decoration: InputDecoration(
-              errorText: isEmail
-                  ? validateEmail(_emailController.text)
-                  : isPassword
-                      ? validatePassword(_passwordController.text)
-                      : validateUsername(_usernameController.text),
               prefixIcon: Icon(
                 icon,
                 color: Colors.white.withOpacity(.7),

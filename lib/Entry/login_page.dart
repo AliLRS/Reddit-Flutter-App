@@ -223,6 +223,30 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 const FeedPage()));
+                                  } else if (validateUsername(
+                                          _usernameController.text) !=
+                                      null) {
+                                    Fluttertoast.showToast(
+                                        msg: validateUsername(
+                                            _usernameController.text),
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.TOP,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: AppTheme.mainColor,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                  } else if (validatePassword(
+                                          _passwordController.text) !=
+                                      null) {
+                                    Fluttertoast.showToast(
+                                        msg: validatePassword(
+                                            _passwordController.text),
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.TOP,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: AppTheme.mainColor,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
                                   }
                                 },
                               ),
@@ -293,9 +317,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
             keyboardType:
                 isEmail ? TextInputType.emailAddress : TextInputType.text,
             decoration: InputDecoration(
-              errorText: isPassword
-                  ? validatePassword(_passwordController.text)
-                  : validateUsername(_usernameController.text),
               prefixIcon: Icon(
                 icon,
                 color: Colors.white.withOpacity(.7),
