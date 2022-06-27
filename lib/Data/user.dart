@@ -1,7 +1,24 @@
+import 'community.dart';
+import 'post.dart';
+
 class User {
-  String name;
+  String username;
   String email;
   String password;
+  List<Community> communities;
+  List<Post> posts;
+  List<Post> savedPosts;
 
-  User(this.name, this.email, this.password);
+  User(this.username, this.email, this.password) {
+    communities = [];
+    posts = [];
+  }
+
+  void addCommunity(Community community) {
+    communities.add(community);
+  }
+
+  void addPost(Post post) {
+    posts.add(post);
+  }
 }

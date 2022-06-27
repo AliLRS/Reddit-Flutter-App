@@ -1,5 +1,6 @@
 import 'package:reddit/Items/post_item.dart';
 import 'package:flutter/material.dart';
+import '../Data/active_user.dart';
 
 class SavedPosts extends StatefulWidget {
   const SavedPosts({Key key}) : super(key: key);
@@ -9,14 +10,8 @@ class SavedPosts extends StatefulWidget {
 }
 
 class _SavedPostsState extends State<SavedPosts> {
-  List<PostItem> posts = [
-    PostItem('r/community1'),
-    PostItem('r/community2'),
-    PostItem('r/community3'),
-    PostItem('r/community4'),
-    PostItem('r/community5'),
-    PostItem('r/community6'),
-  ];
+  List<PostItem> posts =
+      ActiveUser.user.savedPosts.map((val) => PostItem(val)).toList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

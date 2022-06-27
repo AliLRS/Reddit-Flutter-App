@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/Data/post.dart';
 import 'package:reddit/MainPages/post_page.dart';
 
 class AddCommentPage extends StatefulWidget {
   AddCommentPage(this.post, {Key key}) : super(key: key);
-  String post;
+  Post post;
   @override
   State<AddCommentPage> createState() => _AddCommentPageState();
 }
@@ -30,7 +31,7 @@ class _AddCommentPageState extends State<AddCommentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add comment to: ' + widget.post)),
+      appBar: AppBar(title: Text('Add comment to: ' + widget.post.title)),
       body: Column(
         children: [
           TextField(

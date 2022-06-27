@@ -118,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       children: [
                         const Text(
-                          "Followers",
+                          "Communities",
                           style: TextStyle(
                               color: Colors.blueAccent,
                               fontSize: 22.0,

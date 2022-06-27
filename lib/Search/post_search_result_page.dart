@@ -10,14 +10,7 @@ class PostSearchResultPage extends StatefulWidget {
 }
 
 class _PostSearchResultPageState extends State<PostSearchResultPage> {
-  List<PostItem> posts = [
-    PostItem('r/community1'),
-    PostItem('r/community2'),
-    PostItem('r/community3'),
-    PostItem('r/community4'),
-    PostItem('r/community5'),
-    PostItem('r/community6'),
-  ];
+  List<PostItem> posts = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/Data/post.dart';
 
 import '../MainPages/add_comment_page.dart';
 import '../MainPages/post_page.dart';
 
 class PostItem extends StatelessWidget {
   PostItem(this.post, {Key key}) : super(key: key);
-  String post;
+  Post post;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         GestureDetector(
           child: Column(
-            children: const [
+            children: [
               ListTile(
                 leading: CircleAvatar(
                   radius: 30,
                   child: Icon(Icons.ac_unit),
                 ),
-                title: Text('r/community'),
-                subtitle: const Text('u/user' ' - ' '6/6/2022'),
+                title: Text('r/${post.community.name}'),
+                subtitle: Text('u/${post.user.username} - ${post.dateTime}'),
               ),
               ListTile(
                 title: Text('title'),

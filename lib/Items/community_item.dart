@@ -1,9 +1,11 @@
+import 'package:reddit/Data/community.dart';
+
 import '../MainPages/community_page.dart';
 import 'package:flutter/material.dart';
 
 class CommunityItem extends StatelessWidget {
   CommunityItem(this.community, {Key key}) : super(key: key);
-  String community;
+  Community community;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -11,7 +13,7 @@ class CommunityItem extends StatelessWidget {
         child: Text('C'),
       ),
       title: GestureDetector(
-        child: Text(community),
+        child: Text(community.name),
         onTap: () {
           Navigator.push(
               context,

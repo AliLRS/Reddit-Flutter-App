@@ -1,10 +1,11 @@
+import 'package:reddit/Data/post.dart';
 import 'package:reddit/Items/comment_item.dart';
 import 'package:flutter/material.dart';
 import 'package:reddit/MainPages/add_comment_page.dart';
 
 class PostPage extends StatefulWidget {
   PostPage(this.post, {Key key}) : super(key: key);
-  String post;
+  Post post;
   @override
   State<PostPage> createState() => _PostPageState();
 }
@@ -24,7 +25,7 @@ class _PostPageState extends State<PostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.post)),
+      appBar: AppBar(title: Text(widget.post.title)),
       body: Column(
         children: [
           ListTile(
@@ -32,7 +33,7 @@ class _PostPageState extends State<PostPage> {
               radius: 30,
               child: Icon(Icons.ac_unit),
             ),
-            title: Text(widget.post),
+            title: Text(widget.post.content),
             subtitle: const Text('u/user' ' - ' '6/6/2022'),
           ),
           const ListTile(

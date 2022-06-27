@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/Data/community.dart';
+import 'package:reddit/Items/community_item.dart';
 import '../Items/post_item.dart';
 import '../app_theme.dart';
 import '../widgets.dart';
 
 class CommunityPage extends StatefulWidget {
   CommunityPage(this.community, {Key key}) : super(key: key);
-  String community;
+  Community community;
   @override
   State<CommunityPage> createState() => _CommunityPageState();
 }
 
 class _CommunityPageState extends State<CommunityPage> {
-  List<PostItem> posts = [
-    PostItem('r/community1'),
-    PostItem('r/community2'),
-    PostItem('r/community3'),
-    PostItem('r/community4'),
-    PostItem('r/community5'),
-    PostItem('r/community6'),
-  ];
+  List<PostItem> posts = [];
   @override
+  initState() {
+    super.initState();
+    List<PostItem> posts =
+        widget.community.posts.map((val) => PostItem(val)).toList();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.community),
+        title: Text(widget.community.name),
       ),
       body: Stack(
         children: <Widget>[
@@ -43,20 +44,20 @@ class _CommunityPageState extends State<CommunityPage> {
               Container(
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(left: 10, bottom: 5),
-                child: Text(widget.community,
+                child: Text(widget.community.name,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold)),
               ),
               Container(
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(left: 10, bottom: 5),
-                child: const Text('125,154 members',
+                child: Text('${widget.community.users.length} members',
                     style: TextStyle(color: Colors.grey)),
               ),
               Container(
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(left: 10, bottom: 5),
-                child: const Text('Description\n...\n...',
+                child: Text(widget.community.description,
                     style: TextStyle(fontSize: 17)),
               ),
             ],

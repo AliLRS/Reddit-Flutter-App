@@ -1,5 +1,7 @@
+import 'package:reddit/Data/active_user.dart';
 import 'package:reddit/Items/post_item.dart';
 import 'package:flutter/material.dart';
+import '../Data/post.dart';
 import '../widgets.dart';
 
 class FeedPage extends StatefulWidget {
@@ -10,15 +12,14 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
-  List<PostItem> posts = [
-    PostItem('r/community1'),
-    PostItem('r/community2'),
-    PostItem('r/community3'),
-    PostItem('r/community4'),
-    PostItem('r/community5'),
-    PostItem('r/community6'),
-  ];
+  List<PostItem> posts = [PostItem(Post('Title', 'Content', ActiveUser.user))];
+  //ActiveUser.user.posts.map((val) => PostItem(val)).toList() ?? [];
   @override
+  initState() {
+    super.initState();
+    posts = [PostItem(Post('Title', 'Content', ActiveUser.user))];
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
