@@ -228,12 +228,6 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                               _passwordController.text) ==
                                           null &&
                                       userConfirmation == "done\u0000") {
-                                    User.activeUser = User(
-                                        _usernameController.text,
-                                        _emailController.text,
-                                        _passwordController.text);
-                                    User.allUsers.add(User.activeUser);
-
                                     Fluttertoast.showToast(
                                         msg: 'Sign up was successful',
                                         toastLength: Toast.LENGTH_SHORT,

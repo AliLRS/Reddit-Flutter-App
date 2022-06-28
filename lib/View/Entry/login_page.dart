@@ -217,13 +217,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                               _passwordController.text) ==
                                           null &&
                                       userConfirmation == "done\u0000") {
-                                    for (User user in User.allUsers) {
-                                      if (user.username ==
-                                          _usernameController.text) {
-                                        User.activeUser = user;
-                                        break;
-                                      }
-                                    }
                                     Fluttertoast.showToast(
                                         msg: 'Log in was successful',
                                         toastLength: Toast.LENGTH_SHORT,

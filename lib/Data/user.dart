@@ -3,7 +3,7 @@ import 'post.dart';
 
 class User {
   static User activeUser;
-  static List<User> allUsers = [User("Ali", "Ali@gmail.com", "Ali12345")];
+  static List<User> allUsers = [];
 
   String username;
   String email;
