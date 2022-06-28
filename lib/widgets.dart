@@ -1,15 +1,15 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'Settings/create_community_page.dart';
-import 'MainPages/communities_page.dart';
-import 'Settings/saved_posts_page.dart';
+import 'package:reddit/View/Search/search_page.dart';
+import 'package:reddit/View/Settings/create_community_page.dart';
+import 'package:reddit/View/MainPages/communities_page.dart';
+import 'package:reddit/View/Settings/saved_posts_page.dart';
 import 'package:flutter/cupertino.dart';
-import 'MainPages/add_post_page.dart';
+import 'package:reddit/View/MainPages/add_post_page.dart';
 import 'package:flutter/material.dart';
-import 'Settings/settings_page.dart';
-import 'Settings/about_us_page.dart';
-import 'Settings/profile_page.dart';
-import 'MainPages/feed_page.dart';
-import 'Search/search_page.dart';
+import 'package:reddit/View/Settings/settings_page.dart';
+import 'package:reddit/View/Settings/about_us_page.dart';
+import 'package:reddit/View/Settings/profile_page.dart';
+import 'package:reddit/View/MainPages/feed_page.dart';
 import 'app_theme.dart';
 
 class PageDrawer extends StatefulWidget {

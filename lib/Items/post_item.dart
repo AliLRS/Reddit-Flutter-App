@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/Data/post.dart';
-
-import '../MainPages/add_comment_page.dart';
-import '../MainPages/post_page.dart';
+import 'package:reddit/View/MainPages/add_comment_page.dart';
+import 'package:reddit/View/MainPages/post_page.dart';
 
 class PostItem extends StatelessWidget {
   PostItem(this.post, {Key key}) : super(key: key);

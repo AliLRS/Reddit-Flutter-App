@@ -1,22 +1,24 @@
 import 'dart:io';
 
-import 'package:reddit/MainPages/feed_page.dart';
+import 'package:reddit/Data/user.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:reddit/Entry/signup_page.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import '../app_theme.dart';
+import 'package:reddit/View/Entry/login_page.dart';
+import 'package:reddit/View/MainPages/feed_page.dart';
 import 'dart:async';
 import 'dart:ui';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key key}) : super(key: key);
+import 'package:reddit/app_theme.dart';
+
+class SignupPage extends StatefulWidget {
+  const SignupPage({Key key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
+class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
   String userConfirmation = '';
 
   AnimationController controller1;
@@ -26,12 +28,15 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   Animation<double> animation3;
   Animation<double> animation4;
 
-  TextEditingController _usernameController, _passwordController;
+  TextEditingController _emailController,
+      _usernameController,
+      _passwordController;
   bool _passwordVisibility = false, firstEntry = true;
 
   @override
   void initState() {
     super.initState();
+    _emailController = TextEditingController();
     _usernameController = TextEditingController();
     _passwordController = TextEditingController();
     controller1 = AnimationController(
@@ -179,7 +184,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       child: Padding(
                         padding: EdgeInsets.only(top: size.height * .1),
                         child: Text(
-                          'Login',
+                          'Sign up',
                           style: TextStyle(
                             color: Colors.white.withOpacity(.7),
                             fontSize: 15,
@@ -191,34 +196,46 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       ),
                     ),
                     Expanded(
-                      flex: 5,
+                      flex: 6,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           component1(Icons.account_circle_outlined,
                               'User name...', false, false),
                           component1(
+                              Icons.email_outlined, 'Email...', false, true),
+                          component1(
                               Icons.lock_outline, 'Password...', true, false),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               component2(
-                                'Log in',
+                                'Sign up',
                                 2.58,
                                 () {
                                   HapticFeedback.lightImpact();
                                   firstEntry = false;
-                                  confirmUser(_usernameController.text,
+                                  confirmUser(
+                                      _usernameController.text,
+                                      _emailController.text,
                                       _passwordController.text);
-                                  if (validateUsername(
+                                  if (validateEmail(_emailController.text) ==
+                                          null &&
+                                      validateUsername(
                                               _usernameController.text) ==
                                           null &&
                                       validatePassword(
                                               _passwordController.text) ==
                                           null &&
                                       userConfirmation == "done\u0000") {
+                                    User.activeUser = User(
+                                        _usernameController.text,
+                                        _emailController.text,
+                                        _passwordController.text);
+                                    User.allUsers.add(User.activeUser);
+
                                     Fluttertoast.showToast(
-                                        msg: 'Log in was successful',
+                                        msg: 'Sign up was successful',
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.TOP,
                                         timeInSecForIosWeb: 1,
@@ -236,6 +253,18 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                     Fluttertoast.showToast(
                                         msg: validateUsername(
                                             _usernameController.text),
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.TOP,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: AppTheme.mainColor,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                  } else if (validateEmail(
+                                          _emailController.text) !=
+                                      null) {
+                                    Fluttertoast.showToast(
+                                        msg: validateEmail(
+                                            _emailController.text),
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.TOP,
                                         timeInSecForIosWeb: 1,
@@ -277,7 +306,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           component2(
-                            'Sign up',
+                            'Login',
                             2,
                             () {
                               HapticFeedback.lightImpact();
@@ -286,7 +315,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                 PageRouteBuilder(
                                     pageBuilder: (context, animation,
                                             secondaryAnimation) =>
-                                        const SignupPage(),
+                                        const LoginPage(),
                                     transitionDuration: Duration.zero,
                                     reverseTransitionDuration: Duration.zero),
                               );
@@ -326,7 +355,11 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
             borderRadius: BorderRadius.circular(15),
           ),
           child: TextField(
-            controller: isPassword ? _passwordController : _usernameController,
+            controller: isEmail
+                ? _emailController
+                : isPassword
+                    ? _passwordController
+                    : _usernameController,
             style: TextStyle(color: Colors.white.withOpacity(.8)),
             cursorColor: Colors.white,
             obscureText: isPassword ? !_passwordVisibility : false,
@@ -396,22 +429,44 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     );
   }
 
+  String validateEmail(String value) {
+    RegExp regex = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    if (value.isEmpty && !firstEntry) {
+      return 'Email is required';
+    } else {
+      if (!regex.hasMatch(value) && !firstEntry) {
+        return 'Please enter a valid email';
+      } else {
+        return null;
+      }
+    }
+  }
+
   String validateUsername(String value) {
     if (value.isEmpty && !firstEntry) {
       return 'Username is required';
+    } else {
+      return null;
     }
-    return null;
   }
 
   String validatePassword(String value) {
+    RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
     if (value.isEmpty && !firstEntry) {
       return 'Password is required';
+    } else {
+      if (!regex.hasMatch(value) && !firstEntry) {
+        return 'Password must have contain at least one uppercase, one lowercase, one number and at least 8 characters';
+      } else {
+        return null;
+      }
     }
-    return null;
   }
 
-  confirmUser(String username, String password) async {
-    String request = "login,,username:$username,,password:$password\u0000";
+  confirmUser(String username, String email, String password) async {
+    String request =
+        "signUp,,username:$username,,email:$email,,password:$password\u0000";
 
     await Socket.connect("192.168.164.176", 8080).then((serverSocket) {
       serverSocket.write(request);

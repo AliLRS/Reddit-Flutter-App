@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'Entry/splash_screen.dart';
-import 'Entry/login_page.dart';
+import 'package:reddit/View/Entry/login_page.dart';
+import 'package:reddit/View/Entry/splash_screen.dart';
 import 'app_theme.dart';
 
 void main() => runApp(const MyApp());

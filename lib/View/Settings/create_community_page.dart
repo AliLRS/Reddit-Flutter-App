@@ -1,5 +1,5 @@
-import 'package:reddit/MainPages/communities_page.dart';
 import 'package:flutter/material.dart';
+import 'package:reddit/View/MainPages/communities_page.dart';
 import '../MainPages/feed_page.dart';
 
 class CreateCommunity extends StatefulWidget {

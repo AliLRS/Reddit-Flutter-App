@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/Data/community.dart';
 import 'package:reddit/Items/community_item.dart';
-import '../Items/post_item.dart';
-import '../app_theme.dart';
-import '../widgets.dart';
+import 'package:reddit/Items/post_item.dart';
+import 'package:reddit/widgets.dart';
 
 class CommunityPage extends StatefulWidget {
   CommunityPage(this.community, {Key key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
-import '../app_theme.dart';
+import 'package:reddit/app_theme.dart';
 import 'profile_page.dart';
 
 class EditProfile extends StatefulWidget {

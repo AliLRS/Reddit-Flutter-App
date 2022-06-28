@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Items/community_item.dart';
+import 'package:reddit/Items/community_item.dart';
 
 class CommunitySearchResultPage extends StatefulWidget {
   const CommunitySearchResultPage({Key key}) : super(key: key);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../Items/post_item.dart';
+import 'package:reddit/Items/post_item.dart';
 
 class PostSearchResultPage extends StatefulWidget {
   const PostSearchResultPage({Key key}) : super(key: key);

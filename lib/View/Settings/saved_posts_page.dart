@@ -1,6 +1,6 @@
+import 'package:reddit/Data/user.dart';
 import 'package:reddit/Items/post_item.dart';
 import 'package:flutter/material.dart';
-import '../Data/user.dart';
 
 class SavedPosts extends StatefulWidget {
   const SavedPosts({Key key}) : super(key: key);

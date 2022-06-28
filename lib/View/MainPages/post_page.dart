@@ -1,7 +1,7 @@
 import 'package:reddit/Data/post.dart';
 import 'package:reddit/Items/comment_item.dart';
 import 'package:flutter/material.dart';
-import 'package:reddit/MainPages/add_comment_page.dart';
+import 'package:reddit/View/MainPages/add_comment_page.dart';
 
 class PostPage extends StatefulWidget {
   PostPage(this.post, {Key key}) : super(key: key);

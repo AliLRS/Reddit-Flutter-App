@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../Items/community_item.dart';
-import '../widgets.dart';
+import 'package:reddit/Items/community_item.dart';
+import 'package:reddit/widgets.dart';
 
 class CommunitiesPage extends StatefulWidget {
   const CommunitiesPage({Key key}) : super(key: key);

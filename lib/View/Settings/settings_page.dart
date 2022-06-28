@@ -1,5 +1,5 @@
-import 'package:reddit/Entry/login_page.dart';
-import 'package:reddit/Settings/about_us_page.dart';
+import 'package:reddit/View/Entry/login_page.dart';
+import 'package:reddit/View/Settings/about_us_page.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter/material.dart';
 import 'profile_page.dart';

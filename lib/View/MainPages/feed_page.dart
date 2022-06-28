@@ -1,8 +1,8 @@
+import 'package:reddit/Data/post.dart';
+import 'package:reddit/Data/user.dart';
 import 'package:reddit/Items/post_item.dart';
 import 'package:flutter/material.dart';
-import '../Data/post.dart';
-import '../Data/user.dart';
-import '../widgets.dart';
+import 'package:reddit/widgets.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({Key key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets.dart';
+import 'package:reddit/widgets.dart';
 import 'feed_page.dart';
 
 class AddPage extends StatefulWidget {

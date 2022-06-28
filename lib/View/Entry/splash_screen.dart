@@ -1,8 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import '../app_theme.dart';
-import '../main.dart';
+import 'package:reddit/app_theme.dart';
 import 'dart:async';
+
+import 'package:reddit/main.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
