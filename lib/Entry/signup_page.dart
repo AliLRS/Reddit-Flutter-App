@@ -225,7 +225,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                       validatePassword(
                                               _passwordController.text) ==
                                           null &&
-                                      userConfirmation.contains("done")) {
+                                      userConfirmation == "done\u0000") {
                                     Fluttertoast.showToast(
                                         msg: 'Sign up was successful',
                                         toastLength: Toast.LENGTH_SHORT,
@@ -275,7 +275,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                         backgroundColor: AppTheme.mainColor,
                                         textColor: Colors.white,
                                         fontSize: 16.0);
-                                  } else if (userConfirmation != "done") {
+                                  } else if (userConfirmation != "done\u0000") {
                                     Fluttertoast.showToast(
                                         msg: userConfirmation,
                                         toastLength: Toast.LENGTH_SHORT,

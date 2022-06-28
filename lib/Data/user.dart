@@ -2,6 +2,8 @@ import 'community.dart';
 import 'post.dart';
 
 class User {
+  static User activeUser;
+
   String username;
   String email;
   String password;
