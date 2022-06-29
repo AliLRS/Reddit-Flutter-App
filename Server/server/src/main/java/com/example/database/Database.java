@@ -9,7 +9,7 @@ import java.nio.file.Path;
 
 public class Database {
 
-    private static final String usersPath = "src/main/java/com/example/data/users.txt";
+    private static final String usersPath = "server/src/main/java/com/example/data/users.txt";
 
     public static User[] getUsers(){
         try {

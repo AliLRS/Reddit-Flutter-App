@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:reddit/Data/models.dart';
 import 'package:reddit/Data/static_fields.dart';
 import 'package:reddit/View/Entry/login_page.dart';
 import 'package:reddit/View/MainPages/feed_page.dart';
@@ -214,11 +215,10 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                 () {
                                   HapticFeedback.lightImpact();
                                   firstEntry = false;
-                                  confirmUser({
-                                    'username': _usernameController.text,
-                                    'email': _emailController.text,
-                                    'password': _passwordController.text,
-                                  });
+                                  addUser(User(
+                                      username: _usernameController.text,
+                                      password: _passwordController.text,
+                                      email: _emailController.text));
                                   if (validateEmail(_emailController.text) ==
                                           null &&
                                       validateUsername(
@@ -458,10 +458,11 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
     }
   }
 
-  confirmUser(Map request) async {
+  void addUser(User user) async {
     await Socket.connect(StaticFields.ip, StaticFields.port)
         .then((serverSocket) {
-      serverSocket.write(jsonEncode(request));
+      final data = "signUp,," + userToJson(user) + StaticFields.postFix;
+      serverSocket.write(data);
       serverSocket.flush();
       serverSocket.listen((response) {
         setState(() {

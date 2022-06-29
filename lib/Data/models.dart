@@ -75,9 +75,15 @@ class User {
         "username": username,
         "email": email,
         "password": password,
-        "communities": List<dynamic>.from(communities.map((x) => x.toJson())),
-        "posts": List<dynamic>.from(posts.map((x) => x.toJson())),
-        "savedPosts": List<dynamic>.from(savedPosts.map((x) => x.toJson())),
+        "communities": communities == null
+            ? []
+            : List<dynamic>.from(communities.map((x) => x.toJson())),
+        "posts": posts == null
+            ? []
+            : List<dynamic>.from(posts.map((x) => x.toJson())),
+        "savedPosts": savedPosts == null
+            ? []
+            : List<dynamic>.from(savedPosts.map((x) => x.toJson())),
       };
 }
 
