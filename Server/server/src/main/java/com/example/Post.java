@@ -1,13 +1,14 @@
 package com.example;
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.*;
-import java.time.LocalDate;
 
 public class Post {
     private long id;
     private String title;
     private String content;
     private User user;
-    private LocalDate dateTime;
+    private Date dateTime;
     private Community community;
     private Comment[] comments;
 
@@ -32,9 +33,9 @@ public class Post {
     public void setUser(User value) { this.user = value; }
 
     @JsonProperty("dateTime")
-    public LocalDate getDateTime() { return dateTime; }
+    public Date getDateTime() { return dateTime; }
     @JsonProperty("dateTime")
-    public void setDateTime(LocalDate value) { this.dateTime = value; }
+    public void setDateTime(Date value) { this.dateTime = value; }
 
     @JsonProperty("community")
     public Community getCommunity() { return community; }
