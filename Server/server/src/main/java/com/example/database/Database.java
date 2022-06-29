@@ -19,7 +19,9 @@ public class Database {
             }
             try(FileInputStream fis = new FileInputStream(usersPath);
                 ObjectInputStream ois = new ObjectInputStream(fis)){
-                return (User[]) (ois.readObject());
+                Object obj = ois.readObject();
+                if (obj instanceof User[])
+                    return (User[]) obj;
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }

@@ -1,7 +1,9 @@
 package com.example;
 import com.fasterxml.jackson.annotation.*;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String username;
     private String email;
     private String password;

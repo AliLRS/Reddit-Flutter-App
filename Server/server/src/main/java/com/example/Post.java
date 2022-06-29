@@ -1,9 +1,10 @@
 package com.example;
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.*;
 
-public class Post {
+public class Post implements Serializable {
     private long id;
     private String title;
     private String content;
