@@ -1,14 +1,13 @@
+import 'dart:convert';
 import 'dart:io';
-
-import 'package:reddit/Data/user.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:reddit/Data/static_fields.dart';
 import 'package:reddit/View/Entry/login_page.dart';
 import 'package:reddit/View/MainPages/feed_page.dart';
 import 'dart:async';
 import 'dart:ui';
-
 import 'package:reddit/app_theme.dart';
 
 class SignupPage extends StatefulWidget {
@@ -215,10 +214,11 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                 () {
                                   HapticFeedback.lightImpact();
                                   firstEntry = false;
-                                  confirmUser(
-                                      _usernameController.text,
-                                      _emailController.text,
-                                      _passwordController.text);
+                                  confirmUser({
+                                    'username': _usernameController.text,
+                                    'email': _emailController.text,
+                                    'password': _passwordController.text,
+                                  });
                                   if (validateEmail(_emailController.text) ==
                                           null &&
                                       validateUsername(
@@ -458,12 +458,10 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
     }
   }
 
-  confirmUser(String username, String email, String password) async {
-    String request =
-        "signUp,,username:$username,,email:$email,,password:$password\u0000";
-
-    await Socket.connect("192.168.164.176", 8080).then((serverSocket) {
-      serverSocket.write(request);
+  confirmUser(Map request) async {
+    await Socket.connect(StaticFields.ip, StaticFields.port)
+        .then((serverSocket) {
+      serverSocket.write(jsonEncode(request));
       serverSocket.flush();
       serverSocket.listen((response) {
         setState(() {

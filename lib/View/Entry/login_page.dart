@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:reddit/Data/static_fields.dart';
 import 'dart:async';
 import 'dart:ui';
-import 'package:reddit/Data/user.dart';
 import 'package:reddit/View/Entry/signup_page.dart';
 import 'package:reddit/View/MainPages/feed_page.dart';
 import 'package:reddit/app_theme.dart';
@@ -413,7 +413,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   confirmUser(String username, String password) async {
     String request = "login,,username:$username,,password:$password\u0000";
 
-    await Socket.connect("192.168.164.176", 8080).then((serverSocket) {
+    await Socket.connect(StaticFields.ip, StaticFields.port)
+        .then((serverSocket) {
       serverSocket.write(request);
       serverSocket.flush();
       serverSocket.listen((response) {

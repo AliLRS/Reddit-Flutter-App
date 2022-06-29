@@ -1,5 +1,5 @@
-import 'package:reddit/Data/post.dart';
-import 'package:reddit/Data/user.dart';
+import 'package:reddit/Data/models.dart';
+import 'package:reddit/Data/static_fields.dart';
 import 'package:reddit/Items/post_item.dart';
 import 'package:flutter/material.dart';
 import 'package:reddit/widgets.dart';
@@ -12,12 +12,11 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
-  List<PostItem> posts = [PostItem(Post('Title', 'Content', User.activeUser))];
-  //ActiveUser.user.posts.map((val) => PostItem(val)).toList() ?? [];
+  List<PostItem> posts =
+      StaticFields.activeUser.posts.map((val) => PostItem(val)).toList() ?? [];
   @override
   initState() {
     super.initState();
-    posts = [PostItem(Post('Title', 'Content', User.activeUser))];
   }
 
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/Data/post.dart';
+import 'package:reddit/Data/models.dart';
 import 'package:reddit/View/MainPages/post_page.dart';
 
 class AddCommentPage extends StatefulWidget {

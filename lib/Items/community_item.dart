@@ -1,5 +1,5 @@
-import 'package:reddit/Data/community.dart';
 import 'package:flutter/material.dart';
+import 'package:reddit/Data/models.dart';
 import 'package:reddit/View/MainPages/community_page.dart';
 
 class CommunityItem extends StatelessWidget {

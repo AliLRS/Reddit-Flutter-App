@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/Data/community.dart';
-import 'package:reddit/Items/community_item.dart';
+import 'package:reddit/Data/models.dart';
 import 'package:reddit/Items/post_item.dart';
 import 'package:reddit/widgets.dart';
 

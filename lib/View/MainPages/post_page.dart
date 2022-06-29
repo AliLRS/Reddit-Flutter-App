@@ -1,4 +1,4 @@
-import 'package:reddit/Data/post.dart';
+import 'package:reddit/Data/models.dart';
 import 'package:reddit/Items/comment_item.dart';
 import 'package:flutter/material.dart';
 import 'package:reddit/View/MainPages/add_comment_page.dart';

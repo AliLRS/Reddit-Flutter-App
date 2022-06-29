@@ -1,4 +1,5 @@
-import 'package:reddit/Data/user.dart';
+import 'package:reddit/Data/models.dart';
+import 'package:reddit/Data/static_fields.dart';
 import 'package:reddit/Items/post_item.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class SavedPosts extends StatefulWidget {
 
 class _SavedPostsState extends State<SavedPosts> {
   List<PostItem> posts =
-      User.activeUser.savedPosts.map((val) => PostItem(val)).toList();
+      StaticFields.activeUser.savedPosts.map((val) => PostItem(val)).toList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
