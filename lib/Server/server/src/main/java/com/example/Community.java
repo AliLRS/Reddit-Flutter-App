@@ -6,6 +6,7 @@ public class Community {
     private String description;
     private User communityAdmin;
     private Post[] posts;
+    private User[] users;
 
     @JsonProperty("name")
     public String getName() { return name; }
@@ -26,4 +27,9 @@ public class Community {
     public Post[] getPosts() { return posts; }
     @JsonProperty("posts")
     public void setPosts(Post[] value) { this.posts = value; }
+
+    @JsonProperty("users")
+    public User[] getUsers() { return users; }
+    @JsonProperty("users")
+    public void setUsers(User[] value) { this.users = value; }
 }

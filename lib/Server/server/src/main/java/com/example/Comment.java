@@ -6,6 +6,7 @@ public class Comment {
     private long id;
     private String content;
     private User user;
+    private Post post;
     private LocalDate dateTime;
 
     @JsonProperty("id")
@@ -22,6 +23,11 @@ public class Comment {
     public User getuser() { return user; }
     @JsonProperty("user")
     public void setuser(User value) { this.user = value; }
+
+    @JsonProperty("post")
+    public Post getPost() { return post; }
+    @JsonProperty("post")
+    public void setPost(Post value) { this.post = value; }
 
     @JsonProperty("dateTime")
     public LocalDate getDateTime() { return dateTime; }

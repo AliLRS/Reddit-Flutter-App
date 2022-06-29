@@ -130,23 +130,21 @@ class Comment {
     this.id,
     this.content,
     this.user,
-    this.community,
+    this.post,
     this.dateTime,
   });
 
   int id;
   String content;
   User user;
-  Community community;
+  Post post;
   DateTime dateTime;
 
   factory Comment.fromJson(Map<String, dynamic> json) => Comment(
         id: json["id"],
         content: json["content"],
         user: json["user"] == null ? null : User.fromJson(json["user"]),
-        community: json["community"] == null
-            ? null
-            : Community.fromJson(json["community"]),
+        post: json["post"] == null ? null : Post.fromJson(json["post"]),
         dateTime: DateTime.parse(json["dateTime"]),
       );
 
@@ -154,7 +152,7 @@ class Comment {
         "id": id,
         "content": content,
         "user": user == null ? null : user.toJson(),
-        "community": community == null ? null : community.toJson(),
+        "post": post == null ? null : post.toJson(),
         "dateTime":
             "${dateTime.year.toString().padLeft(4, '0')}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}",
       };

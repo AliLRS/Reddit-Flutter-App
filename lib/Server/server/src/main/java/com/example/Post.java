@@ -8,6 +8,7 @@ public class Post {
     private String content;
     private User user;
     private LocalDate dateTime;
+    private Community community;
     private Comment[] comments;
 
     @JsonProperty("id")
@@ -34,6 +35,11 @@ public class Post {
     public LocalDate getDateTime() { return dateTime; }
     @JsonProperty("dateTime")
     public void setDateTime(LocalDate value) { this.dateTime = value; }
+
+    @JsonProperty("community")
+    public Community getCommunity() { return community; }
+    @JsonProperty("community")
+    public void setCommunity(Community value) { this.community = value; }
 
     @JsonProperty("comments")
     public Comment[] getComments() { return comments; }
