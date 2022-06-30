@@ -59,9 +59,9 @@ public class Controller {
         String[] split = request.split(",,");
         switch (split[0]) {
             case "signUp":
-                return signUp(request.substring(8));
+                return signUp(split[1]);
             case "login":
-                return login(request.substring(7));
+                return login(split[1]);
             case "editProfile":
                 return editProfile(split[1], split[2]);
         }

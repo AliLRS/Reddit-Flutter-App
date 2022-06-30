@@ -48,7 +48,7 @@ public class ClientHandler extends Thread{
     }
     void writeResponse(String response) {
         try {
-            dos.writeBytes(response + "\0");
+            dos.writeBytes(response);    //older command: dos.writeBytes(response + "\0");
             dos.flush();
             dos.close();
             dis.close();
