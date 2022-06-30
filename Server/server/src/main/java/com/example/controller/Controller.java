@@ -174,6 +174,18 @@ public class Controller {
         return "error!";
     }
 
+    private String getPosts(String communityJson) {
+        Gson gson = new Gson();
+        Community community = gson.fromJson(communityJson, Community.class);
+        Community[] communities = Database.getCommunities();
+        for (Community c : communities) {
+            if (c.getName().equals(community.getName())) {
+                return gson.toJson(c.getPosts());
+            }
+        }
+        return "error!";
+    }
+
     public String run(String request){
         String[] split = request.split(",,");
         switch (split[0]) {
@@ -191,6 +203,8 @@ public class Controller {
                 return followCommunity(split[1], split[2]);
             case "addPost":
                 return addPost(split[1], split[2], split[3]);
+            case "getPosts":
+                return getPosts(split[1]);
         }
         return "invalid request";
     }
