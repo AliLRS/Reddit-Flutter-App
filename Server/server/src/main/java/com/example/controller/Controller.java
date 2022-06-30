@@ -1,4 +1,5 @@
 package com.example.controller;
+import com.example.Comment;
 import com.example.Community;
 import com.example.Post;
 import com.example.database.Database;
@@ -163,7 +164,7 @@ public class Controller {
         Community[] communities = Database.getCommunities();
         for (Community c : communities) {
             if (c.getName().equals(community.getName())) {
-                Post[] communityPosts = Arrays.copyOf( c.getPosts(),  c.getPosts().length + 1);
+                Post[] communityPosts = Arrays.copyOf( c.getPosts(), c.getPosts().length + 1);
                 communityPosts[communityPosts.length - 1]  = post;
                 c.setPosts(communityPosts);
                 break;
@@ -197,6 +198,16 @@ public class Controller {
         return "error!";
     }
 
+    private String addComment(String commentJson) {
+        Gson gson = new Gson();
+        Comment comment = gson.fromJson(commentJson, Comment.class);
+        Comment[] comments = Arrays.copyOf(Database.getComment() , Database.getComment().length + 1);
+        comments[comments.length - 1] = comment;
+        if (Database.writeComments(comments))
+            return "done";
+        return "error!";
+    }
+
     public String run(String request){
         String[] split = request.split(",,");
         switch (split[0]) {
@@ -218,6 +229,8 @@ public class Controller {
                 return getPosts(split[1]);
             case "updateUser":
                 return updateUser(split[1]);
+            case "addComment":
+                return addComment(split[1]);
         }
         return "invalid request";
     }
