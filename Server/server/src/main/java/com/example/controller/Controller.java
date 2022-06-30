@@ -4,7 +4,9 @@ import com.example.database.Database;
 import com.example.User;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Controller {
 
@@ -84,6 +86,59 @@ public class Controller {
         return new Gson().toJson(Database.getCommunities());
     }
 
+    private String followCommunity(String communityJson, String userJson) {
+        boolean isAdded = false;
+        Gson gson = new Gson();
+        Community community = gson.fromJson(communityJson, Community.class);
+        User user = gson.fromJson(userJson, User.class);
+        Community[] communities = new Community[0];
+        User[] users = Database.getUsers();
+        for (User u : users) {
+            if (u.getUsername().equals(user.getUsername())){
+                communities = u.getCommunities();
+            }
+        }
+        List<Community> communityList = new ArrayList<>();
+        for (Community c : communities) {
+            if (!c.getName().equals(community.getName())) {
+                communityList.add(c);
+            }
+        }
+        if (communityList.size() == communities.length) {
+            communityList.add(community);
+            isAdded = true;
+        }
+        communities = communityList.toArray(Community[]::new);
+        for (User u : users) {
+            if (u.getUsername().equals(user.getUsername())){
+                u.setCommunities(communities);
+            }
+        }
+        User[] comUsers;
+        Community[] dataBaseCommunity = Database.getCommunities();
+        for (Community c : dataBaseCommunity) {
+            if (c.getName().equals(community.getName())) {
+                User[] gottenUsers = c.getUsers();
+                if (isAdded) {
+                    comUsers = Arrays.copyOf(gottenUsers, gottenUsers.length + 1);
+                    comUsers[comUsers.length - 1] = user;
+                }
+                else {
+                    comUsers = new User[gottenUsers.length - 1];
+                    int index = 0;
+                    for (User gottenUser : gottenUsers) {
+                        comUsers[index++] = gottenUser;
+                    }
+                }
+                c.setUsers(comUsers);
+                break;
+            }
+        }
+        if (Database.writeUsers(users) && Database.writeCommunities(dataBaseCommunity))
+            return "done";
+        return "error!";
+    }
+
     public String run(String request){
         String[] split = request.split(",,");
         switch (split[0]) {
@@ -97,6 +152,8 @@ public class Controller {
                 return addCommunity(split[1]);
             case "getCommunities":
                 return getCommunities();
+            case "followCommunity":
+                return followCommunity(split[1], split[2]);
         }
         return "invalid request";
     }
