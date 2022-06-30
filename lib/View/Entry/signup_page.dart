@@ -229,7 +229,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                       email: _emailController.text,
                                     );
                                     addUser(newUser);
-                                    if (response == "done\u0000") {
+                                    if (response == "done") {
                                       StaticFields.activeUser = newUser;
                                       Fluttertoast.showToast(
                                           msg: 'Sign up was successful',

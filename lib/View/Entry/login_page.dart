@@ -218,7 +218,19 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                     confirmUser(User(
                                         username: _usernameController.text,
                                         password: _passwordController.text));
-                                    if (response == "done\u0000") {
+                                    if (response == "Password is incorrect" ||
+                                        response == "Username does not exist") {
+                                      Fluttertoast.showToast(
+                                          msg: response,
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.TOP,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: AppTheme.mainColor,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                    } else {
+                                      StaticFields.activeUser =
+                                          userFromJson(response);
                                       Fluttertoast.showToast(
                                           msg: 'Log in was successful',
                                           toastLength: Toast.LENGTH_SHORT,
@@ -232,15 +244,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   const FeedPage()));
-                                    } else {
-                                      Fluttertoast.showToast(
-                                          msg: response,
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          gravity: ToastGravity.TOP,
-                                          timeInSecForIosWeb: 1,
-                                          backgroundColor: AppTheme.mainColor,
-                                          textColor: Colors.white,
-                                          fontSize: 16.0);
                                     }
                                   } else if (validateUsername(
                                           _usernameController.text) !=
