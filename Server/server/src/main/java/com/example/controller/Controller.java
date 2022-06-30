@@ -1,4 +1,5 @@
 package com.example.controller;
+import com.example.Community;
 import com.example.database.Database;
 import com.example.User;
 import com.google.gson.Gson;
@@ -56,6 +57,33 @@ public class Controller {
         return "error!";
     }
 
+    private String addCommunity(String communityJson) {
+        Gson gson = new Gson();
+        Community community = gson.fromJson(communityJson, Community.class);
+        Community[] communities = Database.getCommunities();
+        for (Community c : communities) {
+            if (c.getName().equals(community.getName()))
+                return "This name is already used";
+        }
+        Community[] result = Arrays.copyOf(communities, communities.length + 1);
+        result[result.length - 1] = community;
+
+        User[] users = Database.getUsers();
+        for (User u : users) {
+            if (u.getUsername().equals(community.getCommunityAdmin().getUsername())) {
+                u.setCommunities(communities);
+            }
+        }
+
+        if (Database.writeCommunities(result) && Database.writeUsers(users))
+            return "done";
+        return "error!";
+    }
+
+    private String getCommunities() {
+        return new Gson().toJson(Database.getCommunities());
+    }
+
     public String run(String request){
         String[] split = request.split(",,");
         switch (split[0]) {
@@ -65,6 +93,10 @@ public class Controller {
                 return login(split[1]);
             case "editProfile":
                 return editProfile(split[1], split[2]);
+            case "addCommunity":
+                return addCommunity(split[1]);
+            case "getCommunities":
+                return getCommunities();
         }
         return "invalid request";
     }
