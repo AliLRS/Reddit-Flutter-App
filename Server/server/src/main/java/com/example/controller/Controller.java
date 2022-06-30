@@ -46,7 +46,8 @@ public class Controller {
         User[] users = Database.getUsers();
         for (User u : users) {
             if (u.getUsername().equals(oldUser.getUsername())) {
-                u = newUser;
+                u.setPassword(newUser.getPassword());
+                u.setEmail(newUser.getEmail());
                 break;
             }
         }
