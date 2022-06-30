@@ -38,8 +38,12 @@ class Community {
         "description": description,
         "communityAdmin":
             communityAdmin == null ? null : communityAdmin.toJson(),
-        "posts": List<dynamic>.from(posts.map((x) => x.toJson())),
-        "users": List<dynamic>.from(users.map((x) => x.toJson())),
+        "posts": posts == null
+            ? []
+            : List<dynamic>.from(posts.map((x) => x.toJson())),
+        "users": users == null
+            ? []
+            : List<dynamic>.from(users.map((x) => x.toJson())),
       };
 }
 
@@ -127,7 +131,9 @@ class Post {
         "dateTime":
             "${dateTime.year.toString().padLeft(4, '0')}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}",
         "community": community == null ? null : community.toJson(),
-        "comments": List<dynamic>.from(comments.map((x) => x.toJson())),
+        "comments": comments == null
+            ? []
+            : List<dynamic>.from(comments.map((x) => x.toJson())),
       };
 }
 

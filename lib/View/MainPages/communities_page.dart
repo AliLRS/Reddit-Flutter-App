@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/Data/models.dart';
 import 'package:reddit/Items/community_item.dart';
 import 'package:reddit/widgets.dart';
 
@@ -10,12 +11,16 @@ class CommunitiesPage extends StatefulWidget {
 }
 
 class _CommunitiesPageState extends State<CommunitiesPage> {
-  List<CommunityItem> communityList = [];
+  List<CommunityItem> communityList = [
+    CommunityItem(
+      Community(
+        name: "r/all",
+        description: "The front page of the internet",
+      ),
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      //communityList.sort((a, b) => a.expireDate.compareTo(b.expireDate));
-    });
     return Scaffold(
       appBar: AppBar(
         title: Container(

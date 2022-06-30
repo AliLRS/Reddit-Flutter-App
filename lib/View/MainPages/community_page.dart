@@ -15,14 +15,23 @@ class _CommunityPageState extends State<CommunityPage> {
   @override
   initState() {
     super.initState();
-    List<PostItem> posts =
-        widget.community.posts.map((val) => PostItem(val)).toList();
+    //List<PostItem> posts =
+    //widget.community.posts.map((val) => PostItem(val)).toList();
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.community.name),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              "Follow",
+              style: TextStyle(color: Colors.white),
+            ),
+          )
+        ],
       ),
       body: Stack(
         children: <Widget>[
@@ -49,7 +58,10 @@ class _CommunityPageState extends State<CommunityPage> {
               Container(
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(left: 10, bottom: 5),
-                child: Text('${widget.community.users.length} members',
+                child: Text(
+                    widget.community.users == null
+                        ? '0 users'
+                        : '${widget.community.users.length} users',
                     style: TextStyle(color: Colors.grey)),
               ),
               Container(
