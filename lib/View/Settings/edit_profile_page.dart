@@ -15,7 +15,7 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  String userConfirmation = '';
+  String response = '';
   TextEditingController _emailController,
       _usernameController,
       _passwordController;
@@ -116,7 +116,9 @@ class _EditProfileState extends State<EditProfile> {
                       password: _passwordController.text,
                     );
                     editUser(newUser);
-                    if (userConfirmation == 'done\u0000') {
+                    if (response == 'done') {
+                      StaticFields.activeUser.email = newUser.email;
+                      StaticFields.activeUser.password = newUser.password;
                       Fluttertoast.showToast(
                           msg: 'Edit was successful',
                           toastLength: Toast.LENGTH_SHORT,
@@ -132,7 +134,7 @@ class _EditProfileState extends State<EditProfile> {
                     } else {
                       print('Not changed');
                       Fluttertoast.showToast(
-                          msg: userConfirmation,
+                          msg: response,
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.TOP,
                           timeInSecForIosWeb: 1,
@@ -190,14 +192,15 @@ class _EditProfileState extends State<EditProfile> {
         .then((serverSocket) {
       final data = "editProfile,," +
           userToJson(StaticFields.activeUser) +
+          ",," +
           userToJson(user) +
           StaticFields.postFix;
       serverSocket.write(data);
       serverSocket.flush();
-      serverSocket.listen((response) {
+      serverSocket.listen((res) {
         setState(() {
-          userConfirmation = (String.fromCharCodes(response));
-          print('userConfirmation: $userConfirmation');
+          response = (String.fromCharCodes(res));
+          print('response: $response');
         });
       });
     });
