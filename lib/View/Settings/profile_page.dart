@@ -1,3 +1,4 @@
+import 'package:reddit/Data/static_fields.dart';
 import 'package:reddit/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'edit_profile_page.dart';
@@ -36,10 +37,10 @@ class _ProfilePageState extends State<ProfilePage> {
               alignment: const Alignment(0.0, 0.0),
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
-                      child: Text('U',
+                      child: Text(StaticFields.activeUser.username[0],
                           style: TextStyle(
                             fontSize: 35,
                           )),
@@ -51,9 +52,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          "Username",
+                          StaticFields.activeUser.username,
                           style: TextStyle(
                               fontSize: 20.0,
                               color: Colors.black,
@@ -64,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           height: 5.0,
                         ),
                         Text(
-                          "Username@email.com",
+                          StaticFields.activeUser.email,
                           style: TextStyle(
                               fontSize: 15.0,
                               color: Colors.black,
@@ -105,7 +106,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           height: 7,
                         ),
                         Text(
-                          "15",
+                          StaticFields.activeUser.posts == null
+                              ? '0'
+                              : StaticFields.activeUser.posts.length.toString(),
                           style: TextStyle(
                               color: AppTheme.mainColor,
                               fontSize: 22.0,
@@ -128,7 +131,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           height: 7,
                         ),
                         Text(
-                          "200",
+                          StaticFields.activeUser.communities == null
+                              ? '0'
+                              : StaticFields.activeUser.communities.length
+                                  .toString(),
                           style: TextStyle(
                               color: AppTheme.mainColor,
                               fontSize: 22.0,

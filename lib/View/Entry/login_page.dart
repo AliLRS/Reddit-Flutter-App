@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
-  String userConfirmation = '';
+  String response = '';
 
   AnimationController controller1;
   AnimationController controller2;
@@ -218,7 +218,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                     confirmUser(User(
                                         username: _usernameController.text,
                                         password: _passwordController.text));
-                                    if (userConfirmation == "done\u0000") {
+                                    if (response == "done\u0000") {
                                       Fluttertoast.showToast(
                                           msg: 'Log in was successful',
                                           toastLength: Toast.LENGTH_SHORT,
@@ -234,7 +234,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                                   const FeedPage()));
                                     } else {
                                       Fluttertoast.showToast(
-                                          msg: userConfirmation,
+                                          msg: response,
                                           toastLength: Toast.LENGTH_SHORT,
                                           gravity: ToastGravity.TOP,
                                           timeInSecForIosWeb: 1,
@@ -419,10 +419,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       final data = "login,," + userToJson(user) + StaticFields.postFix;
       serverSocket.write(data);
       serverSocket.flush();
-      serverSocket.listen((response) {
+      serverSocket.listen((res) {
         setState(() {
-          userConfirmation = (String.fromCharCodes(response));
-          print('userConfirmation: $userConfirmation');
+          response = (String.fromCharCodes(res));
+          print('response: $response');
         });
       });
     });

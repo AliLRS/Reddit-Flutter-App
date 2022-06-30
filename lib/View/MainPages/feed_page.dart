@@ -12,8 +12,8 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
-  List<PostItem> posts =
-      StaticFields.activeUser.posts.map((val) => PostItem(val)).toList() ?? [];
+  List<PostItem> posts = [];
+  //StaticFields.activeUser.posts.map((val) => PostItem(val)).toList() ?? [];
   @override
   initState() {
     super.initState();

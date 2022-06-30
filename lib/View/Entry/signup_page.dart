@@ -19,7 +19,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
-  String userConfirmation = '';
+  String response = '';
 
   AnimationController controller1;
   AnimationController controller2;
@@ -223,11 +223,14 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                       validatePassword(
                                               _passwordController.text) ==
                                           null) {
-                                    addUser(User(
-                                        username: _usernameController.text,
-                                        password: _passwordController.text,
-                                        email: _emailController.text));
-                                    if (userConfirmation == "done\u0000") {
+                                    User newUser = User(
+                                      username: _usernameController.text,
+                                      password: _passwordController.text,
+                                      email: _emailController.text,
+                                    );
+                                    addUser(newUser);
+                                    if (response == "done\u0000") {
+                                      StaticFields.activeUser = newUser;
                                       Fluttertoast.showToast(
                                           msg: 'Sign up was successful',
                                           toastLength: Toast.LENGTH_SHORT,
@@ -242,8 +245,9 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                               builder: (context) =>
                                                   const FeedPage()));
                                     } else {
+                                      print('Not maked');
                                       Fluttertoast.showToast(
-                                          msg: userConfirmation,
+                                          msg: response,
                                           toastLength: Toast.LENGTH_SHORT,
                                           gravity: ToastGravity.TOP,
                                           timeInSecForIosWeb: 1,
@@ -465,10 +469,10 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
       final data = "signUp,," + userToJson(user) + StaticFields.postFix;
       serverSocket.write(data);
       serverSocket.flush();
-      serverSocket.listen((response) {
+      serverSocket.listen((res) {
         setState(() {
-          userConfirmation = (String.fromCharCodes(response));
-          print('userConfirmation: $userConfirmation');
+          response = String.fromCharCodes(res);
+          print('response: $response');
         });
       });
     });

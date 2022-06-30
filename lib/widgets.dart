@@ -1,4 +1,5 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:reddit/Data/static_fields.dart';
 import 'package:reddit/View/Search/search_page.dart';
 import 'package:reddit/View/Settings/create_community_page.dart';
 import 'package:reddit/View/MainPages/communities_page.dart';
@@ -28,11 +29,11 @@ class _PageDrawerState extends State<PageDrawer> {
             decoration: BoxDecoration(color: AppTheme.mainColor),
             child: UserAccountsDrawerHeader(
               decoration: BoxDecoration(color: AppTheme.mainColor),
-              accountName: const Text('User'),
-              accountEmail: const Text('User@email.com'),
-              currentAccountPicture: const CircleAvatar(
+              accountName: Text(StaticFields.activeUser.username),
+              accountEmail: Text(StaticFields.activeUser.email),
+              currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
-                child: Text('U'),
+                child: Text(StaticFields.activeUser.username[0]),
               ),
             ),
           ),
