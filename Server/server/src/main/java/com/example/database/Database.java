@@ -11,6 +11,7 @@ public class Database {
 
     private static final String usersPath = "server/src/main/java/com/example/data/users.txt";
     private static final  String communitiesPath = "server/src/main/java/com/example/data/communities.txt";
+    private static final String commentsPath = "server/src/main/java/com/example/data/comments.txt";
 
     public static User[] getUsers(){
         try {
@@ -85,4 +86,42 @@ public class Database {
         }
         return true;
     }
+
+    public static Comment[] getComment() {
+        try {
+            if (!Files.exists(Path.of(commentsPath))) {
+                Files.createFile(Path.of(commentsPath));
+                return new Comment[0];
+            }
+            try(FileInputStream fis = new FileInputStream(commentsPath);
+                ObjectInputStream ois = new ObjectInputStream(fis)){
+                Object obj = ois.readObject();
+                if (obj instanceof Comment[])
+                    return (Comment[]) obj;
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return new Comment[0];
+    }
+
+    public static boolean writeComments(Comment[] comments){
+        try {
+            if (!Files.exists(Path.of(commentsPath)))
+                Files.createFile(Path.of(commentsPath));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        try(FileOutputStream fos = new FileOutputStream(commentsPath);
+            ObjectOutputStream oos = new ObjectOutputStream(fos)){
+            oos.writeObject(comments);
+        } catch (IOException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
 }
