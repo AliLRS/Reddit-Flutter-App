@@ -112,7 +112,8 @@ public class Controller {
             communityList.add(community);
             isAdded = true;
         }
-        communities = communityList.toArray(Community[]::new);
+        communities = new Community[communityList.size()];
+        communityList.toArray(communities);
         for (User u : users) {
             if (u.getUsername().equals(user.getUsername())){
                 u.setCommunities(communities);
