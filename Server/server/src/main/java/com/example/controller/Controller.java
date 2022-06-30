@@ -186,6 +186,17 @@ public class Controller {
         return "error!";
     }
 
+    private String updateUser(String userJson) {
+        Gson gson = new Gson();
+        User user = gson.fromJson(userJson, User.class);
+        User[] users = Database.getUsers();
+        for (User u : users) {
+            if (u.getUsername().equals(user.getUsername()))
+                return gson.toJson(u);
+        }
+        return "error!";
+    }
+
     public String run(String request){
         String[] split = request.split(",,");
         switch (split[0]) {
@@ -205,6 +216,8 @@ public class Controller {
                 return addPost(split[1], split[2], split[3]);
             case "getPosts":
                 return getPosts(split[1]);
+            case "updateUser":
+                return updateUser(split[1]);
         }
         return "invalid request";
     }
