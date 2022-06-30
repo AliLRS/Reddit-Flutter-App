@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:reddit/Data/models.dart';
+import 'package:reddit/Data/static_fields.dart';
 import 'package:reddit/Items/post_item.dart';
 import 'package:reddit/widgets.dart';
 
@@ -11,10 +15,13 @@ class CommunityPage extends StatefulWidget {
 }
 
 class _CommunityPageState extends State<CommunityPage> {
+  String response = '';
+  bool _Followed;
   List<PostItem> posts = [];
   @override
   initState() {
     super.initState();
+    _Followed = StaticFields.activeUser.communities.contains(widget.community);
     //List<PostItem> posts =
     //widget.community.posts.map((val) => PostItem(val)).toList();
   }
@@ -25,11 +32,22 @@ class _CommunityPageState extends State<CommunityPage> {
         title: Text(widget.community.name),
         actions: [
           TextButton(
-            onPressed: () {},
             child: Text(
-              "Follow",
+              _Followed ? 'Unfollow' : 'Follow',
               style: TextStyle(color: Colors.white),
             ),
+            onPressed: () {
+              followCommunity();
+              if (response == 'followed') {
+                setState(() {
+                  _Followed = true;
+                });
+              } else {
+                setState(() {
+                  _Followed = false;
+                });
+              }
+            },
           )
         ],
       ),
@@ -102,5 +120,22 @@ class _CommunityPageState extends State<CommunityPage> {
         );
       },
     );
+  }
+
+  void followCommunity() async {
+    await Socket.connect(StaticFields.ip, StaticFields.port)
+        .then((serverSocket) {
+      final data = "followCommunity,," +
+          json.encode(widget.community.toJson()) +
+          ',,' +
+          userToJson(StaticFields.activeUser) +
+          StaticFields.postFix;
+      serverSocket.write(data);
+      serverSocket.flush();
+      serverSocket.listen((res) {
+        response = String.fromCharCodes(res);
+        print('response: $response');
+      });
+    });
   }
 }

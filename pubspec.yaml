@@ -39,6 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   animated_text_kit: ^4.2.1
   shamsi_date: ^1.0.1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

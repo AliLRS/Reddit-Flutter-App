@@ -1,4 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:reddit/Data/models.dart';
+import 'package:reddit/Data/static_fields.dart';
+import 'package:reddit/app_theme.dart';
 import 'package:reddit/widgets.dart';
 import 'feed_page.dart';
 
@@ -13,35 +20,29 @@ class _AddPageState extends State<AddPage> {
   TextEditingController _titleController, _bodyController;
   bool _isButtonActive = false;
   List<String> _communities;
-  String _communitySelected;
+  String _communitySelectedname, response;
   @override
   void initState() {
     super.initState();
+    updateUser();
     _titleController = TextEditingController();
     _bodyController = TextEditingController();
     _titleController.addListener(() {
       final _isButtonActive = _titleController.text.isNotEmpty &&
           _bodyController.text.isNotEmpty &&
-          _communitySelected != null;
+          _communitySelectedname != null;
       setState(() => this._isButtonActive = _isButtonActive);
     });
     _bodyController.addListener(() {
       _isButtonActive = _titleController.text.isNotEmpty &&
           _bodyController.text.isNotEmpty &&
-          _communitySelected != null;
+          _communitySelectedname != null;
       setState(() => this._isButtonActive = _isButtonActive);
     });
-    _communities = [
-      'r/Dart',
-      'r/Flutter',
-      'r/React',
-      'r/Vue',
-      'r/Angular',
-      'r/Backbone',
-      'r/Ember',
-      'r/Meteor'
-    ];
-    _communitySelected = _communities[0];
+    _communities = StaticFields.activeUser.communities == null
+        ? ['No communities']
+        : StaticFields.activeUser.communities.map((c) => c.name).toList();
+    _communitySelectedname = _communities.isNotEmpty ? _communities[0] : null;
   }
 
   @override
@@ -63,7 +64,6 @@ class _AddPageState extends State<AddPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextField(
-                //style: const TextStyle(fontSize: 18),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -89,7 +89,7 @@ class _AddPageState extends State<AddPage> {
               Container(
                 margin: const EdgeInsets.only(top: 10, right: 10, left: 10),
                 child: DropdownButton<String>(
-                  value: _communitySelected,
+                  value: _communitySelectedname,
                   items: _communities.map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -99,7 +99,7 @@ class _AddPageState extends State<AddPage> {
                   isExpanded: true,
                   onChanged: (String value) {
                     setState(() {
-                      _communitySelected = value;
+                      _communitySelectedname = value;
                     });
                   },
                 ),
@@ -111,11 +111,39 @@ class _AddPageState extends State<AddPage> {
                 child: ElevatedButton(
                   onPressed: _isButtonActive
                       ? () {
-                          FeedPage.selectedIndex = 1;
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => FeedPage()));
+                          for (int i = 0;
+                              i < StaticFields.activeUser.communities.length;
+                              i++) {
+                            if (StaticFields.activeUser.communities[i].name ==
+                                _communitySelectedname) {
+                              addPost(
+                                Post(
+                                  title: _titleController.text,
+                                  content: _bodyController.text,
+                                  //dateTime: DateTime.now(),
+                                  user: StaticFields.activeUser,
+                                ),
+                                StaticFields.activeUser.communities[i],
+                              );
+                              break;
+                            }
+                          }
+                          if (response == 'done') {
+                            FeedPage.selectedIndex = 1;
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => FeedPage()));
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: response,
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.TOP,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: AppTheme.mainColor,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
                         }
                       : null,
                   child: const Text('Add Post'),
@@ -126,5 +154,38 @@ class _AddPageState extends State<AddPage> {
         ),
         drawer: const PageDrawer(),
         bottomNavigationBar: const PageAppBar());
+  }
+
+  void addPost(Post post, Community community) async {
+    await Socket.connect(StaticFields.ip, StaticFields.port)
+        .then((serverSocket) {
+      final data = "addPost,," +
+          json.encode(post.toJson()) +
+          ',,' +
+          json.encode(community.toJson()) +
+          ',,' +
+          userToJson(StaticFields.activeUser) +
+          StaticFields.postFix;
+      serverSocket.write(data);
+      serverSocket.flush();
+      serverSocket.listen((res) {
+        response = String.fromCharCodes(res);
+        print('response: $response');
+      });
+    });
+  }
+
+  void updateUser() {
+    Socket.connect(StaticFields.ip, StaticFields.port).then((serverSocket) {
+      final data = "updateUser,," +
+          userToJson(StaticFields.activeUser) +
+          StaticFields.postFix;
+      serverSocket.write(data);
+      serverSocket.flush();
+      serverSocket.listen((res) {
+        response = String.fromCharCodes(res);
+        StaticFields.activeUser = userFromJson(response);
+      });
+    });
   }
 }

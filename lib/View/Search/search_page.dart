@@ -48,7 +48,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
               controller: _tabController,
               children: [
                 PostSearchResultPage(),
-                CommunitySearchResultPage(),
+                CommunitySearchResultPage(widget.search),
               ],
             ),
           ),

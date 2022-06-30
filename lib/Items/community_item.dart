@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/Data/models.dart';
+import 'package:reddit/Data/static_fields.dart';
 import 'package:reddit/View/MainPages/community_page.dart';
 
 class CommunityItem extends StatelessWidget {
@@ -8,8 +9,8 @@ class CommunityItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: const CircleAvatar(
-        child: Text('C'),
+      leading: CircleAvatar(
+        child: Text(community.name[0]),
       ),
       title: GestureDetector(
         child: Text(community.name),
@@ -20,7 +21,10 @@ class CommunityItem extends StatelessWidget {
                   builder: (context) => CommunityPage(community)));
         },
       ),
-      trailing: const Icon(Icons.star_outline_rounded),
+      trailing:
+          StaticFields.activeUser.favoriteCommunities.contains(community.name)
+              ? Icon(Icons.star_rounded)
+              : Icon(Icons.star_outline_rounded),
     );
   }
 }
