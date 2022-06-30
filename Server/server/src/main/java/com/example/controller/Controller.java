@@ -1,4 +1,5 @@
 package com.example.controller;
+import com.example.Comment;
 import com.example.Community;
 import com.example.Post;
 import com.example.database.Database;
@@ -111,7 +112,8 @@ public class Controller {
             communityList.add(community);
             isAdded = true;
         }
-        communities = communityList.toArray(Community[]::new);
+        communities = new Community[communityList.size()];
+        communityList.toArray(communities);
         for (User u : users) {
             if (u.getUsername().equals(user.getUsername())){
                 u.setCommunities(communities);
@@ -163,7 +165,7 @@ public class Controller {
         Community[] communities = Database.getCommunities();
         for (Community c : communities) {
             if (c.getName().equals(community.getName())) {
-                Post[] communityPosts = Arrays.copyOf( c.getPosts(),  c.getPosts().length + 1);
+                Post[] communityPosts = Arrays.copyOf( c.getPosts(), c.getPosts().length + 1);
                 communityPosts[communityPosts.length - 1]  = post;
                 c.setPosts(communityPosts);
                 break;
@@ -197,6 +199,31 @@ public class Controller {
         return "error!";
     }
 
+    private String addComment(String commentJson) {
+        Gson gson = new Gson();
+        Comment comment = gson.fromJson(commentJson, Comment.class);
+        Comment[] comments = Arrays.copyOf(Database.getComment() , Database.getComment().length + 1);
+        comments[comments.length - 1] = comment;
+        if (Database.writeComments(comments))
+            return "done";
+        return "error!";
+    }
+
+    private String getComments(String postJson) {
+        Gson gson = new Gson();
+        Post post = gson.fromJson(postJson, Post.class);
+        Comment[] comments = Database.getComment();
+        List<Comment> commentList = new ArrayList<>();
+        for (Comment c : comments) {
+            if (c.getID() == post.getID()) {
+                commentList.add(c);
+            }
+        }
+        Comment[] newComment = new Comment[commentList.size()];
+        commentList.toArray(newComment);
+        return gson.toJson(newComment);
+    }
+
     public String run(String request){
         String[] split = request.split(",,");
         switch (split[0]) {
@@ -218,6 +245,10 @@ public class Controller {
                 return getPosts(split[1]);
             case "updateUser":
                 return updateUser(split[1]);
+            case "addComment":
+                return addComment(split[1]);
+            case "getComments":
+                return getComments(split[1]);
         }
         return "invalid request";
     }
