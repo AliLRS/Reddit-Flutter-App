@@ -1,5 +1,6 @@
 package com.example.controller;
 import com.example.Community;
+import com.example.Post;
 import com.example.database.Database;
 import com.example.User;
 import com.google.gson.Gson;
@@ -141,6 +142,34 @@ public class Controller {
         return "error!";
     }
 
+    private String addPost(String postJson, String communityJson, String userJson) {
+        Gson gson = new Gson();
+        Post post = gson.fromJson(postJson, Post.class);
+        Community community = gson.fromJson(communityJson, Community.class);
+        User user = gson.fromJson(userJson, User.class);
+        User[] users = Database.getUsers();
+        for (User u : users) {
+            if (u.getUsername().equals(user.getUsername())) {
+                Post[] userPosts = Arrays.copyOf( u.getPosts(),  u.getPosts().length + 1);
+                userPosts[userPosts.length - 1]  = post;
+                u.setPosts(userPosts);
+                break;
+            }
+        }
+        Community[] communities = Database.getCommunities();
+        for (Community c : communities) {
+            if (c.getName().equals(community.getName())) {
+                Post[] communityPosts = Arrays.copyOf( c.getPosts(),  c.getPosts().length + 1);
+                communityPosts[communityPosts.length - 1]  = post;
+                c.setPosts(communityPosts);
+                break;
+            }
+        }
+        if (Database.writeCommunities(communities) && Database.writeUsers(users))
+            return "done";
+        return "error!";
+    }
+
     public String run(String request){
         String[] split = request.split(",,");
         switch (split[0]) {
@@ -156,6 +185,8 @@ public class Controller {
                 return getCommunities();
             case "followCommunity":
                 return followCommunity(split[1], split[2]);
+            case "addPost":
+                return addPost(split[1], split[2], split[3]);
         }
         return "invalid request";
     }
