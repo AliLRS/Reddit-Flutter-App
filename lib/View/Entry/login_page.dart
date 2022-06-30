@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:reddit/Data/models.dart';
 import 'package:reddit/Data/static_fields.dart';
 import 'dart:async';
 import 'dart:ui';
@@ -208,28 +209,39 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                 () {
                                   HapticFeedback.lightImpact();
                                   firstEntry = false;
-                                  confirmUser(_usernameController.text,
-                                      _passwordController.text);
                                   if (validateUsername(
                                               _usernameController.text) ==
                                           null &&
                                       validatePassword(
                                               _passwordController.text) ==
-                                          null &&
-                                      userConfirmation == "done\u0000") {
-                                    Fluttertoast.showToast(
-                                        msg: 'Log in was successful',
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.TOP,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: AppTheme.mainColor,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const FeedPage()));
+                                          null) {
+                                    confirmUser(User(
+                                        username: _usernameController.text,
+                                        password: _passwordController.text));
+                                    if (userConfirmation == "done\u0000") {
+                                      Fluttertoast.showToast(
+                                          msg: 'Log in was successful',
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.TOP,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: AppTheme.mainColor,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const FeedPage()));
+                                    } else {
+                                      Fluttertoast.showToast(
+                                          msg: userConfirmation,
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.TOP,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: AppTheme.mainColor,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                    }
                                   } else if (validateUsername(
                                           _usernameController.text) !=
                                       null) {
@@ -248,15 +260,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                     Fluttertoast.showToast(
                                         msg: validatePassword(
                                             _passwordController.text),
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.TOP,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: AppTheme.mainColor,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
-                                  } else if (userConfirmation != "done\u0000") {
-                                    Fluttertoast.showToast(
-                                        msg: userConfirmation,
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.TOP,
                                         timeInSecForIosWeb: 1,
@@ -410,12 +413,11 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     return null;
   }
 
-  confirmUser(String username, String password) async {
-    String request = "login,,username:$username,,password:$password\u0000";
-
+  confirmUser(User user) async {
     await Socket.connect(StaticFields.ip, StaticFields.port)
         .then((serverSocket) {
-      serverSocket.write(request);
+      final data = "login,," + userToJson(user) + StaticFields.postFix;
+      serverSocket.write(data);
       serverSocket.flush();
       serverSocket.listen((response) {
         setState(() {

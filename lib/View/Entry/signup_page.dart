@@ -215,10 +215,6 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                 () {
                                   HapticFeedback.lightImpact();
                                   firstEntry = false;
-                                  addUser(User(
-                                      username: _usernameController.text,
-                                      password: _passwordController.text,
-                                      email: _emailController.text));
                                   if (validateEmail(_emailController.text) ==
                                           null &&
                                       validateUsername(
@@ -226,21 +222,35 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                           null &&
                                       validatePassword(
                                               _passwordController.text) ==
-                                          null &&
-                                      userConfirmation == "done\u0000") {
-                                    Fluttertoast.showToast(
-                                        msg: 'Sign up was successful',
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.TOP,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: AppTheme.mainColor,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const FeedPage()));
+                                          null) {
+                                    addUser(User(
+                                        username: _usernameController.text,
+                                        password: _passwordController.text,
+                                        email: _emailController.text));
+                                    if (userConfirmation == "done\u0000") {
+                                      Fluttertoast.showToast(
+                                          msg: 'Sign up was successful',
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.TOP,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: AppTheme.mainColor,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const FeedPage()));
+                                    } else {
+                                      Fluttertoast.showToast(
+                                          msg: userConfirmation,
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.TOP,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: AppTheme.mainColor,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                    }
                                   } else if (validateUsername(
                                           _usernameController.text) !=
                                       null) {
@@ -271,15 +281,6 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                                     Fluttertoast.showToast(
                                         msg: validatePassword(
                                             _passwordController.text),
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.TOP,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: AppTheme.mainColor,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
-                                  } else if (userConfirmation != "done\u0000") {
-                                    Fluttertoast.showToast(
-                                        msg: userConfirmation,
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.TOP,
                                         timeInSecForIosWeb: 1,
