@@ -8,6 +8,9 @@ User userFromJson(String str) => User.fromJson(json.decode(str));
 
 String userToJson(User data) => json.encode(data.toJson());
 
+List<Community> communityFromJson(String str) =>
+    List<Community>.from(json.decode(str).map((x) => Community.fromJson(x)));
+
 class Community {
   Community({
     this.name,
