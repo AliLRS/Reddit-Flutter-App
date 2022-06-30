@@ -10,6 +10,7 @@ import java.nio.file.Path;
 public class Database {
 
     private static final String usersPath = "server/src/main/java/com/example/data/users.txt";
+    private static final  String communitiesPath = "server/src/main/java/com/example/data/communities.txt";
 
     public static User[] getUsers(){
         try {
@@ -41,6 +42,43 @@ public class Database {
         try(FileOutputStream fos = new FileOutputStream(usersPath);
             ObjectOutputStream oos = new ObjectOutputStream(fos)){
             oos.writeObject(users);
+        } catch (IOException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static Community[] getCommunities() {
+        try {
+            if (!Files.exists(Path.of(communitiesPath))) {
+                Files.createFile(Path.of(communitiesPath));
+                return new Community[0];
+            }
+            try(FileInputStream fis = new FileInputStream(communitiesPath);
+                ObjectInputStream ois = new ObjectInputStream(fis)){
+                Object obj = ois.readObject();
+                if (obj instanceof Community[])
+                    return (Community[]) obj;
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return new Community[0];
+    }
+
+    public static boolean writeCommunities(Community[] communities){
+        try {
+            if (!Files.exists(Path.of(communitiesPath)))
+                Files.createFile(Path.of(communitiesPath));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        try(FileOutputStream fos = new FileOutputStream(communitiesPath);
+            ObjectOutputStream oos = new ObjectOutputStream(fos)){
+            oos.writeObject(communities);
         } catch (IOException e){
             e.printStackTrace();
             return false;
