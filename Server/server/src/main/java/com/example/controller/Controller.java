@@ -31,7 +31,7 @@ public class Controller {
         for (User u : users) {
             if (u.getUsername().equals(user.getUsername())) {
                 if (u.getPassword().equals(user.getPassword()))
-                    return "done";
+                    return gson.toJson(u);
                 else
                     return "Password is incorrect";
             }
