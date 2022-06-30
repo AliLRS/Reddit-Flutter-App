@@ -73,7 +73,9 @@ public class Controller {
         User[] users = Database.getUsers();
         for (User u : users) {
             if (u.getUsername().equals(community.getCommunityAdmin().getUsername())) {
-                u.setCommunities(communities);
+                Community[] userCommunities = Arrays.copyOf(u.getCommunities(), u.getCommunities().length + 1);
+                userCommunities[userCommunities.length - 1] = community;
+                u.setCommunities(userCommunities);
             }
         }
 
