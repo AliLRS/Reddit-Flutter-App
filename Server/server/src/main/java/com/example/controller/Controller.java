@@ -208,6 +208,21 @@ public class Controller {
         return "error!";
     }
 
+    private String getComments(String postJson) {
+        Gson gson = new Gson();
+        Post post = gson.fromJson(postJson, Post.class);
+        Comment[] comments = Database.getComment();
+        List<Comment> commentList = new ArrayList<>();
+        for (Comment c : comments) {
+            if (c.getID() == post.getID()) {
+                commentList.add(c);
+            }
+        }
+        Comment[] newComment = new Comment[commentList.size()];
+        commentList.toArray(newComment);
+        return gson.toJson(newComment);
+    }
+
     public String run(String request){
         String[] split = request.split(",,");
         switch (split[0]) {
@@ -231,6 +246,8 @@ public class Controller {
                 return updateUser(split[1]);
             case "addComment":
                 return addComment(split[1]);
+            case "getComments":
+                return getComments(split[1]);
         }
         return "invalid request";
     }
