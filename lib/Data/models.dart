@@ -58,6 +58,7 @@ class User {
     this.communities,
     this.posts,
     this.savedPosts,
+    this.favoriteCommunities,
   });
 
   String username;
@@ -65,7 +66,8 @@ class User {
   String password;
   List<Community> communities;
   List<Post> posts;
-  List<Post> savedPosts;
+  List<int> savedPosts;
+  List<String> favoriteCommunities;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         username: json["username"],
@@ -74,8 +76,8 @@ class User {
         communities: List<Community>.from(
             json["communities"].map((x) => Community.fromJson(x))),
         posts: List<Post>.from(json["posts"].map((x) => Post.fromJson(x))),
-        savedPosts:
-            List<Post>.from(json["savedPosts"].map((x) => Post.fromJson(x))),
+        savedPosts: List<int>.from(json["savedPosts"].map((x) => x)),
+        favoriteCommunities: List<String>.from(json["favoriteCommunities"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -90,7 +92,10 @@ class User {
             : List<dynamic>.from(posts.map((x) => x.toJson())),
         "savedPosts": savedPosts == null
             ? []
-            : List<dynamic>.from(savedPosts.map((x) => x.toJson())),
+            : List<dynamic>.from(savedPosts.map((x) => x)),
+        "favoriteCommunities": favoriteCommunities == null
+            ? []
+            : List<dynamic>.from(favoriteCommunities),
       };
 }
 

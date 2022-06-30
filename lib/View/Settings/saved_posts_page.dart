@@ -11,8 +11,7 @@ class SavedPosts extends StatefulWidget {
 }
 
 class _SavedPostsState extends State<SavedPosts> {
-  List<PostItem> posts =
-      StaticFields.activeUser.savedPosts.map((val) => PostItem(val)).toList();
+  List<PostItem> posts = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -9,7 +9,8 @@ public class User implements Serializable {
     private String password;
     private Community[] communities;
     private Post[] posts;
-    private Post[] savedPosts;
+    private long[] savedPosts;
+    private String[] favoriteCommunities;
 
     @JsonProperty("username")
     public String getUsername() { return username; }
@@ -37,7 +38,13 @@ public class User implements Serializable {
     public void setPosts(Post[] value) { this.posts = value; }
 
     @JsonProperty("savedPosts")
-    public Post[] getSavedPosts() { return savedPosts; }
+    public long[] getSavedPosts() { return savedPosts; }
     @JsonProperty("savedPosts")
-    public void setSavedPosts(Post[] value) { this.savedPosts = value; }
+    public void setSavedPosts(long[] value) { this.savedPosts = value; }
+
+    @JsonProperty("favoriteCommunities")
+    public String[] getfavoriteCommunities() { return favoriteCommunities; }
+    @JsonProperty("favoriteCommunities")
+    public void setfavoriteCommunities(String[] value) { this.favoriteCommunities = value; }
+
 }
