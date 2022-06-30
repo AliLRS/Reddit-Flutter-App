@@ -137,8 +137,12 @@ public class Controller {
                 break;
             }
         }
-        if (Database.writeUsers(users) && Database.writeCommunities(dataBaseCommunity))
-            return "done";
+        if (Database.writeUsers(users) && Database.writeCommunities(dataBaseCommunity)) {
+            if (isAdded)
+                return "followed";
+            else
+                return "unfollowed";
+        }
         return "error!";
     }
 
