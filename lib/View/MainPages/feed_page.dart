@@ -19,6 +19,7 @@ class _FeedPageState extends State<FeedPage> {
   initState() {
     super.initState();
     FeedPage.selectedIndex = 1;
+    getAllPosts();
   }
 
   Widget build(BuildContext context) {
@@ -29,31 +30,14 @@ class _FeedPageState extends State<FeedPage> {
           child: const SearchBar(),
         ),
       ),
-      body: FutureBuilder(
-        future: Future.delayed(Duration(seconds: 1)),
-        builder: (context, snapshot) {
-          try {
-            getAllPosts();
-            return ListView.builder(
+      body: posts == null
+          ? loading
+          : ListView.builder(
               itemCount: posts.length,
               itemBuilder: (context, index) {
                 return posts[index];
               },
-            );
-          } catch (e) {
-            return Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  CircularProgressIndicator(),
-                ],
-              ),
-            );
-          }
-        },
-      ),
+            ),
       drawer: const PageDrawer(),
       bottomNavigationBar: const PageAppBar(),
     );
@@ -79,4 +63,8 @@ class _FeedPageState extends State<FeedPage> {
       });
     });
   }
+
+  Widget get loading => const Center(
+        child: CircularProgressIndicator(),
+      );
 }

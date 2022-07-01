@@ -31,30 +31,14 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
           child: const SearchBar(),
         ),
       ),
-      body: FutureBuilder(
-        future: Future.delayed(Duration(seconds: 1)),
-        builder: (context, snapshot) {
-          try {
-            return ListView.builder(
-              itemCount: communityList == null ? 0 : communityList.length,
+      body: communityList == null
+          ? loading
+          : ListView.builder(
+              itemCount: communityList.length,
               itemBuilder: (context, index) {
                 return communityList[index];
               },
-            );
-          } catch (e) {
-            return Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  CircularProgressIndicator(),
-                ],
-              ),
-            );
-          }
-        },
-      ),
+            ),
       drawer: const PageDrawer(),
       bottomNavigationBar: const PageAppBar(),
     );
@@ -69,7 +53,6 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
     serverSocket.listen((res) {
       setState(() {
         final response = String.fromCharCodes(res);
-        log(response);
         List<Community> cs = communityFromJson(response);
         //if (cs != null) {
         communityList = cs.map((item) {
