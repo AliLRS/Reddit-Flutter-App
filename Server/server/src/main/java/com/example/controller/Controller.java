@@ -176,6 +176,18 @@ public class Controller {
         return "error!";
     }
 
+    private String getAllPosts() {
+        Gson gson = new Gson();
+        Community[] communities = Database.getCommunities();
+        List<Post> postList = new ArrayList<>();
+        for (Community c : communities) {
+            postList.addAll(Arrays.asList(c.getPosts()));
+        }
+        Post[] posts = new Post[postList.size()];
+        postList.toArray(posts);
+        return gson.toJson(posts);
+    }
+
     private String getPosts(String communityJson) {
         Gson gson = new Gson();
         Community community = gson.fromJson(communityJson, Community.class);
@@ -252,6 +264,8 @@ public class Controller {
                 return getCommunities();
             case "followCommunity":
                 return followCommunity(split[1], split[2]);
+            case "getAllPosts":
+                return getAllPosts();
             case "addPost":
                 return addPost(split[1], split[2], split[3]);
             case "getPosts":
