@@ -227,13 +227,24 @@ public class Controller {
         return "error!";
     }
 
-    private String addComment(String commentJson) {
+    private String addComment(String postJson, String commentJson) {
         Gson gson = new Gson();
+        Post post = gson.fromJson(postJson, Post.class);
         Comment comment = gson.fromJson(commentJson, Comment.class);
-        Comment[] comments = Arrays.copyOf(Database.getComment() , Database.getComment().length + 1);
-        comments[comments.length - 1] = comment;
-        if (Database.writeComments(comments))
-            return "done";
+        Community[] communities = Database.getCommunities();
+        outerLoop:
+        for (Community c : communities) {
+            if (c.getName().equals(post.getCommunity().getName())) {
+                for (Post p : c.getPosts()) {
+                    Comment[] comments = Arrays.copyOf(p.getComments() , p.getComments().length + 1);
+                    comments[comments.length - 1] = comment;
+                    p.setComments(comments);
+                    break outerLoop;
+                }
+            }
+        }
+        if (Database.writeCommunities(communities))
+            return "donne";
         return "error!";
     }
 
