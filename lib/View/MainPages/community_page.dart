@@ -22,6 +22,7 @@ class _CommunityPageState extends State<CommunityPage> {
   initState() {
     super.initState();
     _followed = StaticFields.activeUser.communities.contains(widget.community);
+    getPosts(widget.community);
     //List<PostItem> posts =
     //widget.community.posts.map((val) => PostItem(val)).toList();
   }
@@ -149,6 +150,14 @@ class _CommunityPageState extends State<CommunityPage> {
       serverSocket.listen((res) {
         getPostResponse = String.fromCharCodes(res);
         print('response: $getPostResponse');
+        setState(() {
+          List<Post> ps = postFromJson(getPostResponse);
+          if (ps != null) {
+            posts = ps.map((item) {
+              return PostItem(item);
+            }).toList();
+          }
+        });
       });
     });
   }

@@ -18,6 +18,7 @@ class _FeedPageState extends State<FeedPage> {
   @override
   initState() {
     super.initState();
+    FeedPage.selectedIndex = 1;
   }
 
   Widget build(BuildContext context) {
@@ -73,6 +74,13 @@ class _FeedPageState extends State<FeedPage> {
           }).toList();
         }
       });
+    });
+  }
+
+  void sort() {
+    setState(() {
+      posts.sort((a, b) => DateTime.parse(b.post.dateTime)
+          .compareTo(DateTime.parse(a.post.dateTime)));
     });
   }
 }

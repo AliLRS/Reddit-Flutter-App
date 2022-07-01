@@ -68,9 +68,12 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
     serverSocket.listen((res) {
       setState(() {
         final response = String.fromCharCodes(res);
-        communityList = communityFromJson(response).map((item) {
-          return CommunityItem(item);
-        }).toList();
+        List<Community> cs = communityFromJson(response);
+        if (cs != null) {
+          communityList = cs.map((item) {
+            return CommunityItem(item);
+          }).toList();
+        }
       });
     });
   }

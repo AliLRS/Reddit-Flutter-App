@@ -20,11 +20,11 @@ class PostItem extends StatelessWidget {
                   child: Icon(Icons.ac_unit),
                 ),
                 title: Text('r/${post.community.name}'),
-                // subtitle: Text('u/${post.user.username} - ${Jalali.fromDateTime(DateTime.parse(post.dateTime)).year}/' +
-                //     '${Jalali.fromDateTime(DateTime.parse(post.dateTime)).month}/' +
-                //     '${Jalali.fromDateTime(DateTime.parse(post.dateTime)).day}' +
-                //     ' ${Jalali.fromDateTime(DateTime.parse(post.dateTime)).hour}:' +
-                //     '${Jalali.fromDateTime(DateTime.parse(post.dateTime)).minute}'),
+                subtitle: Text('u/${post.user.username} - ${Jalali.fromDateTime(DateTime.parse(post.dateTime)).year}/' +
+                    '${Jalali.fromDateTime(DateTime.parse(post.dateTime)).month}/' +
+                    '${Jalali.fromDateTime(DateTime.parse(post.dateTime)).day}' +
+                    ' ${Jalali.fromDateTime(DateTime.parse(post.dateTime)).hour}:' +
+                    '${Jalali.fromDateTime(DateTime.parse(post.dateTime)).minute}'),
               ),
               ListTile(
                 title: Text(post.title),
@@ -56,8 +56,6 @@ class PostItem extends StatelessWidget {
                     IconButton(
                         onPressed: () {}, icon: const Icon(Icons.thumb_up)),
                     const Text('16'),
-                    IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.thumb_down)),
                   ],
                 ),
               ),

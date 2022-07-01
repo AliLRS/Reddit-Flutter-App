@@ -111,6 +111,7 @@ class Post {
     this.dateTime,
     this.community,
     this.comments,
+    this.likers,
   });
 
   int id;
@@ -120,6 +121,7 @@ class Post {
   String dateTime;
   Community community;
   List<Comment> comments;
+  List<User> likers;
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
         id: json["id"],
@@ -132,6 +134,7 @@ class Post {
             : Community.fromJson(json["community"]),
         comments: List<Comment>.from(
             json["comments"].map((x) => Comment.fromJson(x))),
+        likers: List<User>.from(json["users"].map((x) => User.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -144,6 +147,9 @@ class Post {
         "comments": comments == null
             ? []
             : List<dynamic>.from(comments.map((x) => x.toJson())),
+        "likers": likers == null
+            ? []
+            : List<dynamic>.from(likers.map((x) => x.toJson())),
       };
 }
 

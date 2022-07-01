@@ -35,8 +35,6 @@ class CommentItem extends StatelessWidget {
                     IconButton(
                         onPressed: () {}, icon: const Icon(Icons.thumb_up)),
                     const Text('16'),
-                    IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.thumb_down)),
                   ],
                 ),
               ),

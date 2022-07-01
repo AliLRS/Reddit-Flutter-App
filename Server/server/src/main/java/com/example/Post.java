@@ -12,6 +12,7 @@ public class Post implements Serializable {
     private String dateTime;
     private Community community;
     private Comment[] comments;
+    private User[] likers;
 
     @JsonProperty("id")
     public long getID() { return id; }
@@ -47,4 +48,9 @@ public class Post implements Serializable {
     public Comment[] getComments() { return comments; }
     @JsonProperty("comments")
     public void setComments(Comment[] value) { this.comments = value; }
+
+    @JsonProperty("likers")
+    public User[] getLikers() { return likers; }
+    @JsonProperty("likers")
+    public void setLikers(User[] value) { this.likers = value; }
 }
