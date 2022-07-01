@@ -236,10 +236,12 @@ public class Controller {
         for (Community c : communities) {
             if (c.getName().equals(post.getCommunity().getName())) {
                 for (Post p : c.getPosts()) {
-                    Comment[] comments = Arrays.copyOf(p.getComments() , p.getComments().length + 1);
-                    comments[comments.length - 1] = comment;
-                    p.setComments(comments);
-                    break outerLoop;
+                    if (p.getTitle().equals(post.getTitle()) && p.getContent().equals(post.getContent())) {
+                        Comment[] comments = Arrays.copyOf(p.getComments() , p.getComments().length + 1);
+                        comments[comments.length - 1] = comment;
+                        p.setComments(comments);
+                        break outerLoop;
+                    }
                 }
             }
         }
@@ -251,16 +253,17 @@ public class Controller {
     private String getComments(String postJson) {
         Gson gson = new Gson();
         Post post = gson.fromJson(postJson, Post.class);
-        Comment[] comments = Database.getComment();
-        List<Comment> commentList = new ArrayList<>();
-        for (Comment c : comments) {
-            if (c.getID() == post.getID()) {
-                commentList.add(c);
+        Community[] communities = Database.getCommunities();
+        for (Community c : communities) {
+            if (c.getName().equals(post.getCommunity().getName())) {
+                for (Post p : c.getPosts()) {
+                    if (p.getTitle().equals(post.getTitle()) && p.getContent().equals(post.getContent())) {
+                        return gson.toJson(p.getComments());
+                    }
+                }
             }
         }
-        Comment[] newComment = new Comment[commentList.size()];
-        commentList.toArray(newComment);
-        return gson.toJson(newComment);
+        return "error!";
     }
 
     private String like(String userJson, String postJson) {
