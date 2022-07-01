@@ -57,6 +57,14 @@ class _AddCommentPageState extends State<AddCommentPage> {
             child: ElevatedButton(
               onPressed: _isButtonActive
                   ? () {
+                      addComment(
+                        Comment(
+                          content: _commentController.text,
+                          dateTime: DateTime.now().toString(),
+                          post: widget.post,
+                          user: StaticFields.activeUser,
+                        ),
+                      );
                       if (response == 'done') {
                         Navigator.pushReplacement(
                             context,
@@ -85,8 +93,11 @@ class _AddCommentPageState extends State<AddCommentPage> {
   void addComment(Comment comment) async {
     await Socket.connect(StaticFields.ip, StaticFields.port)
         .then((serverSocket) {
-      final data =
-          "addComment,," + json.encode(comment.toJson()) + StaticFields.postFix;
+      final data = "addComment,," +
+          json.encode(widget.post.toJson()) +
+          ",," +
+          json.encode(comment.toJson()) +
+          StaticFields.postFix;
       serverSocket.write(data);
       serverSocket.flush();
       serverSocket.listen((res) {

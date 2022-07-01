@@ -16,12 +16,11 @@ class CommunityPage extends StatefulWidget {
 
 class _CommunityPageState extends State<CommunityPage> {
   String followResponse = '', getPostResponse = '';
-  bool _followed;
+  bool _followed = false;
   List<PostItem> posts = [];
   @override
   initState() {
     super.initState();
-    _followed = StaticFields.activeUser.communities.contains(widget.community);
     getPosts(widget.community);
   }
 

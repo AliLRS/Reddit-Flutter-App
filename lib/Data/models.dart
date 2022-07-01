@@ -14,6 +14,9 @@ List<Community> communityFromJson(String str) =>
 List<Post> postFromJson(String str) =>
     List<Post>.from(json.decode(str).map((x) => Post.fromJson(x)));
 
+List<Comment> commentFromJson(String str) =>
+    List<Comment>.from(json.decode(str).map((x) => Comment.fromJson(x)));
+
 class Community {
   Community({
     this.name,

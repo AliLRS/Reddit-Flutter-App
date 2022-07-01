@@ -246,7 +246,7 @@ public class Controller {
             }
         }
         if (Database.writeCommunities(communities))
-            return "donne";
+            return "done";
         return "error!";
     }
 

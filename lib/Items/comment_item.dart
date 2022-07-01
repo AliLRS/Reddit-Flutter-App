@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/Data/models.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 class CommentItem extends StatelessWidget {
   CommentItem(this.comment, {Key key}) : super(key: key);
@@ -13,7 +14,11 @@ class CommentItem extends StatelessWidget {
             radius: 20,
             child: Icon(Icons.ac_unit),
           ),
-          title: Text('u/${comment.user.username}'),
+          title: Text('u/${comment.user.username} - ${Jalali.fromDateTime(DateTime.parse(comment.dateTime)).year}/' +
+              '${Jalali.fromDateTime(DateTime.parse(comment.dateTime)).month}/' +
+              '${Jalali.fromDateTime(DateTime.parse(comment.dateTime)).day}' +
+              ' ${Jalali.fromDateTime(DateTime.parse(comment.dateTime)).hour}:' +
+              '${Jalali.fromDateTime(DateTime.parse(comment.dateTime)).minute}'),
         ),
         ListTile(
           title: Text(comment.content),
@@ -26,19 +31,6 @@ class CommentItem extends StatelessWidget {
                 width: 1,
               ),
             ),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.thumb_up)),
-                    const Text('16'),
-                  ],
-                ),
-              ),
-            ],
           ),
         ),
       ],

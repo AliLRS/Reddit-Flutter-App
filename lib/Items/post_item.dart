@@ -55,7 +55,9 @@ class PostItem extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {}, icon: const Icon(Icons.thumb_up)),
-                    const Text('16'),
+                    post.likers == null
+                        ? Text('0')
+                        : Text(post.likers.length.toString()),
                   ],
                 ),
               ),
@@ -71,7 +73,6 @@ class PostItem extends StatelessWidget {
                                   builder: (context) => AddCommentPage(post)));
                         },
                         icon: const Icon(Icons.comment)),
-                    Text(post.comments.length.toString()),
                   ],
                 ),
               ),
