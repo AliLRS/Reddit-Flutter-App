@@ -129,7 +129,10 @@ public class Controller {
                     comUsers[comUsers.length - 1] = user;
                 }
                 else {
-                    comUsers = new User[gottenUsers.length - 1];
+                    if (gottenUsers.length < 1)
+                        comUsers = new User[0];
+                    else
+                        comUsers = new User[gottenUsers.length - 1];
                     int index = 0;
                     for (User gottenUser : gottenUsers) {
                         comUsers[index++] = gottenUser;
