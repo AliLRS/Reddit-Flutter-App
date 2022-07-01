@@ -252,6 +252,46 @@ public class Controller {
         return gson.toJson(newComment);
     }
 
+    private String like(String userJson, String postJson) {
+        Gson gson = new Gson();
+        User user = gson.fromJson(userJson, User.class);
+        Post post = gson.fromJson(postJson, Post.class);
+        boolean like = true;
+        List<User> userList = new ArrayList<>();
+        for (User u : post.getLikers()) {
+            if (u.getUsername().equals(user.getUsername())) {
+                like = false;
+            }
+            else {
+                userList.add(u);
+            }
+        }
+        if (like) {
+            userList.add(user);
+        }
+        User[] users = new User[userList.size()];
+        userList.toArray(users);
+        Community[] communities = Database.getCommunities();
+        outerLoop:
+        for (Community c : communities) {
+            if (c.getName().equals(post.getCommunity().getName())) {
+                for (Post p : c.getPosts()) {
+                    if (p.getID() == post.getID()) {
+                        p.setLikers(users);
+                        break outerLoop;
+                    }
+                }
+            }
+        }
+        if (Database.writeCommunities(communities)) {
+            if (like)
+                return "liked";
+            else
+                return "disliked";
+        }
+        return "error!";
+    }
+
     public String run(String request){
         String[] split = request.split(",,");
         switch (split[0]) {
@@ -281,6 +321,8 @@ public class Controller {
                 return addComment(split[1]);
             case "getComments":
                 return getComments(split[1]);
+            case "like":
+                return like(split[1], split[2]);
         }
         return "invalid request";
     }
