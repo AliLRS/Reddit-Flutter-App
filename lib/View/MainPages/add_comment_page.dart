@@ -1,7 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:reddit/Data/models.dart';
 import 'package:reddit/Data/static_fields.dart';
 import 'package:reddit/View/MainPages/post_page.dart';
+import 'package:reddit/app_theme.dart';
 
 class AddCommentPage extends StatefulWidget {
   AddCommentPage(this.post, {Key key}) : super(key: key);
@@ -11,6 +16,7 @@ class AddCommentPage extends StatefulWidget {
 }
 
 class _AddCommentPageState extends State<AddCommentPage> {
+  String response = '';
   TextEditingController _commentController;
   bool _isButtonActive = false;
   @override
@@ -51,16 +57,21 @@ class _AddCommentPageState extends State<AddCommentPage> {
             child: ElevatedButton(
               onPressed: _isButtonActive
                   ? () {
-                      widget.post.comments.add(Comment(
-                        content: _commentController.text,
-                        user: StaticFields.activeUser,
-                        dateTime: DateTime.now().toString(),
-                        post: widget.post,
-                      ));
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PostPage(widget.post)));
+                      if (response == 'done') {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PostPage(widget.post)));
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: response,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.TOP,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: AppTheme.mainColor,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      }
                     }
                   : null,
               child: const Text('Add comment'),
@@ -69,5 +80,19 @@ class _AddCommentPageState extends State<AddCommentPage> {
         ],
       ),
     );
+  }
+
+  void addComment(Comment comment) async {
+    await Socket.connect(StaticFields.ip, StaticFields.port)
+        .then((serverSocket) {
+      final data =
+          "addComment,," + json.encode(comment.toJson()) + StaticFields.postFix;
+      serverSocket.write(data);
+      serverSocket.flush();
+      serverSocket.listen((res) {
+        response = String.fromCharCodes(res);
+        print('response: $response');
+      });
+    });
   }
 }

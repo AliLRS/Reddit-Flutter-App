@@ -72,15 +72,10 @@ class _FeedPageState extends State<FeedPage> {
           posts = ps.map((item) {
             return PostItem(item);
           }).toList();
+          posts.sort((a, b) => DateTime.parse(b.post.dateTime)
+              .compareTo(DateTime.parse(a.post.dateTime)));
         }
       });
-    });
-  }
-
-  void sort() {
-    setState(() {
-      posts.sort((a, b) => DateTime.parse(b.post.dateTime)
-          .compareTo(DateTime.parse(a.post.dateTime)));
     });
   }
 }

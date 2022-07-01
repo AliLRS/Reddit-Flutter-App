@@ -19,7 +19,6 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
   @override
   void initState() {
     super.initState();
-    getCommunities();
   }
 
   Widget build(BuildContext context) {

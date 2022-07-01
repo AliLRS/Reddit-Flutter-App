@@ -23,8 +23,6 @@ class _CommunityPageState extends State<CommunityPage> {
     super.initState();
     _followed = StaticFields.activeUser.communities.contains(widget.community);
     getPosts(widget.community);
-    //List<PostItem> posts =
-    //widget.community.posts.map((val) => PostItem(val)).toList();
   }
 
   Widget build(BuildContext context) {
@@ -59,10 +57,10 @@ class _CommunityPageState extends State<CommunityPage> {
               Container(
                 margin: const EdgeInsets.all(10),
                 alignment: Alignment.centerLeft,
-                child: const CircleAvatar(
+                child: CircleAvatar(
                   radius: 30,
                   child: Text(
-                    'C',
+                    '${widget.community.name[0]}',
                     style: TextStyle(fontSize: 30),
                   ),
                 ),
