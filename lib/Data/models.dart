@@ -35,8 +35,12 @@ class Community {
         communityAdmin: json["communityAdmin"] == null
             ? null
             : User.fromJson(json["communityAdmin"]),
-        posts: List<Post>.from(json["posts"].map((x) => Post.fromJson(x))),
-        users: List<User>.from(json["users"].map((x) => User.fromJson(x))),
+        posts: json["posts"] == null
+            ? []
+            : List<Post>.from(json["posts"].map((x) => Post.fromJson(x))),
+        users: json["users"] == null
+            ? []
+            : List<User>.from(json["users"].map((x) => User.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -134,7 +138,9 @@ class Post {
             : Community.fromJson(json["community"]),
         comments: List<Comment>.from(
             json["comments"].map((x) => Comment.fromJson(x))),
-        likers: List<User>.from(json["users"].map((x) => User.fromJson(x))),
+        likers: json["users"] == null
+            ? []
+            : List<User>.from(json["users"].map((x) => User.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

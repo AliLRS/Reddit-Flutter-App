@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
   @override
   void initState() {
     super.initState();
+    getCommunities();
   }
 
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
         ),
       ),
       body: FutureBuilder(
-        future: getCommunities(),
+        future: Future.delayed(Duration(seconds: 1)),
         builder: (context, snapshot) {
           try {
             return ListView.builder(
@@ -67,12 +69,13 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
     serverSocket.listen((res) {
       setState(() {
         final response = String.fromCharCodes(res);
+        log(response);
         List<Community> cs = communityFromJson(response);
-        if (cs != null) {
-          communityList = cs.map((item) {
-            return CommunityItem(item);
-          }).toList();
-        }
+        //if (cs != null) {
+        communityList = cs.map((item) {
+          return CommunityItem(item);
+        }).toList();
+        //}
       });
     });
   }

@@ -30,9 +30,10 @@ class _FeedPageState extends State<FeedPage> {
         ),
       ),
       body: FutureBuilder(
-        future: getAllPosts(),
+        future: Future.delayed(Duration(seconds: 1)),
         builder: (context, snapshot) {
           try {
+            getAllPosts();
             return ListView.builder(
               itemCount: posts.length,
               itemBuilder: (context, index) {
@@ -68,13 +69,13 @@ class _FeedPageState extends State<FeedPage> {
       setState(() {
         final response = String.fromCharCodes(res);
         List<Post> ps = postFromJson(response);
-        if (ps != null) {
-          posts = ps.map((item) {
-            return PostItem(item);
-          }).toList();
-          posts.sort((a, b) => DateTime.parse(b.post.dateTime)
-              .compareTo(DateTime.parse(a.post.dateTime)));
-        }
+        //if (ps != null) {
+        posts = ps.map((item) {
+          return PostItem(item);
+        }).toList();
+        posts.sort((a, b) => DateTime.parse(b.post.dateTime)
+            .compareTo(DateTime.parse(a.post.dateTime)));
+        //}
       });
     });
   }

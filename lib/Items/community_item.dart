@@ -21,10 +21,11 @@ class CommunityItem extends StatelessWidget {
                   builder: (context) => CommunityPage(community)));
         },
       ),
-      trailing:
-          StaticFields.activeUser.favoriteCommunities.contains(community.name)
+      trailing: StaticFields.activeUser.favoriteCommunities == null
+          ? Icon(Icons.star_outline_rounded)
+          : (StaticFields.activeUser.favoriteCommunities == null
               ? Icon(Icons.star_rounded)
-              : Icon(Icons.star_outline_rounded),
+              : Icon(Icons.star_outline_rounded)),
     );
   }
 }
