@@ -332,7 +332,7 @@ public class Controller {
             case "updateUser":
                 return updateUser(split[1]);
             case "addComment":
-                return addComment(split[1]);
+                return addComment(split[1], split[2]);
             case "getComments":
                 return getComments(split[1]);
             case "like":
