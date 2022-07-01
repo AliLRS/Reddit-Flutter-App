@@ -114,7 +114,7 @@ class Post {
   String title;
   String content;
   User user;
-  DateTime dateTime;
+  String dateTime;
   Community community;
   List<Comment> comments;
 
@@ -123,7 +123,7 @@ class Post {
         title: json["title"],
         content: json["content"],
         user: json["user"] == null ? null : User.fromJson(json["user"]),
-        dateTime: DateTime.parse(json["dateTime"]),
+        dateTime: json["dateTime"],
         community: json["community"] == null
             ? null
             : Community.fromJson(json["community"]),
@@ -136,8 +136,7 @@ class Post {
         "title": title,
         "content": content,
         "user": user == null ? null : user.toJson(),
-        "dateTime":
-            "${dateTime.year.toString().padLeft(4, '0')}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}",
+        "dateTime": dateTime,
         "community": community == null ? null : community.toJson(),
         "comments": comments == null
             ? []
@@ -158,14 +157,14 @@ class Comment {
   String content;
   User user;
   Post post;
-  DateTime dateTime;
+  String dateTime;
 
   factory Comment.fromJson(Map<String, dynamic> json) => Comment(
         id: json["id"],
         content: json["content"],
         user: json["user"] == null ? null : User.fromJson(json["user"]),
         post: json["post"] == null ? null : Post.fromJson(json["post"]),
-        dateTime: DateTime.parse(json["dateTime"]),
+        dateTime: json["dateTime"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -173,7 +172,6 @@ class Comment {
         "content": content,
         "user": user == null ? null : user.toJson(),
         "post": post == null ? null : post.toJson(),
-        "dateTime":
-            "${dateTime.year.toString().padLeft(4, '0')}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}",
+        "dateTime": dateTime,
       };
 }

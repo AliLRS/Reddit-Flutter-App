@@ -9,7 +9,7 @@ public class Comment implements Serializable {
     private String content;
     private User user;
     private Post post;
-    private Date dateTime;
+    private String dateTime;
 
     @JsonProperty("id")
     public long getID() { return id; }
@@ -32,7 +32,7 @@ public class Comment implements Serializable {
     public void setPost(Post value) { this.post = value; }
 
     @JsonProperty("dateTime")
-    public Date getDateTime() { return dateTime; }
+    public String getDateTime() { return dateTime; }
     @JsonProperty("dateTime")
-    public void setDateTime(Date value) { this.dateTime = value; }
+    public void setDateTime(String value) { this.dateTime = value; }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reddit/Data/models.dart';
 import 'package:reddit/View/MainPages/add_comment_page.dart';
 import 'package:reddit/View/MainPages/post_page.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 class PostItem extends StatelessWidget {
   PostItem(this.post, {Key key}) : super(key: key);
@@ -19,13 +20,15 @@ class PostItem extends StatelessWidget {
                   child: Icon(Icons.ac_unit),
                 ),
                 title: Text('r/${post.community.name}'),
-                subtitle: Text('u/${post.user.username} - ${post.dateTime}'),
+                // subtitle: Text('u/${post.user.username} - ${Jalali.fromDateTime(DateTime.parse(post.dateTime)).year}/' +
+                //     '${Jalali.fromDateTime(DateTime.parse(post.dateTime)).month}/' +
+                //     '${Jalali.fromDateTime(DateTime.parse(post.dateTime)).day}' +
+                //     ' ${Jalali.fromDateTime(DateTime.parse(post.dateTime)).hour}:' +
+                //     '${Jalali.fromDateTime(DateTime.parse(post.dateTime)).minute}'),
               ),
               ListTile(
-                title: Text('title'),
-                subtitle: Text(
-                  'description\n...\n...\n...',
-                ),
+                title: Text(post.title),
+                subtitle: Text(post.content),
               ),
             ],
           ),
@@ -70,7 +73,7 @@ class PostItem extends StatelessWidget {
                                   builder: (context) => AddCommentPage(post)));
                         },
                         icon: const Icon(Icons.comment)),
-                    const Text('2'),
+                    Text(post.comments.length.toString()),
                   ],
                 ),
               ),
@@ -78,8 +81,11 @@ class PostItem extends StatelessWidget {
                 flex: 2,
                 child: Row(
                   children: [
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
-                    const Text('Share'),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.bookmark_add),
+                    ),
+                    const Text('Save'),
                   ],
                 ),
               )

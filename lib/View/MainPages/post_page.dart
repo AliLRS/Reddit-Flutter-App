@@ -2,6 +2,7 @@ import 'package:reddit/Data/models.dart';
 import 'package:reddit/Items/comment_item.dart';
 import 'package:flutter/material.dart';
 import 'package:reddit/View/MainPages/add_comment_page.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 class PostPage extends StatefulWidget {
   PostPage(this.post, {Key key}) : super(key: key);
@@ -13,16 +14,14 @@ class PostPage extends StatefulWidget {
 class _PostPageState extends State<PostPage> {
   TextEditingController _commentController;
   bool _isButtonActive = false;
-  List<CommentItem> comments = [
-    const CommentItem(),
-    const CommentItem(),
-    const CommentItem(),
-    const CommentItem(),
-    const CommentItem(),
-    const CommentItem(),
-  ];
+  List<CommentItem> _comments = [];
 
   @override
+  initState() {
+    super.initState();
+    _comments = widget.post.comments.map((c) => CommentItem(c)).toList();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.post.title)),
@@ -33,12 +32,16 @@ class _PostPageState extends State<PostPage> {
               radius: 30,
               child: Icon(Icons.ac_unit),
             ),
-            title: Text(widget.post.content),
-            subtitle: const Text('u/user' ' - ' '6/6/2022'),
+            title: Text('r/${widget.post.user.username}'),
+            subtitle: Text('u/${widget.post.user.username} - ${Jalali.fromDateTime(DateTime.parse(widget.post.dateTime)).year}/' +
+                '${Jalali.fromDateTime(DateTime.parse(widget.post.dateTime)).month}/' +
+                '${Jalali.fromDateTime(DateTime.parse(widget.post.dateTime)).day}' +
+                ' ${Jalali.fromDateTime(DateTime.parse(widget.post.dateTime)).hour}:' +
+                '${Jalali.fromDateTime(DateTime.parse(widget.post.dateTime)).minute}'),
           ),
-          const ListTile(
-            title: Text('title'),
-            subtitle: Text('description\n...\n...\n...'),
+          ListTile(
+            title: Text(widget.post.title),
+            subtitle: Text(widget.post.content),
           ),
           Row(
             children: [
@@ -67,7 +70,7 @@ class _PostPageState extends State<PostPage> {
                                       AddCommentPage(widget.post)));
                         },
                         icon: const Icon(Icons.comment)),
-                    const Text('2'),
+                    Text(widget.post.comments.length.toString()),
                   ],
                 ),
               ),
@@ -92,9 +95,9 @@ class _PostPageState extends State<PostPage> {
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
               scrollDirection: Axis.vertical,
-              itemCount: comments.length,
+              itemCount: _comments.length,
               itemBuilder: (context, index) {
-                return comments[index];
+                return _comments[index];
               },
             ),
           ),

@@ -116,15 +116,18 @@ class _AddPageState extends State<AddPage> {
                               i++) {
                             if (StaticFields.activeUser.communities[i].name ==
                                 _communitySelectedname) {
-                              addPost(
+                              StaticFields.activeUser.communities[i].posts.add(
                                 Post(
                                   title: _titleController.text,
                                   content: _bodyController.text,
-                                  //dateTime: DateTime.now(),
+                                  community:
+                                      StaticFields.activeUser.communities[i],
                                   user: StaticFields.activeUser,
+                                  comments: [],
+                                  dateTime: DateTime.now().toString(),
                                 ),
-                                StaticFields.activeUser.communities[i],
                               );
+                              response = 'done';
                               break;
                             }
                           }

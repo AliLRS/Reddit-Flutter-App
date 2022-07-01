@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/Data/models.dart';
 
 class CommentItem extends StatelessWidget {
-  const CommentItem({Key key}) : super(key: key);
-
+  CommentItem(this.comment, {Key key}) : super(key: key);
+  Comment comment;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,10 +13,10 @@ class CommentItem extends StatelessWidget {
             radius: 20,
             child: Icon(Icons.ac_unit),
           ),
-          title: Text('u/user'),
+          title: Text('u/${comment.user.username}'),
         ),
         ListTile(
-          title: Text('Line1\nLine2\nLine3'),
+          title: Text(comment.content),
         ),
         Container(
           decoration: const BoxDecoration(
@@ -29,7 +30,6 @@ class CommentItem extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                flex: 3,
                 child: Row(
                   children: [
                     IconButton(
@@ -37,14 +37,6 @@ class CommentItem extends StatelessWidget {
                     const Text('16'),
                     IconButton(
                         onPressed: () {}, icon: const Icon(Icons.thumb_down)),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  children: [
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.reply)),
-                    const Text('16'),
                   ],
                 ),
               ),

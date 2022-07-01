@@ -19,13 +19,6 @@ class _CommunitySearchResultPageState extends State<CommunitySearchResultPage> {
   void initState() {
     super.initState();
     getCommunities();
-    for (CommunityItem c in communityList) {
-      if (c.community.name
-          .toLowerCase()
-          .contains(widget.search.toLowerCase())) {
-        resultList.add(c);
-      }
-    }
   }
 
   Widget build(BuildContext context) {
@@ -52,5 +45,12 @@ class _CommunitySearchResultPageState extends State<CommunitySearchResultPage> {
         }).toList();
       });
     });
+    for (CommunityItem c in communityList) {
+      if (c.community.name
+          .toLowerCase()
+          .contains(widget.search.toLowerCase())) {
+        resultList.add(c);
+      }
+    }
   }
 }

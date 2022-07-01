@@ -9,7 +9,7 @@ public class Post implements Serializable {
     private String title;
     private String content;
     private User user;
-    private Date dateTime;
+    private String dateTime;
     private Community community;
     private Comment[] comments;
 
@@ -34,9 +34,9 @@ public class Post implements Serializable {
     public void setUser(User value) { this.user = value; }
 
     @JsonProperty("dateTime")
-    public Date getDateTime() { return dateTime; }
+    public String getDateTime() { return dateTime; }
     @JsonProperty("dateTime")
-    public void setDateTime(Date value) { this.dateTime = value; }
+    public void setDateTime(String value) { this.dateTime = value; }
 
     @JsonProperty("community")
     public Community getCommunity() { return community; }

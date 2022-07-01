@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/Data/models.dart';
+import 'package:reddit/Data/static_fields.dart';
 import 'package:reddit/View/MainPages/post_page.dart';
 
 class AddCommentPage extends StatefulWidget {
@@ -41,7 +42,7 @@ class _AddCommentPageState extends State<AddCommentPage> {
             ),
             controller: _commentController,
             keyboardType: TextInputType.text,
-            maxLines: 15,
+            maxLines: 6,
           ),
           Container(
             margin: const EdgeInsets.only(top: 20),
@@ -50,6 +51,12 @@ class _AddCommentPageState extends State<AddCommentPage> {
             child: ElevatedButton(
               onPressed: _isButtonActive
                   ? () {
+                      widget.post.comments.add(Comment(
+                        content: _commentController.text,
+                        user: StaticFields.activeUser,
+                        dateTime: DateTime.now().toString(),
+                        post: widget.post,
+                      ));
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
