@@ -11,6 +11,9 @@ String userToJson(User data) => json.encode(data.toJson());
 List<Community> communityFromJson(String str) =>
     List<Community>.from(json.decode(str).map((x) => Community.fromJson(x)));
 
+List<Post> postFromJson(String str) =>
+    List<Post>.from(json.decode(str).map((x) => Post.fromJson(x)));
+
 class Community {
   Community({
     this.name,

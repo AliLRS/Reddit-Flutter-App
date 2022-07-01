@@ -15,13 +15,13 @@ class CommunityPage extends StatefulWidget {
 }
 
 class _CommunityPageState extends State<CommunityPage> {
-  String response = '';
-  bool _Followed;
+  String followResponse = '', getPostResponse = '';
+  bool _followed;
   List<PostItem> posts = [];
   @override
   initState() {
     super.initState();
-    _Followed = StaticFields.activeUser.communities.contains(widget.community);
+    _followed = StaticFields.activeUser.communities.contains(widget.community);
     //List<PostItem> posts =
     //widget.community.posts.map((val) => PostItem(val)).toList();
   }
@@ -33,18 +33,18 @@ class _CommunityPageState extends State<CommunityPage> {
         actions: [
           TextButton(
             child: Text(
-              _Followed ? 'Unfollow' : 'Follow',
+              _followed ? 'Unfollow' : 'Follow',
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () {
               followCommunity();
-              if (response == 'followed') {
+              if (followResponse == 'followed') {
                 setState(() {
-                  _Followed = true;
+                  _followed = true;
                 });
               } else {
                 setState(() {
-                  _Followed = false;
+                  _followed = false;
                 });
               }
             },
@@ -133,8 +133,22 @@ class _CommunityPageState extends State<CommunityPage> {
       serverSocket.write(data);
       serverSocket.flush();
       serverSocket.listen((res) {
-        response = String.fromCharCodes(res);
-        print('response: $response');
+        followResponse = String.fromCharCodes(res);
+        print('response: $followResponse');
+      });
+    });
+  }
+
+  void getPosts(Community community) async {
+    await Socket.connect(StaticFields.ip, StaticFields.port)
+        .then((serverSocket) {
+      final data =
+          "getPosts,," + json.encode(community.toJson()) + StaticFields.postFix;
+      serverSocket.write(data);
+      serverSocket.flush();
+      serverSocket.listen((res) {
+        getPostResponse = String.fromCharCodes(res);
+        print('response: $getPostResponse');
       });
     });
   }

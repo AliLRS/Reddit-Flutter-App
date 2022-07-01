@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:reddit/Data/models.dart';
 import 'package:reddit/Data/static_fields.dart';
 import 'package:reddit/Items/post_item.dart';
@@ -16,11 +18,6 @@ class _FeedPageState extends State<FeedPage> {
   @override
   initState() {
     super.initState();
-    for (Community c in StaticFields.activeUser.communities) {
-      for (Post p in c.posts) {
-        posts.add(PostItem(p));
-      }
-    }
   }
 
   Widget build(BuildContext context) {
@@ -31,13 +28,51 @@ class _FeedPageState extends State<FeedPage> {
           child: const SearchBar(),
         ),
       ),
-      body: ListView.builder(
-          itemCount: posts.length,
-          itemBuilder: (context, index) {
-            return posts[index];
-          }),
+      body: FutureBuilder(
+        future: getAllPosts(),
+        builder: (context, snapshot) {
+          try {
+            return ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                return posts[index];
+              },
+            );
+          } catch (e) {
+            return Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CircularProgressIndicator(),
+                ],
+              ),
+            );
+          }
+        },
+      ),
       drawer: const PageDrawer(),
       bottomNavigationBar: const PageAppBar(),
     );
+  }
+
+  Future<void> getAllPosts() async {
+    Socket serverSocket =
+        await Socket.connect(StaticFields.ip, StaticFields.port);
+    final data = "getAllPosts,," + StaticFields.postFix;
+    serverSocket.write(data);
+    serverSocket.flush();
+    serverSocket.listen((res) {
+      setState(() {
+        final response = String.fromCharCodes(res);
+        List<Post> ps = postFromJson(response);
+        if (ps != null) {
+          posts = ps.map((item) {
+            return PostItem(item);
+          }).toList();
+        }
+      });
+    });
   }
 }

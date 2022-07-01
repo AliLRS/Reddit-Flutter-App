@@ -30,19 +30,36 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
           child: const SearchBar(),
         ),
       ),
-      body: communityList == null
-          ? loading
-          : ListView.builder(
-              itemCount: communityList.length,
+      body: FutureBuilder(
+        future: getCommunities(),
+        builder: (context, snapshot) {
+          try {
+            return ListView.builder(
+              itemCount: communityList == null ? 0 : communityList.length,
               itemBuilder: (context, index) {
                 return communityList[index];
-              }),
+              },
+            );
+          } catch (e) {
+            return Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CircularProgressIndicator(),
+                ],
+              ),
+            );
+          }
+        },
+      ),
       drawer: const PageDrawer(),
       bottomNavigationBar: const PageAppBar(),
     );
   }
 
-  void getCommunities() async {
+  Future<void> getCommunities() async {
     Socket serverSocket =
         await Socket.connect(StaticFields.ip, StaticFields.port);
     final data = "getCommunities,," + StaticFields.postFix;
@@ -59,8 +76,6 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
   }
 
   Widget get loading => const Center(
-        child: CircularProgressIndicator(
-          backgroundColor: Colors.white,
-        ),
+        child: CircularProgressIndicator(),
       );
 }
