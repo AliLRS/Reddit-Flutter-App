@@ -4,7 +4,7 @@ A Simple Reddit
 
 ![Login](/images/login.png?raw=true "Login")
 
-![Signup](/images/singup_light.png?raw=true "Signup")
+![Signup](/images/signup.png?raw=true "Signup")
 
 ![Light feed](/images/feed_light.png?raw=true "Light feed")
 
