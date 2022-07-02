@@ -1,6 +1,6 @@
 # reddit
 
-Reddit
+A Simple Reddit
 
 ## Getting Started
 
